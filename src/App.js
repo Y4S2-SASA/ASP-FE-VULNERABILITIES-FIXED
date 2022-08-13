@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import Button from "./components/buttons/Buttons";
+import Dialog from "./components/dialog/Dialog";
+import DialogActions from "./components/dialog/DialogActions";
+import DialogContent from "./components/dialog/DialogContent";
+import DialogTitle from "./components/dialog/DialogTitle";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Dialog>
+        <DialogTitle>
+          This is title
+        </DialogTitle>
+        <DialogContent>
+          This is content
+        </DialogContent>
+        <DialogActions>
+          <Button variant="default" onClick={()=>alert('ss')}>Confirm</Button>
+          <Button variant="alternative" onClick={()=>alert('ss')}>Cancel</Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
