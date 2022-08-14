@@ -13,8 +13,8 @@ export default function Login() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const url = loginUser(credentials);
-			const { data: res } = await url;
+            const userLog = loginUser(credentials);
+			const { data: res } = await userLog;
             if(res.data) {
                 localStorage.setItem("token", res.data);
                 localStorage.setItem("userRole", res.userData.role);
@@ -89,6 +89,7 @@ export default function Login() {
                             <br />
                             <h4 className="font-mono font-thin text-white px-10 text-center">Register and discover great amount of new opportunities!</h4>
                         </div>
+                        <br />
                         <Link to="/register">
                             <Button type="button" variant="alternative" className="pt-10">
                                 Register Now!
