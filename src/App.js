@@ -8,18 +8,82 @@ import DialogTitle from "./components/dialog/DialogTitle";
 function App() {
   return (
     <div>
-      <Dialog>
+      g
+      <br/>
+      gg
+      <br/>
+      g
+      <br/>
+      gg
+      <br/>
+      g
+      <br/>
+      gg
+      <br/>
+      g
+      <br/>
+      gg
+      <br/>
+      g
+      <br/>
+      gg
+      <br/>
+      g
+      <br/>
+      gg
+      <br/>
+      g
+      <br/>
+      gg
+      <br/>
+      g
+      <br/>
+      gg
+      <br/>
+      g
+      <br/>
+      gg
+      <br/>
+      g
+      <br/>
+      gg
+      <br/>
+      g
+      <br/>
+      gg
+      <br/>
+      g
+      <br/>
+      gg
+      <br/>
+      g
+      <br/>
+      gg
+      <br/>
+      g
+      <br/>
+      gg
+      <br/>
+      g
+      <br/>
+      gg
+      <br/>
+      g
+      <br/>
+      gg
+      <br/>
+      <Dialog visible={true} >
         <DialogTitle>
-          This is title
+          Test
         </DialogTitle>
         <DialogContent>
-          This is content
+          gg
         </DialogContent>
         <DialogActions>
-          <Button variant="default" onClick={()=>alert('ss')}>Confirm</Button>
-          <Button variant="alternative" onClick={()=>alert('ss')}>Cancel</Button>
+          <Button variant="purple">Close</Button>
         </DialogActions>
       </Dialog>
+
     </div>
   );
 }
