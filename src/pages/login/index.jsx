@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { loginUser } from "../../api/UserApi"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 import Button from "../../components/buttons/Buttons";
 import PreviewHeader from "../../components/PreviewPage/PreviewHeader";
@@ -9,6 +9,7 @@ import PreviewFooter from "../../components/PreviewPage/PreviewFooter";
 export default function Login() {
     const [credentials, setCredentials] = React.useState({});
     const [error, setError] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -19,7 +20,7 @@ export default function Login() {
                 localStorage.setItem("token", res.data);
                 localStorage.setItem("userRole", res.userData.role);
                 console.log(res.userData)
-                window.location = "/items";
+                navigate("/items");
             }
         } catch (error) {
             if (
