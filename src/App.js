@@ -1,5 +1,6 @@
 import { createContext } from "react";
-import {BrowserRouter, Route, Routes} from "react-router-dom"
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import PreviewSite from "./pages/preview-page";
 import Items from "./pages/items";
 import Login from "./pages/login";
 import Profile from "./pages/profile";
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="/profile" element={<Profile />} />
         </Route>
         {/* add public routes here */}
+        <Route path="/" element={<PreviewSite />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
