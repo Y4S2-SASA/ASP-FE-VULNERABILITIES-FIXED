@@ -4,6 +4,7 @@ import { AuthContext } from '../App';
 
 export default function PrivateRoutes() {
     // Todo: takes currently logged in user's id and role from localstorage or however - @Amantha
+    // Uda todo eka done - @Shehannn
     const userId = "001" // localStorage.getItem("userId");
     const role = "admin"; //localStorage.getItem("role");
 
