@@ -1,4 +1,10 @@
+import { useContext } from "react"
+import { AuthContext } from "../../App"
+
 export default function NavBar() {
+    const loggedInUser = useContext(AuthContext);
+    const {userId, role} = loggedInUser;
+
     return (
         <nav
             className="relative w-fullflex flex-wrap items-center justify-between py-4 bg-gray-100 text-gray-500 hover:text-gray-700 focus:text-gray-700 shadow-lg navbar navbar-expand-lg navbar-light"  
@@ -45,45 +51,42 @@ export default function NavBar() {
                     />
                 </a>
                 {/* Left links */}
-                <ul className="navbar-nav flex flex-col pl-0 list-style-none mr-auto">
-                    <li className="nav-item p-2">
-                    <a
-                        className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0"
-                        href="home"
-                    >
-                        Home
-                    </a>
-                    </li>
-                    <li className="nav-item p-2">
-                    <a
-                        className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0"
-                        href="items"
-                    >
-                        Items
-                    </a>
-                    </li>
-                    <li className="nav-item p-2">
-                    <a
-                        className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0"
-                        href="questions"
-                    >
-                        Question Thread
-                    </a>
-                    </li>
-                </ul>
+                {role === "CLIENT" && (
+                    <>
+                        <ul className="navbar-nav flex flex-col pl-0 list-style-none mr-auto">
+                            <li className="nav-item p-2">
+                                <a className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0" href="home">
+                                    Home
+                                </a>
+                            </li>
+                            <li className="nav-item p-2">
+                                <a className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0" href="/items">
+                                    Items
+                                </a>
+                            </li>
+                            <li className="nav-item p-2">
+                                <a className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0" href="/questions">
+                                    Question Thread
+                                </a>
+                            </li>
+                        </ul>
+                    </>
+                )}
+                {role === "ADMIN" && (
+                    <>
+                        <ul className="navbar-nav flex flex-col pl-0 list-style-none mr-auto">
+                            <li className="nav-item p-2">
+                                <a className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0" href="home">
+                                    Home
+                                </a>
+                            </li>
+                        </ul>
+                    </>
+                )}
                 </div>
                 <div className="flex items-center relative">
                 <div className="dropdown relative">
-                    <a
-                        className="
-                            text-gray-500
-                            hover:text-gray-700
-                            focus:text-gray-700
-                            mr-4
-                            dropdown-toggle
-                            hidden-arrow
-                            flex items-center
-                        "
+                    <a className=" text-gray-500 hover:text-gray-700 focus:text-gray-700 mr-4 dropdown-toggle hidden-arrow flex items-center"
                         href="#"
                         id="dropdownMenuButton1"
                         role="button"
@@ -115,18 +118,12 @@ export default function NavBar() {
                         aria-labelledby="dropdownMenuButton1"
                     >
                         <li>
-                            <a
-                                className="dropdown-item text-sm py-2  px-4 font-normal block w-full  whitespace-nowrap bg-transparent  text-gray-700 hover:bg-gray-100"
-                                href="#"
-                            >
+                            <a className="dropdown-item text-sm py-2  px-4 font-normal block w-full  whitespace-nowrap bg-transparent  text-gray-700 hover:bg-gray-100" href="#">
                                 My Profile
                             </a>
                         </li>
                         <li>
-                            <a
-                                className="dropdown-item text-sm py-2  px-4 font-normal block w-full  whitespace-nowrap bg-transparent  text-gray-700 hover:bg-gray-100"
-                                href="#"
-                            >
+                            <a className="dropdown-item text-sm py-2  px-4 font-normal block w-full  whitespace-nowrap bg-transparent  text-gray-700 hover:bg-gray-100" href="#">
                                 Logout
                             </a>
                         </li>
