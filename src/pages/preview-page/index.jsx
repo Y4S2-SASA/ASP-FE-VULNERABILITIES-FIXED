@@ -1,4 +1,3 @@
-import Button from "../../components/buttons/Buttons"
 import PreviewCarousel from "../../components/PreviewPage/Carousel"
 import PreviewFooter from "../../components/PreviewPage/PreviewFooter"
 import PreviewHeader from "../../components/PreviewPage/PreviewHeader"

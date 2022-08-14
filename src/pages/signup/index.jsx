@@ -84,11 +84,8 @@ export default function Register() {
     }
 
     const onUploadImgToCloudinary = (pics) => {
-        if (!pics) {
-          return setPicMessage("Please select an Image");
-        }
         setPicMessage(null);
-        if (pics.type === "image/jpeg" || pics.type === "image/png") {
+        if (pics.type === "image/jpeg" || pics.type === "image/png" || pics.type === "image/jpg") {
           const data = new FormData();
           data.append("file", pics);
           data.append("upload_preset", "trainerfg");
@@ -106,7 +103,7 @@ export default function Register() {
               console.log(err);
             });
         } else {
-          return setPicMessage("Please Select an Image");
+          return setPicMessage("Please select jpg,png or jpeg type image");
         }
       };
 
@@ -208,6 +205,7 @@ export default function Register() {
                                 />
                             </div>
                             {error && <div className={styles.error_msg}>{error}</div>}
+                            {picMessage && <div className={styles.error_msg}>{picMessage}</div>}
                             <Button variant="red">
                                 Register
                             </Button>
