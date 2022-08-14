@@ -1,91 +1,30 @@
-import Button from "./components/buttons/Buttons";
-import Dialog from "./components/dialog/Dialog";
-import DialogActions from "./components/dialog/DialogActions";
-import DialogContent from "./components/dialog/DialogContent";
-import DialogTitle from "./components/dialog/DialogTitle";
+import { createContext } from "react";
+import {BrowserRouter, Route, Routes} from "react-router-dom"
+import Items from "./pages/items";
+import Login from "./pages/login";
+import Profile from "./pages/profile";
+import Questions from "./pages/questions";
+import Reservations from "./pages/reservations";
+import Signup from "./pages/signup";
+import PrivateRoutes from "./private-routes/PrivateRoutes";
 
+export const AuthContext = createContext();
 
-function App() {
+export default function App() {
   return (
-    <div>
-      g
-      <br/>
-      gg
-      <br/>
-      g
-      <br/>
-      gg
-      <br/>
-      g
-      <br/>
-      gg
-      <br/>
-      g
-      <br/>
-      gg
-      <br/>
-      g
-      <br/>
-      gg
-      <br/>
-      g
-      <br/>
-      gg
-      <br/>
-      g
-      <br/>
-      gg
-      <br/>
-      g
-      <br/>
-      gg
-      <br/>
-      g
-      <br/>
-      gg
-      <br/>
-      g
-      <br/>
-      gg
-      <br/>
-      g
-      <br/>
-      gg
-      <br/>
-      g
-      <br/>
-      gg
-      <br/>
-      g
-      <br/>
-      gg
-      <br/>
-      g
-      <br/>
-      gg
-      <br/>
-      g
-      <br/>
-      gg
-      <br/>
-      g
-      <br/>
-      gg
-      <br/>
-      <Dialog visible={true} >
-        <DialogTitle>
-          Test
-        </DialogTitle>
-        <DialogContent>
-          gg
-        </DialogContent>
-        <DialogActions>
-          <Button variant="purple">Close</Button>
-        </DialogActions>
-      </Dialog>
-
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route exact element={<PrivateRoutes />}>
+          {/* add private routes here */}
+          <Route path="/items" element={<Items />} />
+          <Route path="/questions" element={<Questions />} />
+          <Route path="/reservations" element={<Reservations />} />
+          <Route path="/profile" element={<Profile />} />
+        </Route>
+        {/* add public routes here */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-export default App;
