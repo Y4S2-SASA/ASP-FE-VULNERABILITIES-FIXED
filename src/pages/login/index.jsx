@@ -3,6 +3,8 @@ import { loginUser } from "../../api/UserApi"
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
 import Button from "../../components/buttons/Buttons";
+import PreviewHeader from "../../components/PreviewPage/PreviewHeader";
+import PreviewFooter from "../../components/PreviewPage/PreviewFooter";
 
 export default function Login() {
     const [credentials, setCredentials] = React.useState({});
@@ -45,48 +47,57 @@ export default function Login() {
         }
     }
     return (
-        <div className={styles.login_container}>
-			<div className={styles.login_form_container}>
-				<div className={styles.left}>
-					<form className={styles.form_container} onSubmit={handleSubmit}>
+        <div className="container mx-auto md:px-20">
+            <PreviewHeader />
+            <div className={styles.login_container}>
+                <div className={styles.login_form_container}>
+                    <div className={styles.left}>
+                        <form className={styles.form_container} onSubmit={handleSubmit}>
+                            <div className="">
+                                <h1 className="font-sans subpixel-antialiased font-bold text-center text-slate-600">One of Us?</h1>
+                                <br />
+                                <h4 className="font-mono font-thin">If you already has an account, just log in. We've missed you!</h4>
+                            </div>
+                            <br /><br />
+                            <input
+                                type="email"
+                                placeholder="Email"
+                                name="email"
+                                onChange={handleChange}
+                                required
+                                value={credentials.email}
+                                className={styles.input}
+                            />
+                            <input
+                                type="password"
+                                placeholder="Password"
+                                name="password"
+                                onChange={handleChange}
+                                required
+                                value={credentials.password}
+                                className={styles.input}
+                            />
+                            {error && <div className={styles.error_msg}>{error}</div>}
+                            <Button variant="red">
+                                Login
+                            </Button>
+                        </form>
+                    </div>
+                    <div className={styles.right}>
                         <div className="">
-                            <h1 className="font-sans italic subpixel-antialiased font-bold text-center text-slate-600 underline underline-offset-8">One of us?</h1>
-                            <h4 className="font-mono">If you already has an account, just log in. We've missed you!</h4>
-						</div>
-                        <input
-							type="email"
-							placeholder="Email"
-							name="email"
-							onChange={handleChange}
-							required
-                            value={credentials.email}
-							className={styles.input}
-						/>
-						<input
-							type="password"
-							placeholder="Password"
-							name="password"
-							onChange={handleChange}
-							required
-                            value={credentials.password}
-							className={styles.input}
-						/>
-						{error && <div className={styles.error_msg}>{error}</div>}
-						<Button type="submit" variant="red">
-							Login
-						</Button>
-					</form>
-				</div>
-				<div className={styles.right}>
-					<h1>New Here ?</h1>
-                    <h5>Register and discover great amount of new opportunities!</h5>
-					<Link to="/register">
-						<Button type="button" variant="alternative">
-							Register Now!
-						</Button>
-					</Link>
-				</div>
-			</div>
-		</div>
+                            <h1 className="font-sans subpixel-antialiased font-bold text-center text-white">New Here?</h1>
+                            <br />
+                            <h4 className="font-mono font-thin text-white px-10 text-center">Register and discover great amount of new opportunities!</h4>
+                        </div>
+                        <Link to="/register">
+                            <Button type="button" variant="alternative" className="pt-10">
+                                Register Now!
+                            </Button>
+                        </Link>
+                    </div>
+                </div>
+            </div>
+            <PreviewFooter />
+        </div>
     )
 }

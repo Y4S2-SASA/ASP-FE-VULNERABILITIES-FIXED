@@ -11,12 +11,12 @@ export default function PreviewHeader() {
                 </span>
                 <ul className="flex flex-wrap items-center mt-3 text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
                     <li>
-                        <a href="#" className="mr-4 hover:underline md:mr-6">
+                        <a href="/register" className="mr-4 hover:underline md:mr-6">
                             <Button variant="alternative">Register</Button>
                         </a>
                     </li>
                     <li>
-                        <a href="#" className="mr-4 hover:underline md:mr-6">
+                        <a href="/login" className="mr-4 hover:underline md:mr-6">
                             <Button variant="green">Login</Button>
                         </a>
                     </li>
