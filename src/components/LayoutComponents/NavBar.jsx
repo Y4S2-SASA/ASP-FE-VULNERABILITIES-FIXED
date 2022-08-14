@@ -3,7 +3,13 @@ import { AuthContext } from "../../App"
 
 export default function NavBar() {
     const loggedInUser = useContext(AuthContext);
-    const {userId, role} = loggedInUser;
+    const {userId, role, proPic} = loggedInUser;
+    console.log(proPic)
+
+    const handleLogout = () => {
+		localStorage.removeItem("token");
+		window.location.reload();
+	};
 
     return (
         <nav
@@ -106,9 +112,9 @@ export default function NavBar() {
                         aria-expanded="false"
                     >
                     <img
-                        src="https://mdbootstrap.com/img/new/avatars/2.jpg"
+                        src={proPic? proPic : "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"}
                         className="rounded-full"
-                        style={{ height: 25, width: 25 }}
+                        style={{ height: 35, width: 35 }}
                         alt=""
                         loading="lazy"
                     />
@@ -123,7 +129,7 @@ export default function NavBar() {
                             </a>
                         </li>
                         <li>
-                            <a className="dropdown-item text-sm py-2  px-4 font-normal block w-full  whitespace-nowrap bg-transparent  text-gray-700 hover:bg-gray-100" href="#">
+                            <a onClick={handleLogout} className="dropdown-item text-sm py-2  px-4 font-normal block w-full  whitespace-nowrap bg-transparent  text-gray-700 hover:bg-gray-100" href="#">
                                 Logout
                             </a>
                         </li>

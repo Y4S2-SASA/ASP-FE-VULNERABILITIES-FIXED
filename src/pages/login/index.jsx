@@ -19,6 +19,7 @@ export default function Login() {
             if(res.data) {
                 localStorage.setItem("token", res.data);
                 localStorage.setItem("userRole", res.userData.role);
+                localStorage.setItem("profilePic", res.userData.pic);
                 console.log(res.userData)
                 navigate("/items");
             }
