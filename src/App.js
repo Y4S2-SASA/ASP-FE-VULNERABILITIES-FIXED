@@ -6,7 +6,7 @@ import Login from "./pages/login";
 import Profile from "./pages/profile";
 import Questions from "./pages/questions";
 import Reservations from "./pages/reservations";
-import Signup from "./pages/signup";
+import Register from "./pages/signup";
 import PrivateRoutes from "./private-routes/PrivateRoutes";
 
 export const AuthContext = createContext();
@@ -25,7 +25,7 @@ export default function App() {
         {/* add public routes here */}
         <Route path="/" element={<PreviewSite />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   );
