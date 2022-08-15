@@ -4,10 +4,10 @@ import PreviewSite from "./pages/preview-page";
 import Items from "./pages/items";
 import Login from "./pages/login";
 import Profile from "./pages/profile";
-import Questions from "./pages/questions";
 import Reservations from "./pages/reservations";
 import Register from "./pages/signup";
 import PrivateRoutes from "./private-routes/PrivateRoutes";
+import CreateQuestions from "./pages/questions/create-questions/CreateQuestions";
 
 export const AuthContext = createContext();
 
@@ -18,7 +18,7 @@ export default function App() {
         <Route exact element={<PrivateRoutes />}>
           {/* add private routes here */}
           <Route path="/items" element={<Items />} />
-          <Route path="/questions" element={<Questions />} />
+          <Route path="/questions" element={<CreateQuestions />} />
           <Route path="/reservations" element={<Reservations />} />
           <Route path="/profile" element={<Profile />} />
         </Route>
