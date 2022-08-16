@@ -17,7 +17,7 @@ export default function PreviewSite() {
         );
     }
     return (
-        <div className="container mx-auto md:px-20">
+        <div className="container mx-auto md:px-10">
             <PreviewHeader />
             <PreviewCarousel />
             <ServiceHead/>
