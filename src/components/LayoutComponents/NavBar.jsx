@@ -1,10 +1,9 @@
-import { useContext } from "react"
-import { AuthContext } from "../../App"
+import { useContext } from "react";
+import { AuthContext } from "../../App";
 
 export default function NavBar() {
     const loggedInUser = useContext(AuthContext);
     const {userId, role, proPic} = loggedInUser;
-    console.log(proPic)
 
     const handleLogout = () => {
 		localStorage.removeItem("token");
@@ -82,7 +81,7 @@ export default function NavBar() {
                     <>
                         <ul className="navbar-nav flex flex-col pl-0 list-style-none mr-auto">
                             <li className="nav-item p-2">
-                                <a className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0" href="home">
+                                <a className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0" href="/admin-panel">
                                     Home
                                 </a>
                             </li>

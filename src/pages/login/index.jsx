@@ -9,6 +9,7 @@ import PreviewFooter from "../../components/PreviewPage/PreviewFooter";
 export default function Login() {
     const [credentials, setCredentials] = React.useState({});
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
@@ -21,7 +22,14 @@ export default function Login() {
                 localStorage.setItem("userRole", res.userData.role);
                 localStorage.setItem("profilePic", res.userData.pic);
                 console.log(res.userData)
-                navigate("/items");
+                if(res.userData.role === "CLIENT") {
+                    window.location.href = '/items';
+                } else if(res.userData.role === "ADMIN") {
+                    window.location.href = '/admin-panel';
+                } else {
+                    window.location.href = '/404';
+                }
+                
             }
         } catch (error) {
             if (

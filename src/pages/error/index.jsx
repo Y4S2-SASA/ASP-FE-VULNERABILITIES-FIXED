@@ -1,6 +1,5 @@
 import Button from "../../components/buttons/Buttons";
 
-
 export default function Error404() {
     return (
 		<div className="h-screen bg-gray-100 flex items-center">
@@ -18,10 +17,9 @@ export default function Error404() {
 						</Button>
 					</a>
 				</div>
-			<div className="max-w-lg opacity-25">
-				<img src="images/automobile.png"/>
-			</div>
-
+				<div className="max-w-lg opacity-25">
+					<img src="images/automobile.png"/>
+				</div>
 			</div>
 		</div>
     );

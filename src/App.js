@@ -9,6 +9,7 @@ import Reservations from "./pages/reservations";
 import Register from "./pages/signup";
 import PrivateRoutes from "./private-routes/PrivateRoutes";
 import Error404 from "./pages/error";
+import AdminHome from "./pages/admin-panel";
 
 export const AuthContext = createContext();
 
@@ -22,12 +23,14 @@ export default function App() {
           <Route path="/questions" element={<Questions />} />
           <Route path="/reservations" element={<Reservations />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/admin-panel" element={<AdminHome />} />
           <Route path="/404" element={<Error404 />} />
         </Route>
         {/* add public routes here */}
         <Route path="/" element={<PreviewSite />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        
       </Routes>
     </BrowserRouter>
   );
