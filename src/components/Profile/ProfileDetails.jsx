@@ -15,9 +15,11 @@ export default function ProfileDetails(props) {
                 <p className="mt-7 ml-0 md:ml-8">{(data.firstName + " " + data.lastName) + " " + "("+ data.username + ")"}</p>
             </div>
         </div>
-        <div className="flex flex-col md:flex-row">
+        <div className="grid grid-cols-1 md:grid-cols-2">
             <p className="mt-6 italic w-max">User Information</p>
-            <img src={data.pic} class="rounded-full w-8 h-8 shadow-lg" alt="Avatar" />
+            <a href="#" className="ml-0 md:ml-96" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Profile">
+                <img src="images/edit.jpg" class="rounded-full w-8 h-8 shadow-lg" alt="Edit" />
+            </a>
         </div>
         
         <div className="border-b-4"></div>
@@ -29,7 +31,7 @@ export default function ProfileDetails(props) {
                 <div className="space-y-0.5 font-medium dark:text-white text-left w-80">
                     <div className="text-base font-bold text-gray-600">Full Name</div>
                     <div className="text-sm font-light text-gray-400 dark:text-gray-400">{(data.firstName + " " + data.lastName)}</div>
-                    <div className="border-b-2 border-gray-500"></div>
+                    <div className="border-b-2 border-gray-300"></div>
                 </div>
             </figcaption>
             <figcaption className="flex justify-center items-center space-x-3 mt-5 md:mt-10 basis-1/2">
@@ -39,7 +41,7 @@ export default function ProfileDetails(props) {
                 <div className="space-y-0.5 font-medium dark:text-white text-left w-80">
                     <div className="text-base font-bold text-gray-600">Email Address</div>
                     <div className="text-sm font-light text-gray-400 dark:text-gray-400">{data.email}</div>
-                    <div className="border-b-2 border-gray-500"></div>
+                    <div className="border-b-2 border-gray-300"></div>
                 </div>
             </figcaption>
             
@@ -53,7 +55,7 @@ export default function ProfileDetails(props) {
                 <div className="space-y-0.5 font-medium dark:text-white text-left w-80">
                     <div className="text-base font-bold text-gray-600">Contact No</div>
                     <div className="text-sm font-light text-gray-400 dark:text-gray-400">{data.contactNo? data.contactNo : "-"}</div>
-                    <div className="border-b-2 border-gray-500"></div>
+                    <div className="border-b-2 border-gray-300"></div>
                 </div>
             </figcaption>
             <figcaption className="flex justify-center items-center space-x-3 mt-5 md:mt-10 basis-1/2">
@@ -63,7 +65,7 @@ export default function ProfileDetails(props) {
                 <div className="space-y-0.5 font-medium dark:text-white text-left w-80">
                     <div className="text-base font-bold text-gray-600">Profile Role</div>
                     <div className="text-sm font-light text-gray-400 dark:text-gray-400">{data.role}</div>
-                    <div className="border-b-2 border-gray-500"></div>
+                    <div className="border-b-2 border-gray-300"></div>
                 </div>
             </figcaption>
         </div>
@@ -76,7 +78,7 @@ export default function ProfileDetails(props) {
                 <div className="space-y-0.5 font-medium dark:text-white text-left w-80 ">
                     <div className="text-base font-bold text-gray-600">Address</div>
                     <div className="text-sm font-light text-gray-400 dark:text-gray-400">{getUserAddressDetailStr()}</div>
-                    <div className="border-b-2 border-gray-500"></div>
+                    <div className="border-b-2 border-gray-300"></div>
                 </div>
             </figcaption>
             <figcaption className="flex justify-center items-center space-x-3 mt-5 md:mt-10 basis-1/2">
@@ -86,11 +88,10 @@ export default function ProfileDetails(props) {
                 <div className="space-y-0.5 font-medium dark:text-white text-left w-80">
                     <div className="text-base font-bold text-gray-600">Province/State</div>
                     <div className="text-sm font-light text-gray-400 dark:text-gray-400">{data.state? data.state : "-"}</div>
-                    <div className="border-b-2 border-gray-500"></div>
+                    <div className="border-b-2 border-gray-300"></div>
                 </div>
             </figcaption>
         </div>
-        
         </div>
     );
 }

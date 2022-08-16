@@ -108,7 +108,7 @@ export default function Register() {
       };
 
     return (
-        <div className="container mx-auto md:px-20">
+        <div className="container">
             <PreviewHeader />
             <div className={styles.signup_container}>
                 <div className={styles.signup_form_container}>
@@ -213,7 +213,7 @@ export default function Register() {
                     </div>
                 </div>
 		    </div>
-            <PreviewFooter />
+            {/* <PreviewFooter /> */}
         </div>
     )
 }

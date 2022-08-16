@@ -17,13 +17,13 @@ export default function PreviewSite() {
         );
     }
     return (
-        <div className="container mx-auto md:px-10">
+        <div className="container">
             <PreviewHeader />
             <PreviewCarousel />
             <ServiceHead/>
             <ServiceCards />
             <br/><br/>
-            <PreviewFooter />
+            {/* <PreviewFooter /> */}
         </div>
     )
 }

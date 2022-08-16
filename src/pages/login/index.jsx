@@ -49,7 +49,7 @@ export default function Login() {
         }
     }
     return (
-        <div className="container mx-auto md:px-20">
+        <div className="container">
             <PreviewHeader />
             <div className={styles.login_container}>
                 <div className={styles.login_form_container}>
@@ -100,7 +100,7 @@ export default function Login() {
                     </div>
                 </div>
             </div>
-            <PreviewFooter />
+            {/* <PreviewFooter /> */}
         </div>
     )
 }

@@ -36,9 +36,12 @@ export default function Profile() {
     return (
         <>
             <NavBar />
-            <div>
+            <div className="">
                 <ProfileSideNav />
+                <br />
                 <ProfileDetails user={user}/>
+                <br />
+                <br />
             </div>
         </>
     );
