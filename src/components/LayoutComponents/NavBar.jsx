@@ -1,10 +1,9 @@
-import { useContext } from "react"
-import { AuthContext } from "../../App"
+import { useContext } from "react";
+import { AuthContext } from "../../App";
 
 export default function NavBar() {
     const loggedInUser = useContext(AuthContext);
     const {userId, role, proPic} = loggedInUser;
-    console.log(proPic)
 
     const handleLogout = () => {
 		localStorage.removeItem("token");
@@ -13,7 +12,7 @@ export default function NavBar() {
 
     return (
         <nav
-            className="relative w-fullflex flex-wrap items-center justify-between py-4 bg-gray-100 text-gray-500 hover:text-gray-700 focus:text-gray-700 shadow-lg navbar navbar-expand-lg navbar-light"  
+            className="shadow-lg relative w-fullflex flex-wrap items-center justify-between py-4 bg-gray-100 text-gray-500 hover:text-gray-700 focus:text-gray-700 shadow-lg navbar navbar-expand-lg navbar-light"  
         >
             <div className="container-fluid w-full flex flex-wrap items-center justify-between px-6">
                 <button
@@ -45,7 +44,7 @@ export default function NavBar() {
                 className="collapse navbar-collapse flex-grow items-center"
                 id="navbarSupportedContent"
                 >
-                <a
+                {/* <a
                     className="flex items-center text-gray-900 hover:text-gray-900 focus:text-gray-900 mt-2 lg:mt-0 mr-1"
                     href="#"
                 >
@@ -55,7 +54,7 @@ export default function NavBar() {
                         alt=""
                         loading="lazy"
                     />
-                </a>
+                </a> */}
                 {/* Left links */}
                 {role === "CLIENT" && (
                     <>
@@ -82,7 +81,7 @@ export default function NavBar() {
                     <>
                         <ul className="navbar-nav flex flex-col pl-0 list-style-none mr-auto">
                             <li className="nav-item p-2">
-                                <a className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0" href="home">
+                                <a className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0" href="/admin-panel">
                                     Home
                                 </a>
                             </li>
@@ -124,10 +123,11 @@ export default function NavBar() {
                         aria-labelledby="dropdownMenuButton1"
                     >
                         <li>
-                            <a className="dropdown-item text-sm py-2  px-4 font-normal block w-full  whitespace-nowrap bg-transparent  text-gray-700 hover:bg-gray-100" href="#">
+                            <a className="dropdown-item text-sm py-2  px-4 font-normal block w-full  whitespace-nowrap bg-transparent  text-gray-700 hover:bg-gray-100" href="/profile">
                                 My Profile
                             </a>
                         </li>
+                        <hr className="border-gray-200 dark:border-gray-700" />
                         <li>
                             <a onClick={handleLogout} className="dropdown-item text-sm py-2  px-4 font-normal block w-full  whitespace-nowrap bg-transparent  text-gray-700 hover:bg-gray-100" href="#">
                                 Logout
