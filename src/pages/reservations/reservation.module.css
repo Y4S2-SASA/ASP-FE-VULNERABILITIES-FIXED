@@ -4,7 +4,6 @@
     padding: 2%;
     border-radius: 8px;
     text-align: left;
-
 }
 
 .user_detail_container{
@@ -25,19 +24,20 @@
     font-weight: bold;
 }
 
-.lable{
+.label{
     font-size: 12pt;
     font-family: sans-serif;
     font-weight: bold;
 }
 
-.lable_data{
+.label_data{
     font-size: 12pt;
     font-family: sans-serif;
 }
 
 .img_size{
-    height: 150px;
-    width: 150px;
+    height: 175px;
+    width: 175px;
     border-radius: 7;
+    border: 1px solid black;
 }

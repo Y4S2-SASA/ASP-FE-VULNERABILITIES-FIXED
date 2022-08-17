@@ -27,7 +27,7 @@ export default function App() {
           <Route path="/admin-panel" element={<AdminHome />} />
           <Route path="/404" element={<Error404 />} />
 
-          <Route path="/reserve" element={<ReserveNow />} />
+          <Route path="/reserve/:id" element={<ReserveNow />} />
         </Route>
         {/* add public routes here */}
         <Route path="/" element={<PreviewSite />} />
