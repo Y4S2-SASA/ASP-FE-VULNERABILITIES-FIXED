@@ -23,7 +23,7 @@ export default function PrivateRoutes() {
     // When you provide loggedInUser object to AuthContext like below, Other child components will be able to get loggedInUser
     return (
         <AuthContext.Provider value={loggedInUser}>
-            {userId ? <Outlet  /> : <Navigate to="/login" />};
+            {userId ? <Outlet  /> : <Navigate to="/login" />}
         </AuthContext.Provider>
     )
 }

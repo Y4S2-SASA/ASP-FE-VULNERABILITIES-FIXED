@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { registerUser } from "../../api/UserApi";
 import styles from "./styles.module.css";
 import Button from "../../components/buttons/Buttons";
@@ -8,16 +8,18 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function Register() {
     const [user, setUser] = React.useState({});
-    const [error, setError] = useState("");
-    const [picMessage, setPicMessage] = useState(null);
+    const [error, setError] = React.useState("");
+    const [picMessage, setPicMessage] = React.useState(null);
     const navigate = useNavigate();
-    const [proPic, setProPic] = useState(
-        "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
-    
-        );
+    const [proPic, setProPic] = React.useState("https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg");
+    const [apiResponseWaiting, setApiResponseWaiting] = React.useState(false);
+
+    let confirmPassword = "";
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
+            setApiResponseWaiting(true);
             const userObj = {
                 firstName: user.firstName,
                 lastName: user.lastName,
@@ -26,17 +28,19 @@ export default function Register() {
                 password: user.password,
                 pic: proPic
             };
-            if (user.password !== user.confirmpassword) {
+            console.log(confirmPassword)
+            if (user.password !== confirmPassword) {
                 setError(
                   "Passowrds do not match! Try again"
                 );
             }
             const userReg = registerUser(userObj);
 			const { data: res } = await userReg;
-            if(res.data) {
+            console.log(res.data);
+            res.data.isSuccessful? setTimeout(function(){
+                setApiResponseWaiting(false);
                 navigate("/login");
-			    console.log(res.message);
-            }
+            }, 1500) : setApiResponseWaiting(false);
         } catch (error) {
             if (
 				error.response &&
@@ -44,6 +48,7 @@ export default function Register() {
 				error.response.status <= 500
 			) {
 				setError(error.response.data.message);
+                setApiResponseWaiting(false);
 			}
         }
     }
@@ -108,7 +113,7 @@ export default function Register() {
       };
 
     return (
-        <div className="container mx-auto md:px-20">
+        <div className="container">
             <PreviewHeader />
             <div className={styles.signup_container}>
                 <div className={styles.signup_form_container}>
@@ -206,14 +211,21 @@ export default function Register() {
                             </div>
                             {error && <div className={styles.error_msg}>{error}</div>}
                             {picMessage && <div className={styles.error_msg}>{picMessage}</div>}
-                            <Button variant="red">
+                            <Button variant="red" disabled={apiResponseWaiting}>
                                 Register
                             </Button>
+                            {apiResponseWaiting && (
+                                <div className="flex justify-center items-center">
+                                    <div className="spinner-grow inline-block w-8 h-8 bg-current rounded-full opacity-0 text-red-700" role="status">
+                                        <span className="visually-hidden">Loading...</span>
+                                    </div>
+                                </div>
+                            )}
                         </form>
                     </div>
                 </div>
 		    </div>
-            <PreviewFooter />
+            {/* <PreviewFooter /> */}
         </div>
     )
 }

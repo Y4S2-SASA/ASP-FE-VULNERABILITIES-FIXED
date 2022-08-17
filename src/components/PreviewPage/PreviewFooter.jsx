@@ -1,7 +1,7 @@
 export default function PreviewFooter() {
 
     return (
-        <footer className="p-4 bg-neutral-300 rounded-lg shadow md:px-6 md:py-8 dark:bg-gray-900">
+        <footer className="p-4 shadow-lg rounded-lg shadow md:px-6 md:py-8 bg-gray-100">
             <div className="sm:flex sm:items-center sm:justify-between">
                 <a href="/" className="flex items-center mb-4 sm:mb-0">
                 <img

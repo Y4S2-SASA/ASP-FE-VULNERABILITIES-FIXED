@@ -3,7 +3,7 @@ import Button from "../buttons/Buttons";
 export default function PreviewHeader() {
 
     return (
-        <div className="p-4 bg-neutral-300 rounded-lg shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800">
+        <div className="p-4 bg-gray-100 rounded-lg shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800">
                 <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
                     <a href="/">
                         <img className="rounded-t-lg w-1/2 md:w-48" src="images/automobile.png" alt="" />
