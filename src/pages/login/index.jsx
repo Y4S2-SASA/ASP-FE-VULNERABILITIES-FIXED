@@ -70,7 +70,7 @@ export default function Login() {
                             <div className="">
                                 <h1 className="font-sans subpixel-antialiased font-bold text-center text-slate-600">One of Us?</h1>
                                 <br />
-                                <h4 className="font-mono font-thin">If you already has an account, just log in. We've missed you!</h4>
+                                <h4 className="font-mono font-thin px-10 text-center">If you already has an account, just log in. We've missed you!</h4>
                             </div>
                             <br /><br />
                             <input
