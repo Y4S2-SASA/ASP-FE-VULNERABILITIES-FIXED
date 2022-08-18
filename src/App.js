@@ -9,6 +9,7 @@ import Register from "./pages/signup";
 import PrivateRoutes from "./private-routes/PrivateRoutes";
 import CreateQuestions from "./pages/questions/create-questions/CreateQuestions";
 import ListQuestions from "./pages/questions/list-questions/ListQuestions";
+import ViewQuestion from "./pages/questions/view-question/ViewQuestion";
 
 export const AuthContext = createContext();
 
@@ -19,8 +20,9 @@ export default function App() {
         <Route exact element={<PrivateRoutes />}>
           {/* add private routes here */}
           <Route path="/items" element={<Items />} />
-          <Route path="/questions" element={<CreateQuestions />} />
-          <Route path="/list" element={<ListQuestions />} />
+          <Route path="/create-questions" element={<CreateQuestions />} />
+          <Route path="/list-questions" element={<ListQuestions />} />
+          <Route path="/view-question/:id" element={<ViewQuestion />} />
           <Route path="/reservations" element={<Reservations />} />
           <Route path="/profile" element={<Profile />} />
         </Route>
