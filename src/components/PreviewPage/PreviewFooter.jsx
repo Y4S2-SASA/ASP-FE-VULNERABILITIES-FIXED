@@ -1,7 +1,6 @@
 export default function PreviewFooter() {
 
     return (
-        <div style={{bottom: 0, position: "fixed", width: "72%"}}>
         <footer className="p-4 shadow-lg rounded-lg shadow md:px-6 md:py-8 bg-gray-100">
             <div className="sm:flex sm:items-center sm:justify-between">
                 <a href="/" className="flex items-center mb-4 sm:mb-0">
@@ -46,7 +45,6 @@ export default function PreviewFooter() {
                 . All Rights Reserved.
             </span>
         </footer>
-        </div>
 
     );
 }
