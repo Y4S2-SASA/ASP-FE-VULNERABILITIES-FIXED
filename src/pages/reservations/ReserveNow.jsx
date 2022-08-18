@@ -7,6 +7,7 @@ import { getAuth } from '../../helper/helper';
 import { findUsers } from '../../api/UserApi';
 import orderRequest from '../../api/Order/order.request';
 import itemRequest from '../../api/Item/item.request';
+import ID from 'nodejs-unique-numeric-id-generator';
 
 export default function ReserveNow() {
     const userId = getAuth(localStorage.getItem('token'))._id;
@@ -18,6 +19,7 @@ export default function ReserveNow() {
     const [order] = useState({
         buyer:userId,
         item:itemId,
+        orderId:'',
         quantity:0,
         status:'Pending',
         total:0
@@ -71,6 +73,8 @@ export default function ReserveNow() {
 
     const handleSubmit = (e) =>{
         e.preventDefault();
+        let newID = ID.generate(new Date().toJSON());
+        order.orderId = "R" + newID;
         order.total = total;
         order.quantity = quantity;
         orderRequest.saveOrder(order)
@@ -88,7 +92,7 @@ export default function ReserveNow() {
         <h1 className={style.heading}>Reserve Now</h1>
         <br/>
         <center>
-        <div className='drop-shadow-xl '>
+        <div className='drop-shadow-xl'>
             <div className={style.reservation_container}>
                 <h2 className={style.sub_heading}>User Details</h2><br/>
                 <center>
