@@ -11,6 +11,7 @@ import PrivateRoutes from "./private-routes/PrivateRoutes";
 import Error404 from "./pages/error";
 import AdminHome from "./pages/admin-panel";
 import ReserveNow from "./pages/reservations/ReserveNow";
+import MyReservations from "./pages/reservations/MyReservations";
 
 export const AuthContext = createContext();
 
@@ -28,6 +29,7 @@ export default function App() {
           <Route path="/404" element={<Error404 />} />
 
           <Route path="/reserve/:id" element={<ReserveNow />} />
+          <Route path="/my-reservations" element={<MyReservations/>}/>
         </Route>
         {/* add public routes here */}
         <Route path="/" element={<PreviewSite />} />

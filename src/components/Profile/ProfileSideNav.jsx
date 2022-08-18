@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../App";
 
 export default function ProfileSideNav() {
@@ -25,7 +26,7 @@ export default function ProfileSideNav() {
                         <li className="relative">
                             <a className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="dark">
                                 <img src="/images/reserve.svg" className="mr-2 md:mr-3 w-3 md:w-5 h-3 md:h-5"/>
-                                <span className="text-xs md:text-sm">My Reservations</span>
+                                <Link to="/my-reservations"><span className="text-xs md:text-sm">My Reservations</span></Link>
                             </a>
                         </li>
                         <hr className="border-gray-200 dark:border-gray-700" />
