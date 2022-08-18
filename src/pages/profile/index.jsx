@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react"
-import { fetchUser, findUsers } from "../../api/UserApi";
+import { fetchUser, findUsers } from "../../api/User/userApi";
 import { AuthContext } from "../../App"
 import NavBar from "../../components/LayoutComponents/NavBar";
 import ProfileSideNav from "../../components/Profile/ProfileSideNav";
