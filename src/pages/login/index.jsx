@@ -1,5 +1,5 @@
 import React from "react";
-import { loginUser } from "../../api/UserApi"
+import { loginUser } from "../../api/User/userApi"
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 import Button from "../../components/buttons/Buttons";
