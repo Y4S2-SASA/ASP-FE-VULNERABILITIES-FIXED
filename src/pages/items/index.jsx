@@ -106,6 +106,7 @@ export default function Items() {
                   
                   </div>
 
+
                   <h3 className="mt-2 text-xl text-gray-900 font-semibold">
                       {callout.name}
                   </h3>
