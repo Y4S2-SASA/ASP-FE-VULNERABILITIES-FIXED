@@ -1,7 +1,7 @@
 export default function ServiceCards() {
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-4 px-12 md:px-0">
+        <div className="grid grid-cols-1 md:grid-cols-4 px-12 md:px-0 space-y-5 md:space-y-0">
             <div className="max-w-xs bg-white rounded-lg border border-gray-200 shadow-2xl dark:bg-gray-800 dark:border-gray-700">
                 <a href="#">
                     <div class="relative overflow-hidden bg-no-repeat bg-cover max-w-xs">

@@ -96,3 +96,33 @@
 	color: white;
 	margin: 10px;
 }
+
+@media (max-width: 640px) {
+	.login_container {
+		display: flex;
+		flex-direction: column;
+		min-height: 75vh;
+		margin-top: -50px;
+	}
+
+	.left {
+		flex: 2;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		background-color: white;
+		width: 100%;
+		border-top-left-radius: 10px;
+		border-bottom-left-radius: 10px;
+	}
+	
+	.login_form_container {
+		display: flex;
+		flex-direction: column;
+		width: 90%;
+	}
+	.input {
+		width: 300px !important;
+	}
+  }

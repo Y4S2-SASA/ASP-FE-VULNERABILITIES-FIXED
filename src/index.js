@@ -13,7 +13,7 @@ root.render(
     <div className="container mx-auto md:px-20">
       {toastContainer()}
       <App />
-      <PreviewFooter className="z-10"/>
+      <PreviewFooter />
     </div>
   </React.StrictMode>
 );

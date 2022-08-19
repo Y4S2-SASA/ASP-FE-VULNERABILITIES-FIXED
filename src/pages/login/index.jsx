@@ -1,5 +1,5 @@
 import React from "react";
-import { loginUser } from "../../api/UserApi"
+import { loginUser } from "../../api/User/userApi"
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 import Button from "../../components/buttons/Buttons";
@@ -70,7 +70,7 @@ export default function Login() {
                             <div className="">
                                 <h1 className="font-sans subpixel-antialiased font-bold text-center text-slate-600">One of Us?</h1>
                                 <br />
-                                <h4 className="font-mono font-thin">If you already has an account, just log in. We've missed you!</h4>
+                                <h4 className="font-mono font-thin px-10 text-center">If you already has an account, just log in. We've missed you!</h4>
                             </div>
                             <br /><br />
                             <input
