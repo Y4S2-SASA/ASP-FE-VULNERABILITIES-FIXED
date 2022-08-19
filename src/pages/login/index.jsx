@@ -92,7 +92,7 @@ export default function Login() {
                                 className={styles.input}
                             />
                             {error && <div className={styles.error_msg}>{error}</div>}
-                            <Button variant="red" disabled={apiResponseWaiting}>
+                            <Button variant="red" disabled={apiResponseWaiting} type="submit">
                                 Login
                             </Button>
                             {apiResponseWaiting && (

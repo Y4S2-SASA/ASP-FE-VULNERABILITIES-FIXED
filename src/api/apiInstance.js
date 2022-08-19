@@ -8,6 +8,7 @@ const apiInstance = axios.create({
 apiInstance.interceptors.request.use(
   async function (config) {
     if(process.env.CURRENT_ENV === "production") {
+      console.log(process.env.CURRENT_ENV )
       config.baseURL = "https://automobile-spare-parts-web.herokuapp.com/api";
       config.headers = {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
