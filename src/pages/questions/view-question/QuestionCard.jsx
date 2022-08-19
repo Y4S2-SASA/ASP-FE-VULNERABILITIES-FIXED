@@ -1,16 +1,18 @@
 import { timeSince } from "../../../helper/helper";
+import { BsFillTrashFill } from "react-icons/bs";
+import { BsPencilSquare } from "react-icons/bs";
 
-export default function QuestionCard({title, createdAt, createdBy, numOfViews, imageUrl, tags, _id, description}) {
+export default function QuestionCard({title, createdAt, createdBy, onEdit, imageUrl, tags, onDelete, description}) {
     return (
         <>
             <div
                 className="block p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
             >
-                <div class="flex justify-between ...">
+                <div className="flex justify-between ...">
                     <p className="text-slate-400 text-sm">@{createdBy} &nbsp; {timeSince(new Date(createdAt))} ago </p>
-                    <div className="mx-4">
-                        <button>edit</button>
-                        <button>delete</button>
+                    <div className="text-3xl flex justify-between ...">
+                        <div className="pr-5 cursor-pointer" onClick={onEdit}><BsPencilSquare/></div>
+                        <div className="cursor-pointer" onClick={onDelete}><BsFillTrashFill/></div>
                     </div>
                 </div>
                 

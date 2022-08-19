@@ -7,7 +7,7 @@ export default function QuestionCard({title, createdAt, createdBy, numOfViews, i
                 href={`view-question/${_id}`}
                 className="block p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
             >
-                <div class="flex justify-between ...">
+                <div className="flex justify-between ...">
                     <p className="text-slate-400 text-sm">@{createdBy} &nbsp; {timeSince(new Date(createdAt))} ago </p>
                     <p className="text-slate-400 text-sm">{numOfViews} Views </p>
                 </div>

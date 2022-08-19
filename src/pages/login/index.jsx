@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { loginUser } from "../../api/UserApi"
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
@@ -8,20 +8,31 @@ import PreviewFooter from "../../components/PreviewPage/PreviewFooter";
 
 export default function Login() {
     const [credentials, setCredentials] = React.useState({});
-    const [error, setError] = useState("");
+    const [error, setError] = React.useState("");
+    const [apiResponseWaiting, setApiResponseWaiting] = React.useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
+            setApiResponseWaiting(true);
             const userLog = loginUser(credentials);
 			const { data: res } = await userLog;
             if(res.data) {
                 localStorage.setItem("token", res.data);
                 localStorage.setItem("userRole", res.userData.role);
                 localStorage.setItem("profilePic", res.userData.pic);
-                console.log(res.userData)
-                navigate("/items");
+                console.log(res.userData);
+                res.userData? setTimeout(function(){
+                    setApiResponseWaiting(false);
+                    if(res.userData.role === "CLIENT") {
+                        window.location.href = '/items';
+                    } else if(res.userData.role === "ADMIN") {
+                        window.location.href = '/admin-panel';
+                    } else {
+                        window.location.href = '/404';
+                    }
+                }, 1500) : setApiResponseWaiting(false);
             }
         } catch (error) {
             if (
@@ -30,6 +41,7 @@ export default function Login() {
 				error.response.status <= 500
 			) {
 				setError(error.response.data.message);
+                setApiResponseWaiting(false);
 			}
         }
     }
@@ -49,7 +61,7 @@ export default function Login() {
         }
     }
     return (
-        <div className="container mx-auto md:px-20">
+        <div className="container">
             <PreviewHeader />
             <div className={styles.login_container}>
                 <div className={styles.login_form_container}>
@@ -80,9 +92,16 @@ export default function Login() {
                                 className={styles.input}
                             />
                             {error && <div className={styles.error_msg}>{error}</div>}
-                            <Button variant="red">
+                            <Button variant="red" disabled={apiResponseWaiting}>
                                 Login
                             </Button>
+                            {apiResponseWaiting && (
+                                <div className="flex justify-center items-center">
+                                    <div className="spinner-grow inline-block w-8 h-8 bg-current rounded-full opacity-0 text-red-700" role="status">
+                                        <span className="visually-hidden">Loading...</span>
+                                    </div>
+                                </div>
+                            )}
                         </form>
                     </div>
                     <div className={styles.right}>
@@ -100,7 +119,7 @@ export default function Login() {
                     </div>
                 </div>
             </div>
-            <PreviewFooter />
+            {/* <PreviewFooter /> */}
         </div>
     )
 }
