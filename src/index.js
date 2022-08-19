@@ -10,7 +10,7 @@ root.render(
   <React.StrictMode>
     <div className="container mx-auto md:px-20">
       <App />
-      <PreviewFooter className="z-10"/>
+      <PreviewFooter />
     </div>
   </React.StrictMode>
 );

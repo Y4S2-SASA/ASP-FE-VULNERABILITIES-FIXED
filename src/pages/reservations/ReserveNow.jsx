@@ -3,7 +3,7 @@ import {useParams} from 'react-router-dom'
 import NavBar from '../../components/LayoutComponents/NavBar';
 import style from "./reservation.module.css"
 import Button from '../../components/buttons/Buttons';
-import { findUsers } from '../../api/UserApi';
+import { findUsers } from '../../api/User/userApi';
 import orderRequest from '../../api/Order/order.request';
 import itemRequest from '../../api/Item/item.request';
 import ID from 'nodejs-unique-numeric-id-generator';

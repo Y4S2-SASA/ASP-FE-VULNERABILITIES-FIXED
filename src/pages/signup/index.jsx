@@ -1,5 +1,5 @@
 import React from "react";
-import { registerUser } from "../../api/UserApi";
+import { registerUser } from "../../api/User/userApi";
 import styles from "./styles.module.css";
 import Button from "../../components/buttons/Buttons";
 import PreviewHeader from "../../components/PreviewPage/PreviewHeader";
