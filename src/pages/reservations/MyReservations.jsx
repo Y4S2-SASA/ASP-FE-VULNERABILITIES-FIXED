@@ -15,7 +15,7 @@ export default function MyReservations() {
     const [seller, setSeller] = useState({});
 
     const getOrders = () =>{
-        orderRequest.getUserOrders(buyer)
+        orderRequest.getUserOrders('')
         .then((response) =>{
             console.log(response.data.data)
             setOrders(response.data.data);
