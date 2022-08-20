@@ -1,20 +1,21 @@
 import axios from "axios"; 
 
-
 const apiInstance = axios.create({
   baseURL: "INVALID_URL",
 });
+let current = process.env.REACT_APP_CURRENT_ENV;
 
 apiInstance.interceptors.request.use(
   async function (config) {
-    if(process.env.CURRENT_ENV === "production") {
-      config.baseURL = "https://automobile-spare-parts-web.herokuapp.com/api";
+
+    if(current === "PRODUCTION") {
+      config.baseURL = process.env.REACT_APP_PRODUCTION_URL;
       config.headers = {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       };
       return config;
     } else {
-      config.baseURL = "http://localhost:3001/api";
+      config.baseURL = process.env.REACT_APP_DEV_URL;
       config.headers = {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       };
