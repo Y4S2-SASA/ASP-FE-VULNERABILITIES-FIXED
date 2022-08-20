@@ -6,6 +6,7 @@ import itemRequest from "../../api/Item/item.request";
 import Button from "../../components/buttons/Buttons";
 import { BsFillTrashFill } from "react-icons/bs";
 import { BsPencilSquare } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const Items = () => {
     // With this AuthContext you can get the currently logged in user's details
@@ -111,7 +112,9 @@ const Items = () => {
                   </div>
 
                   <div className="flex justify-between pt-4">
-                  <div className="cursor-pointer"><Button>Add to cart</Button></div>
+                  <div className="cursor-pointer">
+                    <Link to={`/reserve/${i._id}`}><Button>Add to cart</Button></Link>
+                  </div>
                   
                   <div className="flex center-items text-3xl pt-2">
                   <div className="pr-5 cursor-pointer"><BsPencilSquare/></div>
