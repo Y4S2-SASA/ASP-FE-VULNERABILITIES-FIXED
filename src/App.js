@@ -12,6 +12,7 @@ import Error404 from "./pages/error";
 import AdminHome from "./pages/admin-panel";
 import ReserveNow from "./pages/reservations/ReserveNow";
 import MyReservations from "./pages/reservations/MyReservations";
+import CreateItem from "./pages/items/CreateItem";
 
 export const AuthContext = createContext();
 
@@ -30,6 +31,8 @@ export default function App() {
 
           <Route path="/reserve/:id" element={<ReserveNow />} />
           <Route path="/my-reservations" element={<MyReservations/>}/>
+
+          <Route path="/createitem" element={<CreateItem/>}/>
         </Route>
         {/* add public routes here */}
         <Route path="/" element={<PreviewSite />} />
