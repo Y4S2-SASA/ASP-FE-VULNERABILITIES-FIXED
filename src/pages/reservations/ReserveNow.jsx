@@ -8,6 +8,7 @@ import orderRequest from '../../api/Order/order.request';
 import itemRequest from '../../api/Item/item.request';
 import ID from 'nodejs-unique-numeric-id-generator';
 import { AuthContext } from '../../App';
+import { applyToast } from '../../components/toast-message/toast';
 
 export default function ReserveNow() {
     const loggedInUser = useContext(AuthContext);
@@ -81,8 +82,12 @@ export default function ReserveNow() {
         orderRequest.saveOrder(order)
         .then((response) =>{
             console.log(response.data);
+            applyToast('Order successfully created!', 'success');
+            setQuantity(0);
+            setTotal(0);
         }).catch((error) =>{
             console.error(error.message);
+            applyToast('Error in creating order!', 'error');
         })
     }  
 
@@ -126,7 +131,7 @@ export default function ReserveNow() {
                             <div className='col-span-1 relative w-full h-80 bg-white rounded-lg overflow-hidden sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1'>
                                 <img src={item.imageUrl} className='w-full h-full object-center object-cover border ' alt='Item'></img>
                             </div>
-                            <div className='col-span-2 mt-10 m-10 lg:grid lg:grid-cols-3 lg:gap-x-2'>
+                            <div className='col-span-2 mt-3 m-10 lg:grid lg:grid-cols-3 lg:gap-x-2'>
                                 <div className="mt-4 px-5 text-base font-semibold col-span-1">
                                     Item Name : 
                                 </div>
@@ -135,11 +140,15 @@ export default function ReserveNow() {
                                     Seller Name : 
                                 </div>
                                 <h4 className="mt-4 px-5 font-medium col-span-2"> {seller.firstName} {seller.lastName}</h4>
+                                <div className="mt-4 px-5 text-base font-semibold">
+                                    Item Price : 
+                                </div>
+                                <h4 className="mt-4 px-5 font-medium col-span-2"> Rs.{item.price}</h4>
                                 <div className='mt-4 lg:grid lg:grid-cols-3 lg:gap-x-3 col-span-3'>
-                                    <div className="px-5 text-base font-semibold ">
+                                    <div className="px-5 text-base font-semibold">
                                         Quantity :
                                     </div>
-                                    <div class="flex flex-row h-10 w-full rounded-lg relative bg-transparent mt-1 px-5 ">
+                                    <div class="flex flex-row h-10 w-full rounded-lg relative bg-transparent  mt-3 lg:mt-0 px-5">
                                         <button onClick={handleDecrement} class=" bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-7 w-10 rounded-l cursor-pointer outline-none">
                                             <span class="m-auto text-2xl font-thin">−</span>
                                         </button>
@@ -148,11 +157,16 @@ export default function ReserveNow() {
                                             <span class="m-auto text-2xl font-thin">+</span>
                                         </button>
                                     </div>
-                                    <div className='col-span-2 lg:px-5'>
-                                        <span class="inline-flex items-center px-2 text-sm text-gray-900 bg-gray-200 h-9 w-10 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
-                                            LKR
-                                        </span>
-                                        <input type="text" name="total" class="rounded-none border p-0.5 h-9 w-40" placeholder="Price" value={total}/>
+                                    <div className='col-span-3 lg:grid lg:grid-cols-3'>
+                                        <div className=" col-span-1 text-base font-semibold px-5 mt-3">
+                                            Order Price : 
+                                        </div>
+                                        <div className='col-span-2 lg:px-5 mt-3'>
+                                            <span class="inline-flex items-center px-2 text-sm text-gray-900 bg-gray-200 h-9 w-10 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                                LKR
+                                            </span>
+                                            <input type="text" name="total" class="rounded-none border p-0.5 h-9 w-40" placeholder="Price" value={total}/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
