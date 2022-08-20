@@ -1,10 +1,12 @@
 import { useContext } from "react";
 import { AuthContext } from "../../App";
+import {useLocation} from 'react-router-dom';
 
 export default function NavBar() {
     const loggedInUser = useContext(AuthContext);
     const {userId, role, proPic} = loggedInUser;
-
+    const location = useLocation();
+    
     const handleLogout = () => {
 		localStorage.removeItem("token");
 		window.location.reload();
@@ -44,34 +46,43 @@ export default function NavBar() {
                 className="collapse navbar-collapse flex-grow items-center"
                 id="navbarSupportedContent"
                 >
-                {/* <a
+                <a
                     className="flex items-center text-gray-900 hover:text-gray-900 focus:text-gray-900 mt-2 lg:mt-0 mr-1"
                     href="#"
                 >
                     <img
-                        className="rounded-t-lg w-1/2 md:w-48"
-                        src="images/automobile.png"
+                        className="rounded-t-lg w-0 md:w-16"
+                        src="images/asplogo.png"
                         alt=""
                         loading="lazy"
                     />
-                </a> */}
+                </a>
                 {/* Left links */}
                 {role === "CLIENT" && (
                     <>
                         <ul className="navbar-nav flex flex-col pl-0 list-style-none mr-auto">
                             <li className="nav-item p-2">
-                                <a className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0" href="home">
-                                    Home
+                                <a className="nav-link  p-0" href="/home">
+                                    {location.pathname === '/home'? 
+                                        <span className="text-red-800 hover:text-red-600 focus:text-red-600 decoration-red-800 underline underline-offset-8 hover:decoration-red-600">Home</span> :
+                                        <span className="text-gray-500 hover:text-red-600 focus:text-red-600">Home</span>
+                                    }
                                 </a>
                             </li>
                             <li className="nav-item p-2">
-                                <a className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0" href="/items">
-                                    Items
+                                <a className="nav-link text-gray-500 hover:text-gray-500 focus:text-gray-500 p-0" href="/items">
+                                    {location.pathname === '/items'?
+                                        <span className="text-red-800 hover:text-red-600 focus:text-red-600 decoration-red-800 underline underline-offset-8 hover:decoration-red-600">Items</span> :
+                                        <span className="text-gray-500 hover:text-red-600 focus:text-red-600">Items</span>
+                                    }
                                 </a>
                             </li>
                             <li className="nav-item p-2">
                                 <a className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0" href="/questions">
-                                    Question Thread
+                                    {location.pathname === '/questions'? 
+                                        <span className="text-red-800 hover:text-red-600 focus:text-red-600 decoration-red-800 underline underline-offset-8 hover:decoration-red-600">Question Thread</span> :
+                                        <span className="text-gray-500 hover:text-red-600 focus:text-red-600">Question Thread</span>
+                                    }
                                 </a>
                             </li>
                         </ul>
@@ -81,8 +92,11 @@ export default function NavBar() {
                     <>
                         <ul className="navbar-nav flex flex-col pl-0 list-style-none mr-auto">
                             <li className="nav-item p-2">
-                                <a className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0" href="/admin-panel">
-                                    Home
+                                <a className="nav-link p-0" href="/admin-panel">
+                                    {location.pathname === '/admin-panel'? 
+                                        <span className="text-red-800 hover:text-red-600 focus:text-red-600 decoration-red-800 underline underline-offset-8 hover:decoration-red-600">Home</span> :
+                                        <span className="text-gray-500 hover:text-red-600 focus:text-red-600">Home</span>
+                                    }
                                 </a>
                             </li>
                         </ul>
