@@ -34,7 +34,68 @@ const Items = () => {
         });
       }, []);
 
-      // const callouts = [
+    return (
+        <>
+        <NavBar />
+            {/* <h1>Items</h1>
+            <h2>logged in user - {userId}</h2>
+            <h2>logged in user's role - {role}</h2> */}
+      <br/>
+        <div className="bg-gray-100">
+        <div className="max-w-7xl mx-auto px-16 sm:px-16 lg:px-2">
+          <div className="max-w-2xl mx-auto py-10 lg:max-w-none">
+
+           <div className="py-2">
+           <Button><div className="text-xl"><a href="/createitem">Create your Item</a></div> </Button>
+           </div>
+
+            <div className="mt-6 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-6">
+              {item.map((i) => (
+                <div key={i.id} className="group relative">
+                  <div className="relative w-full h-80 bg-white rounded-lg overflow-hidden sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1">
+                    <img
+                      src={i.imageUrl}
+                      className="w-full h-full object-center object-cover"
+                    />
+                  </div>
+
+                  <div className="flex justify-between pt-4">
+                  <div className="cursor-pointer">
+                    <Link to={`/reserve/${i._id}`}><Button>Add to cart</Button></Link>
+                  </div>
+                  
+                  <div className="flex center-items text-3xl pt-2">
+                  <div className="pr-5 cursor-pointer"><BsPencilSquare/></div>
+                  <div className="pr-5 cursor-pointer"><BsFillTrashFill/></div>
+                  </div>
+                  
+                  </div>
+
+
+                  <h3 className="mt-2 text-xl text-gray-900 font-semibold">
+                      {i.name}
+                  </h3>
+                  <h3 className="mt-0 text-lg text-gray-600 font-semibold">
+                      LKR {i.price} | Availability - {i.quantity}
+                  </h3>
+                  <p className="text-base font-medium text-gray-900 mt-2 mb-24">{i.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+        
+        <br/><br/>
+        
+        </>
+    )
+}
+
+export default Items;
+
+
+// const callouts = [
       //   {
       //     name: 'Steering Wheel',
       //     description: 'A good choice for your vehicle. Contact us through mobile number - 0761234567',
@@ -85,63 +146,3 @@ const Items = () => {
       //     availability: '4'
       //   },
       // ]
-
-    return (
-        <>
-        <NavBar />
-            {/* <h1>Items</h1>
-            <h2>logged in user - {userId}</h2>
-            <h2>logged in user's role - {role}</h2> */}
-      <br/>
-        <div className="bg-gray-100">
-        <div className="max-w-7xl mx-auto px-16 sm:px-16 lg:px-2">
-          <div className="max-w-2xl mx-auto py-10 lg:max-w-none">
-
-           <div className="py-2">
-           <Button><div className="text-xl">Create your Item</div> </Button>
-           </div>
-
-            <div className="mt-6 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-6">
-              {item.map((i) => (
-                <div key={i.id} className="group relative">
-                  <div className="relative w-full h-80 bg-white rounded-lg overflow-hidden sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1">
-                    <img
-                      src={i.imageUrl}
-                      className="w-full h-full object-center object-cover"
-                    />
-                  </div>
-
-                  <div className="flex justify-between pt-4">
-                  <div className="cursor-pointer">
-                    <Link to={`/reserve/${i._id}`}><Button>Add to cart</Button></Link>
-                  </div>
-                  
-                  <div className="flex center-items text-3xl pt-2">
-                  <div className="pr-5 cursor-pointer"><BsPencilSquare/></div>
-                  <div className="pr-5 cursor-pointer"><BsFillTrashFill/></div>
-                  </div>
-                  
-                  </div>
-
-
-                  <h3 className="mt-2 text-xl text-gray-900 font-semibold">
-                      {i.name}
-                  </h3>
-                  <h3 className="mt-0 text-lg text-gray-600 font-semibold">
-                      LKR {i.price} | Availability - {i.quantity}
-                  </h3>
-                  <p className="text-base font-medium text-gray-900 mt-2 mb-24">{i.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-        
-        <br/><br/>
-        
-        </>
-    )
-}
-
-export default Items;

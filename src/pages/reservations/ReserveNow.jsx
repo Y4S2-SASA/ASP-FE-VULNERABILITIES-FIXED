@@ -84,7 +84,7 @@ export default function ReserveNow() {
             console.log(response.data);
             applyToast('Order successfully created!', 'success');
             setQuantity(0);
-            setTotal(0);
+            setTotal(0)
         }).catch((error) =>{
             console.error(error.message);
             applyToast('Error in creating order!', 'error');
@@ -104,51 +104,44 @@ export default function ReserveNow() {
                     <h3 className="mt-5 px-5 text-lg font-semibold">
                         User Details
                     </h3>
-                    <div className="mt-3 px-5 lg:grid lg:grid-cols-6 lg:gap-x-6">
-                        <h3 className="mt-3 px-5 text-base font-semibold col-span-1">
+                    <div className="mt-3 px-5 grid grid-cols-2 lg:grid lg:grid-cols-6 lg:gap-x-6">
+                        <h3 className="mt-3 px-5 text-base font-semibold lg:col-span-1">
                             First Name :
                         </h3>
-                        <h4 className="mt-4 px-5 font-medium col-span-2">{user.firstName}</h4>
-                        <h3 className="mt-3 px-5 text-base font-semibold col-span-1">
+                        <h4 className="mt-4 px-5 font-medium lg:col-span-2">{user.firstName}</h4>
+                        <h3 className="mt-3 px-5 text-base font-semibold lg:col-span-1">
                             Last Name  : 
                         </h3>
-                        <h4 className="mt-4 px-5 font-medium col-span-2">{user.lastName}</h4>
-                        <h3 className="mt-3 px-5 text-base font-semibold col-span-1">
+                        <h4 className="mt-4 px-5 font-medium lg:col-span-2">{user.lastName}</h4>
+                        <h3 className="mt-3 px-5 text-base font-semibold lg:col-span-1">
                             Email :  
                         </h3>
-                        <h4 className="mt-4 px-5 font-medium col-span-2">{user.email}</h4>
-                        <h3 className="mt-3 px-5 text-base font-semibold col-span-1">
+                        <h4 className="mt-4 px-5 font-medium lg:col-span-2">{user.email}</h4>
+                        <h3 className="mt-3 px-5 text-base font-semibold lg:col-span-1">
                             Contact No : 
                         </h3>
-                        <h4 className="mt-4 px-5 font-medium col-span-2"> {user.contactNo}</h4>
+                        <h4 className="mt-4 px-5 font-medium lg:col-span-2"> {user.contactNo}</h4>
                     </div>
                     <div class="mt-5 flex-grow border-t border-gray-300"></div>
                     <h3 className="mt-7 px-5 text-lg font-semibold">
                         Item Details
                     </h3>
-                    <div className="px-5">
-                        <div className="mt-5 lg:grid lg:grid-cols-3 lg:gap-x-3">
-                            <div className='col-span-1 relative w-full h-80 bg-white rounded-lg overflow-hidden sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1'>
-                                <img src={item.imageUrl} className='w-full h-full object-center object-cover border ' alt='Item'></img>
-                            </div>
-                            <div className='col-span-2 mt-3 m-10 lg:grid lg:grid-cols-3 lg:gap-x-2'>
-                                <div className="mt-4 px-5 text-base font-semibold col-span-1">
-                                    Item Name : 
-                                </div>
-                                <h4 className="mt-4 px-5 font-medium col-span-2">{item.name}</h4>
-                                <div className="mt-4 px-5 text-base font-semibold">
-                                    Seller Name : 
-                                </div>
-                                <h4 className="mt-4 px-5 font-medium col-span-2"> {seller.firstName} {seller.lastName}</h4>
-                                <div className="mt-4 px-5 text-base font-semibold">
-                                    Item Price : 
-                                </div>
-                                <h4 className="mt-4 px-5 font-medium col-span-2"> Rs.{item.price}</h4>
-                                <div className='mt-4 lg:grid lg:grid-cols-3 lg:gap-x-3 col-span-3'>
-                                    <div className="px-5 text-base font-semibold">
-                                        Quantity :
-                                    </div>
-                                    <div class="flex flex-row h-10 w-full rounded-lg relative bg-transparent  mt-3 lg:mt-0 px-5">
+                    <div className='lg:grid lg:grid-cols-4 lg:gap-x-3 lg:px-10'>
+                        <div className='relative w-72 h-60 col-span-1 mt-7'>
+                            <img src={item.imageUrl} className='w-full h-full bg-white object-center object cover border' alt='Item'></img>
+                        </div>
+                        <div class=" px-5 col-span-3">
+                        <br/>
+                            <div className='lg:grid lg:grid-cols-3'>
+                                <div className='col-span-2 grid grid-cols-2 lg:grid lg:grid-cols-3 text-gray-900'>
+                                    <h3 className='text-base font-semibold lg:col-span-1 mt-5'>Item Name :</h3>
+                                    <h4 className='text-base font-medium lg:col-span-2  mt-5'>{item.name}</h4>
+                                    <h3 className='text-base font-semibold lg:col-span-1 mt-5'>Seller's Name :</h3>
+                                    <h4 className='text-base font-medium lg:col-span-2 mt-5'>{seller.firstName} {seller.lastName}</h4>
+                                    <h3 className='text-base font-semibold lg:col-span-1 mt-5'>Price :</h3>
+                                    <h4 className='text-base font-medium lg:col-span-2 mt-5'>Rs. {item.price} </h4>
+                                    <h3 className='text-base font-semibold lg:col-span-1 mt-5'>Quantity :</h3>
+                                    <div class="flex flex-row h-10 w-full rounded-lg relative bg-transparent  mt-3 lg:mt-5lg:col-span-2">
                                         <button onClick={handleDecrement} class=" bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-7 w-10 rounded-l cursor-pointer outline-none">
                                             <span class="m-auto text-2xl font-thin">−</span>
                                         </button>
@@ -157,17 +150,17 @@ export default function ReserveNow() {
                                             <span class="m-auto text-2xl font-thin">+</span>
                                         </button>
                                     </div>
-                                    <div className='col-span-3 lg:grid lg:grid-cols-3'>
-                                        <div className=" col-span-1 text-base font-semibold px-5 mt-3">
-                                            Order Price : 
-                                        </div>
-                                        <div className='col-span-2 lg:px-5 mt-3'>
-                                            <span class="inline-flex items-center px-2 text-sm text-gray-900 bg-gray-200 h-9 w-10 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
-                                                LKR
-                                            </span>
-                                            <input type="text" name="total" class="rounded-none border p-0.5 h-9 w-40" placeholder="Price" value={total}/>
-                                        </div>
-                                    </div>
+                                </div>
+                            </div>
+                            <div className='lg:grid lg:grid-cols-5'>
+                                <div className=" col-span-1 text-base font-semibold mt-3">
+                                    Order Price : 
+                                </div>
+                                <div className='col-span-2 mt-3 lg:px-4'>
+                                    <span class="inline-flex items-center px-2 text-sm text-gray-900 bg-gray-200 h-9 w-10 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                        LKR
+                                    </span>
+                                    <input type="text" name="total" class="rounded-none border p-0.5 h-9 w-40" placeholder="Price" value={total}/>
                                 </div>
                             </div>
                         </div>
