@@ -5,139 +5,118 @@ const CreateItem = () => {
     return(
         <div>
             <NavBar />
-            
-
-            <div className="mt-16 mb-16 ml-20">
-                <div className="md:grid md:grid-cols-3 md:gap-6">
-
-                <div className="mt-5 md:mt-0 md:col-span-2">
-                    <form action="#" method="POST">
-                    <div className="shadow overflow-hidden sm:rounded-md">
-                        <div className="px-4 py-5 bg-white sm:p-6">
-                        <div className="grid grid-cols-6 gap-6">
-                            <div className="col-span-6 sm:col-span-3">
-                            <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
-                                First name
-                            </label>
-                            <input
-                                type="text"
-                                name="first-name"
-                                id="first-name"
-                                autoComplete="given-name"
-                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                            />
-                            </div>
-
-                            <div className="col-span-6 sm:col-span-3">
-                            <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
-                                Last name
-                            </label>
-                            <input
-                                type="text"
-                                name="last-name"
-                                id="last-name"
-                                autoComplete="family-name"
-                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                            />
-                            </div>
-
-                            <div className="col-span-6 sm:col-span-4">
-                            <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
-                                Email address
-                            </label>
-                            <input
-                                type="text"
-                                name="email-address"
-                                id="email-address"
-                                autoComplete="email"
-                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                            />
-                            </div>
-
-                            <div className="col-span-6 sm:col-span-3">
-                            <label htmlFor="country" className="block text-sm font-medium text-gray-700">
-                                Country
-                            </label>
-                            <select
-                                id="country"
-                                name="country"
-                                autoComplete="country-name"
-                                className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                            >
-                                <option>United States</option>
-                                <option>Canada</option>
-                                <option>Mexico</option>
-                            </select>
-                            </div>
-
-                            <div className="col-span-6">
-                            <label htmlFor="street-address" className="block text-sm font-medium text-gray-700">
-                                Street address
-                            </label>
-                            <input
-                                type="text"
-                                name="street-address"
-                                id="street-address"
-                                autoComplete="street-address"
-                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                            />
-                            </div>
-
-                            <div className="col-span-6 sm:col-span-6 lg:col-span-2">
-                            <label htmlFor="city" className="block text-sm font-medium text-gray-700">
-                                City
-                            </label>
-                            <input
-                                type="text"
-                                name="city"
-                                id="city"
-                                autoComplete="address-level2"
-                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                            />
-                            </div>
-
-                            <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                            <label htmlFor="region" className="block text-sm font-medium text-gray-700">
-                                State / Province
-                            </label>
-                            <input
-                                type="text"
-                                name="region"
-                                id="region"
-                                autoComplete="address-level1"
-                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                            />
-                            </div>
-
-                            <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                            <label htmlFor="postal-code" className="block text-sm font-medium text-gray-700">
-                                ZIP / Postal code
-                            </label>
-                            <input
-                                type="text"
-                                name="postal-code"
-                                id="postal-code"
-                                autoComplete="postal-code"
-                                className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                            />
-                            </div>
-                        </div>
-                        </div>
-                        <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                        <button
-                            type="submit"
-                            className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        >
-                            Save
-                        </button>
-                        </div>
-                    </div>
-                    </form>
-                </div>
-                </div>
+            <br/>
+            <div className="block pl-20 pr-20 pt-10 pb-10 max-w-8xl bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <div className="text-xl font-semibold">
+                Create an Item
             </div>
+            <div className="pt-10 text-xl sm:px-0 lg:px-24">
+                <div className="mb-6">
+                <label
+                    htmlFor="name"
+                    className="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300"
+                >
+                    Enter Item Name
+                </label>
+                <input
+                    type="text"
+                    id="name"
+                    className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                    placeholder="Ex: Steering Wheel"
+                    required=""
+                />
+                </div>
 
+                <div className="mb-6">
+                <label
+                    htmlFor="price"
+                    className="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300"
+                >
+                    Enter Item Price
+                </label>
 
+                <div className="flex">
+                    <span className="inline-flex items-center px-3 text-lg text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                    LKR
+                    </span>
+                    <input
+                    type="text"
+                    id="price"
+                    className="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-lg border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Ex: 7000"
+                    />
+                </div>
+                </div>
+
+                <div className="mb-6">
+                <label
+                    htmlFor="quantity"
+                    className="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300"
+                >
+                    Enter Item Quantity
+                </label>
+                <input
+                    type="text"
+                    id="quantity"
+                    className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                    placeholder="Ex: 10"
+                    required=""
+                />
+                </div>
+
+                <div className="mb-6">
+                <label
+                    htmlFor="description"
+                    className="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300"
+                >
+                    Enter Item Description
+                </label>
+                <textarea
+                    type="text"
+                    id="description"
+                    className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                    placeholder="Ex: A good choice for your vehicle. Contact us through mobile number - 0761234567"
+                    required=""
+                />
+                </div>
+
+                <div className="mb-6">
+                <label
+                    htmlFor="quantity"
+                    className="block mb-2 text-lg font-medium text-gray-900 dark:text-gray-300"
+                >
+                    Upload Item Image
+                </label>
+                <input
+                    className="block w-full text-xl text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                    aria-describedby="user_avatar_help"
+                    id="image"
+                    type="file"
+                />
+                </div>
+                <br/>
+
+                <div className="flex flex-row-reverse">   
+                <button
+                type="button"
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                >
+                Save
+                </button>
+
+                <div className="pr-4">
+                   <button
+                    type="button"
+                    className="py-2.5 px-5 mr-2 mb-2 text-lg font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-500 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                    >
+                    Cancel
+                    </button> 
+                </div>
+                </div>
+                
+            </div>
+            </div>
+            <br/><br/>
         </div>
     );
 }
