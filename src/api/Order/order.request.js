@@ -44,11 +44,23 @@ const updateOrderDetails = (id, payload) =>{
         })
 }
 
+const deleteOrderDetails = (id) =>{
+    return apiInstance
+        .delete(`/orders/${id}`)
+        .then((response) =>{
+            return response;
+        })
+        .catch((error) =>{
+            return error;
+        })
+}
+
 const orderRequest = {
     saveOrder,
     getUserOrders,
     getUserOrder,
     updateOrderDetails,
+    deleteOrderDetails,
 }
 
 export default orderRequest;

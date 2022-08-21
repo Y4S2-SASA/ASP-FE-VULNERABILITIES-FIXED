@@ -7,7 +7,6 @@ import NavBar from '../../components/LayoutComponents/NavBar'
 import Button from '../../components/buttons/Buttons';
 import { applyToast } from '../../components/toast-message/toast';
 
-
 export default function MyReservations() {
     const loggedInUser = useContext(AuthContext);
     const {userId} = loggedInUser;
@@ -23,6 +22,7 @@ export default function MyReservations() {
     const [buyer, setBuyer] = useState({});
     const [status, setStatus] = useState('NEW');
     const [newTotal, setNewTotal] = useState(0);
+    const [open, setOpen] = useState(false);
 
     const getOrders = () =>{
         orderRequest.getUserOrders(buyerId)
@@ -101,6 +101,18 @@ export default function MyReservations() {
         }).catch((error) =>{
             console.error(error);
             applyToast('Order detail update failed!', 'error');
+        })
+    }
+
+    const handleDelete = (id) =>{
+        console.log(id);
+        orderRequest.deleteOrderDetails(id)
+        .then((response) =>{
+            applyToast('Order details deleted successfully!', 'success');
+            getOrders();
+        }).catch((error) =>{
+            console.error(error);
+            applyToast('Order details delete failed!', 'error')
         })
     }
 
@@ -190,11 +202,11 @@ export default function MyReservations() {
                                                 <div className='col-span-1 self-center'>
                                                     <div className="flex center-items text-3xl pt-5">
                                                         <div className="pr-5 cursor-pointer text-gray-900" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Request"><BsPencilSquare data-bs-toggle="modal" data-bs-target="#updateReservationDetails"/></div>
-                                                        <div className="pr-5 cursor-pointer text-red-800" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Request"><BsFillTrashFill/></div>
+                                                        <div className="pr-5 cursor-pointer text-red-800" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Request"><BsFillTrashFill data-bs-toggle="modal" data-bs-target="#deleteReservationDetails"/></div>
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="updateReservationDetails" tabIndex={-1} aria-modal="true" role="dialog">
+                                                    <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto text-gray-900" id="updateReservationDetails" tabIndex={-1} aria-modal="true" role="dialog">
                                                     <div className="modal-dialog modal-xl modal-dialog-centered relative w-auto pointer-events-none">
                                                         <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
                                                         <div className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
@@ -291,6 +303,31 @@ export default function MyReservations() {
                                                             </div>
                                                             <div className='transition duration-150 ease-in-out ml-1' data-bs-dismiss="modal">
                                                                 <Button onClick={()=> handleUpdate(row._id)}>Update</Button>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto text-gray-900" id="deleteReservationDetails" tabIndex={-1} aria-modal="true" role="dialog">
+                                                    <div className="modal-dialog modal-dialog-centered relative w-auto pointer-events-none">
+                                                        <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+                                                        <div className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
+                                                            <h5 className="text-xl font-medium leading-normal text-gray-800">
+                                                                Delete Reservation Details
+                                                            </h5>
+                                                            <button type="button" className="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline" data-bs-toggle="tooltip" data-bs-placement="top" title="Close" data-bs-dismiss="modal" aria-label="Close" />
+                                                        </div>
+                                                        <div className="modal-body relative p-5">
+                                                           Are you sure that you want to delete this placed order?
+                                                        </div>
+                                                        <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
+                                                            <div className="transition duration-150 ease-in-out px-3" data-bs-dismiss="modal" >
+                                                                <Button variant={'alternative'}>Close</Button>
+                                                            </div>
+                                                            <div className='transition duration-150 ease-in-out ml-1' data-bs-dismiss="modal">
+                                                                <Button onClick={()=> handleDelete(row._id)}>Delete</Button>
                                                             </div>
                                                         </div>
                                                         </div>
