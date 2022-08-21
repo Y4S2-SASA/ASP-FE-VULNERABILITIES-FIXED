@@ -40,7 +40,7 @@ export default function MyReservations() {
             setOrder(response.data.data);
             setBuyer(response.data.data.buyer)
             setItem(response.data.data.item);
-            setQuantity(order.quantity)
+            setQuantity(response.data.data.quantity)
             setSeller(response.data.data.item.createdBy)
             setTotal(response.data.data.total)
         }).catch((error) =>{
@@ -194,7 +194,7 @@ export default function MyReservations() {
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="updateReservationDetails" tabIndex={-1} aria-labelledby="exampleModalCenterTitle" aria-modal="true" role="dialog">
+                                                    <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="updateReservationDetails" tabIndex={-1} aria-modal="true" role="dialog">
                                                     <div className="modal-dialog modal-xl modal-dialog-centered relative w-auto pointer-events-none">
                                                         <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
                                                         <div className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
