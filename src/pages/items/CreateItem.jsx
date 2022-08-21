@@ -3,6 +3,7 @@ import NavBar from "../../components/LayoutComponents/NavBar";
 import itemRequest from "../../api/Item/item.request";
 import { useContext } from "react"
 import { AuthContext } from "../../App"
+import { applyToast } from '../../components/toast-message/toast';
 
 const CreateItem = () => {
     // With this AuthContext you can get the currently logged in user's details
@@ -10,6 +11,7 @@ const CreateItem = () => {
     const {userId, role} = loggedInUser;
     const [picMessage, setPicMessage] = React.useState(null);
     const [proPic, setProPic] = React.useState("https://carfromjapan.com/wp-content/uploads/2018/03/hard-steering-wheel.jpg");
+    const [sucess, setSucess] = React.useState(true);
 
     const initialInput = {
         name: "",
@@ -33,9 +35,13 @@ const CreateItem = () => {
         })
         .then((res) => {
             console.log(res);
+            setInputs(initialInput);
+            applyToast('Item successfully created!', 'success');
         })
-
-        setInputs(initialInput);
+        .catch((error) => {
+            console.log(error);
+            applyToast('Error in creating item!', 'error');
+        })
     }
 
     const handleChange = (e) => {
