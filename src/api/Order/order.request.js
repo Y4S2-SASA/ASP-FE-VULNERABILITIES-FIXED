@@ -33,10 +33,22 @@ const getUserOrder = (id) =>{
         })
 }
 
+const updateOrderDetails = (id, payload) =>{
+    return apiInstance
+        .put(`/orders/${id}`, payload)
+        .then((response) =>{
+            return response;
+        })
+        .catch((error) =>{
+            return error;
+        })
+}
+
 const orderRequest = {
     saveOrder,
     getUserOrders,
     getUserOrder,
+    updateOrderDetails,
 }
 
 export default orderRequest;

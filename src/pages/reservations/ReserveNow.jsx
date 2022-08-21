@@ -96,7 +96,7 @@ export default function ReserveNow() {
         <NavBar/>
         <br/>
         <div className="bg-gray-100">
-            <div className="max-w-7xl mx-auto px-10 sm:px-10 lg:px-6">
+            <div className="max-w-7xl mx-auto px-5 sm:px-10 lg:px-6">
                 <div className="max-w-2xl mx-auto py-5 lg:max-w-none">
                     <h3 className="mt-5  text-xl font-semibold">
                         Reserve Now

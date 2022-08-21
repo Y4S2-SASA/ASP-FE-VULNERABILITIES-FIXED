@@ -7,7 +7,7 @@ const AccordionLayout = ({ title, children, index, activeIndex, setActiveIndex }
         {
             (activeIndex === index) ?
             <>
-            <div onClick={() => handleSetIndex(0)} className='flex items-center justify-between bg-gray-200 w-full p-5 font-medium text-left text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'>
+            <div onClick={() => handleSetIndex(0)} className='flex items-center justify-between bg-gray-200 w-full p-5 font-medium text-left text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-800'>
                 <div className='flex'>
                     <div className='font-semibold text-left text-gray-800 rounded-t-xl '>{title}</div>
                 </div>
