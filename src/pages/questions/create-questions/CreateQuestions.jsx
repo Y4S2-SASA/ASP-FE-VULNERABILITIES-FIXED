@@ -72,7 +72,6 @@ export default function CreateQuestions() {
 
     const onInputChange = e => {
         const { name, value } = e.target
-        console.log(name, value)
         setQuestion({ ...question, [name]: value });
     };
 
