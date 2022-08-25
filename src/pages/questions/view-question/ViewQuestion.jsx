@@ -10,12 +10,14 @@ import NavBar from "../../../components/LayoutComponents/NavBar";
 import QuestionCard from "../view-question/QuestionCard";
 import Button from "../../../components/buttons/Buttons";
 import { applyToast } from "../../../components/toast-message/toast";
+import EditQuestion from "../edit-question.jsx/EditQuestion";
 
 export default function ViewQuestion() {
     const { id } = useParams();
     const [question, setQuestions] = useState({});
     const [isLoading, setLoading] = useState(true);
-    const [deleteModelOpen, setDeleteModelOpen] = useState(false);
+    const [deleteModelOpen, setDeleteModelOpen] = useState(false);    
+    const [editModelOpen, setEditModelOpen] = useState(false);
 
     useEffect(() => {
         fetchQuestion(id);
@@ -54,6 +56,14 @@ export default function ViewQuestion() {
                         </DialogActions>
                     </Dialog>
                 }
+                {editModelOpen &&
+                    <Dialog onClose={() => setEditModelOpen(false)}>
+                        <EditQuestion 
+                            questionObject={question}
+                            setEditModelOpen={setEditModelOpen}
+                        />
+                    </Dialog>
+                }
                 <div className="max-w-7xl mx-auto px-16 sm:px-16 lg:px-2">
                     {!isLoading &&
                         <QuestionCard
@@ -65,7 +75,7 @@ export default function ViewQuestion() {
                             createdAt={question.createdAt}
                             _id={question._id}
                             description={question.description}
-                            onEdit={() => console.log('editing')}
+                            onEdit={() => setEditModelOpen(true)}
                             onDelete={() => setDeleteModelOpen(true)}
                         />
                     }
