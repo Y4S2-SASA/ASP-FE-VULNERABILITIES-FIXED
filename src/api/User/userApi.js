@@ -1,6 +1,6 @@
 import apiInstance from "../apiInstance";
 
-let subMainRoutePath = '/users';
+const subMainRoutePath = '/users';
 
 export const loginUser = (authObj) => apiInstance.post(subMainRoutePath + '/login', authObj);
 export const registerUser = (userObj) => apiInstance.post(subMainRoutePath + '/register', userObj);
