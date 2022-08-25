@@ -15,7 +15,7 @@ export default function MyReservations() {
     const [seller, setSeller] = useState({});
 
     const getOrders = () =>{
-        orderRequest.getUserOrders('')
+        orderRequest.getUserOrders(buyer)
         .then((response) =>{
             console.log(response.data.data)
             setOrders(response.data.data);
@@ -106,20 +106,20 @@ export default function MyReservations() {
                                         <div class=" px-5 col-span-3">
                                         <br/>
                                             <div className='lg:grid lg:grid-cols-3'>
-                                                <div className='col-span-2 lg:grid lg:grid-cols-3 '>
-                                                        <h3 className='text-base font-semibold col-span-1 mt-5'>Item Name :</h3>
-                                                        <h4 className='text-base font-medium col-span-2  mt-5'>{item.name}</h4>
-                                                        <h3 className='text-base font-semibold col-span-1 mt-5'>Seller's Name :</h3>
-                                                        <h4 className='text-base font-medium col-span-2 mt-5'>{seller.firstName} {seller.lastName}</h4>
-                                                        <h3 className='text-base font-semibold col-span-1 mt-5'>Quantity :</h3>
-                                                        <h4 className='text-base font-medium col-span-2 mt-5'>{row.quantity}</h4>
-                                                        <h3 className='text-base font-semibold col-span-1 mt-5'>Price :</h3>
-                                                        <h4 className='text-base font-medium col-span-2 mt-5'>{row.total}</h4>
+                                                <div className='col-span-2 grid grid-cols-2 lg:grid lg:grid-cols-3 text-gray-900'>
+                                                        <h3 className='text-base font-semibold lg:col-span-1 mt-5'>Item Name :</h3>
+                                                        <h4 className='text-base font-medium lg:col-span-2  mt-5'>{item.name}</h4>
+                                                        <h3 className='text-base font-semibold lg:col-span-1 mt-5'>Seller's Name :</h3>
+                                                        <h4 className='text-base font-medium lg:col-span-2 mt-5'>{seller.firstName} {seller.lastName}</h4>
+                                                        <h3 className='text-base font-semibold lg:col-span-1 mt-5'>Quantity :</h3>
+                                                        <h4 className='text-base font-medium lg:col-span-2 mt-5'>{row.quantity} item(s)</h4>
+                                                        <h3 className='text-base font-semibold lg:col-span-1 mt-5'>Price :</h3>
+                                                        <h4 className='text-base font-medium lg:col-span-2 mt-5'>Rs. {row.total}</h4>
                                                 </div>
                                                 <div className='col-span-1 self-center'>
                                                     <div className="flex center-items text-3xl pt-5">
-                                                        <div className="pr-5 cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Request"><BsPencilSquare/></div>
-                                                        <div className="pr-5 cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Request"><BsFillTrashFill/></div>
+                                                        <div className="pr-5 cursor-pointer text-gray-900" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Request"><BsPencilSquare/></div>
+                                                        <div className="pr-5 cursor-pointer text-red-800" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Request"><BsFillTrashFill/></div>
                                                     </div>
                                                 </div>
                                             </div>
