@@ -1,6 +1,7 @@
 import { timeSince } from "../../../helper/helper";
+import './QuestionCard.css';
 
-export default function QuestionCard({title, createdAt, createdBy, numOfViews, imageUrl, tags, _id}) {
+export default function QuestionCard({ title, createdAt, createdBy, numOfViews, imageUrl, tags, _id }) {
     return (
         <>
             <a
@@ -8,27 +9,27 @@ export default function QuestionCard({title, createdAt, createdBy, numOfViews, i
                 className="block p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
             >
                 <div className="flex justify-between ...">
-                    <p className="text-slate-400 text-sm">@{createdBy} &nbsp; {timeSince(new Date(createdAt))} ago </p>
-                    <p className="text-slate-400 text-sm">{numOfViews} Views </p>
+                    <p className="text-base font-medium text-gray-600">@{createdBy.username} &nbsp; {timeSince(new Date(createdAt))} ago </p>
+                    <p className="text-base font-medium text-gray-600">{numOfViews} Views </p>
                 </div>
-                
+
                 <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                     {title}
                 </h5>
-                <p className="text-slate-400 text-sm">
+                <p className="text-base font-medium text-gray-400">
                     {tags.map(tag => {
-                        return(
+                        return (
                             <>
                                 #{tag} &nbsp;
                             </>
                         )
                     })}
                 </p>
-                <div className="flex justify-center">
-                    <img className="max-w-lg max-h-sm" src={imageUrl} />
+                <div className="geeks">
+                    <img className="image rounded-lg" src={imageUrl} />
                 </div>
                 <div class="flex justify-end ...">
-                    <p className="text-slate-400 text-sm">25 Comments </p>
+                    <p className="text-base font-medium text-gray-600">25 Comments </p>
                 </div>
             </a>
         </>

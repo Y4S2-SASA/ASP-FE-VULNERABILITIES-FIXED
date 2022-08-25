@@ -13,6 +13,7 @@ export default function CreateQuestions() {
     const loggedInUser = useContext(AuthContext);
     const { userId } = loggedInUser;
     const [tags, setTags] = useState(["tags"]);
+    const [image, setImage] = useState();
     const [question, setQuestion] = useState({
         createdBy: userId,
         title: "",
@@ -21,30 +22,52 @@ export default function CreateQuestions() {
         tags: []
     });
 
-    const handleCreateQuestion = () => {
-        applyToast('Question is creating', 'info');
-        createQuestion(question)
-            .then(() => {
-                applyToast('Question created', 'success');
-            })
-            .catch(() => {
-                applyToast();
-            })
-    }
     useEffect(() => {
         setQuestion({ ...question, tags: tags });
     }, [tags])
 
+    const IsFormValid = () => {
+        if (question.title) return true;
+        return false;
+    }
+
+    const handleCreateQuestion = async (e) => {
+        if (IsFormValid()) {
+            e.preventDefault();
+            applyToast('Question is creating', 'info');
+            try {
+                let imageUrl;
+                if (image) {
+                    imageUrl = await handleImageOnInput(image);
+                }
+                const newQuestion = {
+                    createdBy: question.createdBy,
+                    title: question.title,
+                    description: question.description,
+                    imageUrl: imageUrl,
+                    tags: question.tags
+                }
+                await createQuestion(newQuestion);
+                applyToast('Question created', 'success');
+            } catch (err) {
+                applyToast();
+            }
+        }
+    }
+
     const handleImageOnInput = (pic) => {
-        uploadImgToCloudinary(pic)
+        return new Promise((resolve, reject) => {
+            uploadImgToCloudinary(pic)
             .then((res) => res.json())
             .then((data) => {
                 const imageUrl = data.url.toString();
-                setQuestion({ ...question, imageUrl: imageUrl });
+                resolve(imageUrl);
             })
             .catch((err) => {
-                console.log(err);
+                applyToast('Image did not upload', 'error');
+                reject(err)
             });
+        })
     }
 
     const onInputChange = e => {
@@ -77,7 +100,7 @@ export default function CreateQuestions() {
                                     onChange={onInputChange}
                                     className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                                     placeholder="name@flowbite.com"
-                                    required=""
+                                    required
                                 />
                             </div>
                             <div className="mb-6">
@@ -123,7 +146,7 @@ export default function CreateQuestions() {
                                         className="block w-full p-1 text-lg text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                                         id="large_size"
                                         type="file"
-                                        onChange={(e) => handleImageOnInput(e.target.files[0])}
+                                        onChange={(e) => setImage(e.target.files[0])}
                                     />
                                 </div>
 
@@ -131,11 +154,10 @@ export default function CreateQuestions() {
                             <br />
                             <div class="flex justify-end ...">
                                 <div className="mr-2">
-                                    <Button variant="alternative">Cancel</Button>
+                                    <Button variant="alternative" onClick={() => window.location.href="list-questions"}>Cancel</Button>
                                 </div>
-                                <Button onClick={handleCreateQuestion}>Save</Button>
+                                <Button type="submit" onClick={handleCreateQuestion}>Save</Button>
                             </div>
-
                         </form>
                     </div>
                 </div>
