@@ -11,7 +11,7 @@ export default function Register() {
     const navigate = useNavigate();
     const [proPic, setProPic] = React.useState("https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg");
     const [apiResponseWaiting, setApiResponseWaiting] = React.useState(false);
-    const [confirmPw, setConfirmPw] = React.useState(""); "";
+    const [confirmPw, setConfirmPw] = React.useState("");
 
     const handleSubmit = async (event) => {
         event.preventDefault();
