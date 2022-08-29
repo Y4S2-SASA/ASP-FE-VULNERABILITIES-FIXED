@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 import Button from "../../components/buttons/Buttons";
 import PreviewHeader from "../../components/PreviewPage/PreviewHeader";
-import PreviewFooter from "../../components/PreviewPage/PreviewFooter";
 import { applyToast } from "../../components/toast-message/toast";
 
 export default function Login() {
@@ -22,10 +21,9 @@ export default function Login() {
                 localStorage.setItem("token", res.data);
                 localStorage.setItem("userRole", res.userData.role);
                 localStorage.setItem("profilePic", res.userData.pic);
-                console.log(res.userData);
+                applyToast('Login successful!', 'success');
                 res.userData? setTimeout(function(){
                     setApiResponseWaiting(false);
-                    applyToast('Login successful!', 'success');
                     if(res.userData.role === "CLIENT") {
                         window.location.href = '/items';
                     } else if(res.userData.role === "ADMIN") {

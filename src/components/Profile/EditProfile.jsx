@@ -5,6 +5,7 @@ import Dialog from "../dialog/Dialog";
 import DialogActions from "../dialog/DialogActions";
 import DialogContent from "../dialog/DialogContent";
 import DialogTitle from "../dialog/DialogTitle";
+import { applyToast } from "../toast-message/toast";
 
 export default function Editprofile(props) {
     // let data = props.user;
@@ -31,9 +32,10 @@ export default function Editprofile(props) {
                 if (res.data.isSuccessful) {
                     props.handleGetUser();
                     props.setEditModelOpen(false);
+                    applyToast('User data updated successfully!', 'success');
                 }
             })
-            .catch((e) => console.log(e));
+            .catch((e) => applyToast(e, 'error'));
     }
 
     const handleChange = (event) => {
@@ -80,7 +82,6 @@ export default function Editprofile(props) {
     }
     
     const onUploadImgToCloudinary = (pics) => {
-        setPicMessage(null);
         if (pics.type === "image/jpeg" || pics.type === "image/png" || pics.type === "image/jpg") {
           const data = new FormData();
           data.append("file", pics);
@@ -99,7 +100,7 @@ export default function Editprofile(props) {
               console.log(err);
             });
         } else {
-          return setPicMessage("Please select jpg,png or jpeg type image");
+          return applyToast('Please select jpg,png or jpeg type image', 'info');
         }
     };
 
