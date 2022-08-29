@@ -5,10 +5,10 @@ import styles from "./styles.module.css";
 import Button from "../../components/buttons/Buttons";
 import PreviewHeader from "../../components/PreviewPage/PreviewHeader";
 import PreviewFooter from "../../components/PreviewPage/PreviewFooter";
+import { applyToast } from "../../components/toast-message/toast";
 
 export default function Login() {
     const [credentials, setCredentials] = React.useState({});
-    const [error, setError] = React.useState("");
     const [apiResponseWaiting, setApiResponseWaiting] = React.useState(false);
     const navigate = useNavigate();
 
@@ -25,6 +25,7 @@ export default function Login() {
                 console.log(res.userData);
                 res.userData? setTimeout(function(){
                     setApiResponseWaiting(false);
+                    applyToast('Login successful!', 'success');
                     if(res.userData.role === "CLIENT") {
                         window.location.href = '/items';
                     } else if(res.userData.role === "ADMIN") {
@@ -32,7 +33,7 @@ export default function Login() {
                     } else {
                         window.location.href = '/404';
                     }
-                }, 1500) : setApiResponseWaiting(false);
+                }, 1500) : setApiResponseWaiting(false) && applyToast('Login failed. Try again!', 'error');
             }
         } catch (error) {
             if (
@@ -40,7 +41,7 @@ export default function Login() {
 				error.response.status >= 400 &&
 				error.response.status <= 500
 			) {
-				setError(error.response.data.message);
+                applyToast(error.response.data.message, 'error');
                 setApiResponseWaiting(false);
 			}
         }
@@ -91,7 +92,6 @@ export default function Login() {
                                 value={credentials.password}
                                 className={styles.input}
                             />
-                            {error && <div className={styles.error_msg}>{error}</div>}
                             <Button variant="red" disabled={apiResponseWaiting} type="submit">
                                 Login
                             </Button>
