@@ -11,8 +11,7 @@ export default function Register() {
     const navigate = useNavigate();
     const [proPic, setProPic] = React.useState("https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg");
     const [apiResponseWaiting, setApiResponseWaiting] = React.useState(false);
-
-    let confirmPassword = "";
+    const [confirmPw, setConfirmPw] = React.useState(""); "";
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -26,8 +25,7 @@ export default function Register() {
                 password: user.password,
                 pic: proPic
             };
-            console.log(confirmPassword)
-            if (user.password !== confirmPassword) {
+            if (user.password !== confirmPw) {
                 applyToast('Passowrds do not match! Try again', 'error');
             }
             const userReg = registerUser(userObj);
@@ -77,12 +75,12 @@ export default function Register() {
                 setUser({ ...user, pic: value });
                 break;
             }
-            case 'confirmPassword': {
-                setUser({ ...user, confirmPassword: value });
-                break;
-            }
             default: { }
         }
+    }
+
+    const handleChangePw =(event) => {
+        setConfirmPw(event.target.value);
     }
 
     const onUploadImgToCloudinary = (pics) => {
@@ -186,9 +184,8 @@ export default function Register() {
                                 <input
                                     type="password"
                                     placeholder="Confirm Password"
-                                    name="confirmpassword"
-                                    onChange={handleChange}
-                                    value={user.confirmpassword}
+                                    onChange={handleChangePw}
+                                    value={confirmPw}
                                     required
                                     className={styles.input}
                                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
