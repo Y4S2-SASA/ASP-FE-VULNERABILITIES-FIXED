@@ -29,12 +29,11 @@ export default function Register() {
             if (user.password === confirmPw) {
                 const userReg = registerUser(userObj);
                 const { data: res } = await userReg;
-                console.log(res.data);
-                res.data.isSuccessful? setTimeout(function(){
+                res.isSuccessfull? setTimeout(function(){
                     setApiResponseWaiting(false);
                     navigate("/login");
-                    applyToast('Account created successfully', 'success');
-                }, 1500) : setApiResponseWaiting(false) && applyToast('Error on Account creation!', 'error');
+                    applyToast('Account created successfully. Please login to proceed!', 'success');
+                }, 500) : setApiResponseWaiting(false) && applyToast('Error on Account creation!', 'error');
             } else {
                 applyToast('Passwords do not match! Try again', 'error');
                 return;
