@@ -5,6 +5,7 @@ import ServiceCards from "../../components/PreviewPage/ServiceCards";
 import {useLocation} from 'react-router-dom';
 import Loader from "../../components/LayoutComponents/Loader";
 import React, { useEffect } from "react";
+import './index.css';
 
 export default function PreviewSite() {
     const location = useLocation();
@@ -21,9 +22,17 @@ export default function PreviewSite() {
         return (
             <>
                 <br/><br/>
-                <p className="font-sans text-4xl antialiased font-semibold text-center underline underline-offset-8">Our Services</p>
+                <center>
+                <div className="deconstructed font-sans text-4xl antialiased font-semibold text-center underline underline-offset-8">
+                    Our Services
+                    <div>Our Services</div>
+                    <div>Our Services</div>
+                    <div>Our Services</div>
+                    <div>Our Services</div>
+                </div>
+                </center>
                 <br/>
-                <p className="font-mono text-base antialiased font-thin text-center px-5">We are committed to supplying all types of automotive replacement parts. Our product line includes vehicle bumper guards, side steps, grilles, spoilers, roof racks, and inner and exterior chrome decorations, among other things. Top quality at a reasonable price and honest service are our main weapons in attracting and retaining customers.</p>
+                <p className="long-text font-mono text-base antialiased font-thin text-center px-5">We are committed to supplying all types of automotive replacement parts. Top quality at a reasonable price and honest service are our main weapons.</p>
                 <br/><br/>
             </>
         );
