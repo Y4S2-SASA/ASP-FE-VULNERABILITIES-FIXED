@@ -2,7 +2,7 @@ export default function ServiceCards() {
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-4 px-12 md:px-0 space-y-5 md:space-y-0">
-            <div className="max-w-xs bg-white rounded-lg border border-gray-200 shadow-2xl dark:bg-gray-800 dark:border-gray-700">
+            <div className="hover:scale-110 transition duration-300 ease-in-out max-w-xs bg-white rounded-lg border border-gray-200 shadow-2xl dark:bg-gray-800 dark:border-gray-700">
                 <a href="#">
                     <div class="relative overflow-hidden bg-no-repeat bg-cover max-w-xs">
                         <img src="images/s1.jpg" class="max-w-xs" alt="Louvre" />
@@ -20,7 +20,7 @@ export default function ServiceCards() {
                         data-bs-toggle="offcanvas" href="#offcanvasTop1"
                         className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     >
-                    Read more
+                    Learn more
                     <svg
                         aria-hidden="true"
                         className="ml-2 -mr-1 w-4 h-4"
@@ -37,7 +37,7 @@ export default function ServiceCards() {
                     </a>
                 </div>
             </div>
-            <div className="max-w-xs bg-white rounded-lg border border-gray-200 shadow-2xl dark:bg-gray-800 dark:border-gray-700">
+            <div className="hover:scale-110 transition duration-300 ease-in-out max-w-xs bg-white rounded-lg border border-gray-200 shadow-2xl dark:bg-gray-800 dark:border-gray-700">
                 <a href="#">
                     <div class="relative overflow-hidden bg-no-repeat bg-cover max-w-xs">
                         <img src="images/s2.jpg" class="max-w-xs" alt="Louvre" />
@@ -55,7 +55,7 @@ export default function ServiceCards() {
                         data-bs-toggle="offcanvas" href="#offcanvasTop2"
                         className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     >
-                    Read more
+                    Learn more
                     <svg
                         aria-hidden="true"
                         className="ml-2 -mr-1 w-4 h-4"
@@ -72,7 +72,7 @@ export default function ServiceCards() {
                     </a>
                 </div>
             </div>
-            <div className="max-w-xs bg-white rounded-lg border border-gray-200 shadow-2xl dark:bg-gray-800 dark:border-gray-700">
+            <div className="hover:scale-110 transition duration-300 ease-in-out max-w-xs bg-white rounded-lg border border-gray-200 shadow-2xl dark:bg-gray-800 dark:border-gray-700">
                 <a href="#">
                     <div class="relative overflow-hidden bg-no-repeat bg-cover max-w-xs">
                         <img src="images/s3.jpg" class="max-w-xs" alt="Louvre" />
@@ -90,7 +90,7 @@ export default function ServiceCards() {
                         data-bs-toggle="offcanvas" href="#offcanvasTop3"
                         className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     >
-                    Read more
+                    Learn more
                     <svg
                         aria-hidden="true"
                         className="ml-2 -mr-1 w-4 h-4"
@@ -107,7 +107,7 @@ export default function ServiceCards() {
                     </a>
                 </div>
             </div>
-            <div className="max-w-xs bg-white rounded-lg border border-gray-200 shadow-2xl dark:bg-gray-800 dark:border-gray-700">
+            <div className="hover:scale-110 transition duration-300 ease-in-out max-w-xs bg-white rounded-lg border border-gray-200 shadow-2xl dark:bg-gray-800 dark:border-gray-700">
                 <a href="#">
                     <div class="relative overflow-hidden bg-no-repeat bg-cover max-w-xs">
                         <img src="images/s4.jpg" class="max-w-xs" alt="Louvre" />
@@ -125,7 +125,7 @@ export default function ServiceCards() {
                         data-bs-toggle="offcanvas" href="#offcanvasTop4"
                         className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     >
-                    Read more
+                    Learn more
                     <svg
                         aria-hidden="true"
                         className="ml-2 -mr-1 w-4 h-4"

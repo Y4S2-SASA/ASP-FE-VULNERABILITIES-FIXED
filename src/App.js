@@ -32,6 +32,7 @@ export default function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/admin-panel" element={<AdminHome />} />
           <Route path="/404" element={<Error404 />} />
+          <Route path="/home" element={<PreviewSite />} />
 
           <Route path="/reserve/:id" element={<ReserveNow />} />
           <Route path="/my-reservations" element={<MyReservations/>}/>
