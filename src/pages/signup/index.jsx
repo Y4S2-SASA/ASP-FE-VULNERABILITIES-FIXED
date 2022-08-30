@@ -25,17 +25,20 @@ export default function Register() {
                 password: user.password,
                 pic: proPic
             };
-            if (user.password !== confirmPw) {
-                applyToast('Passowrds do not match! Try again', 'error');
+
+            if (user.password === confirmPw) {
+                const userReg = registerUser(userObj);
+                const { data: res } = await userReg;
+                console.log(res.data);
+                res.data.isSuccessful? setTimeout(function(){
+                    setApiResponseWaiting(false);
+                    navigate("/login");
+                    applyToast('Account created successfully', 'success');
+                }, 1500) : setApiResponseWaiting(false) && applyToast('Error on Account creation!', 'error');
+            } else {
+                applyToast('Passwords do not match! Try again', 'error');
+                return;
             }
-            const userReg = registerUser(userObj);
-			const { data: res } = await userReg;
-            console.log(res.data);
-            res.data.isSuccessful? setTimeout(function(){
-                setApiResponseWaiting(false);
-                navigate("/login");
-                applyToast('Account created successfully', 'success');
-            }, 1500) : setApiResponseWaiting(false) && applyToast('Error on Account creation!', 'error');;
         } catch (error) {
             if (
 				error.response &&
@@ -202,7 +205,7 @@ export default function Register() {
                                     onChange={(e) => onUploadImgToCloudinary(e.target.files[0])}
                                 />
                             </div>
-                            <Button variant="red" disabled={apiResponseWaiting}>
+                            <Button type="submit" variant="red" disabled={apiResponseWaiting}>
                                 Register
                             </Button>
                             {apiResponseWaiting && (
