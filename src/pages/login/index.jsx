@@ -31,7 +31,7 @@ export default function Login() {
                     } else {
                         window.location.href = '/404';
                     }
-                }, 1500) : setApiResponseWaiting(false) && applyToast('Login failed. Try again!', 'error');
+                }, 500) : setApiResponseWaiting(false) && applyToast('Login failed. Try again!', 'error');
             }
         } catch (error) {
             if (
