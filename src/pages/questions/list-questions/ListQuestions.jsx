@@ -28,7 +28,7 @@ export default function ListQuestions() {
           <div className="max-w-2xl mx-auto py-10 lg:max-w-none">
             <div className="flex justify-between ...">
               <SearchBox />
-              <Button onClick={() => window.location.href='/create-question'}>Create Question</Button>
+              <Button onClick={() => window.location.href='/create-question'}><div className="text-xl">Create Question</div></Button>
             </div>
 
             <div className="py-10">
@@ -52,6 +52,7 @@ export default function ListQuestions() {
           </div>
         </div>
       </div>
+      <br/>
     </>
   );
 }

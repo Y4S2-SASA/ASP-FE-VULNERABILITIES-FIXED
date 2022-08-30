@@ -103,6 +103,7 @@
 		flex-direction: column;
 		min-height: 75vh;
 		margin-top: -50px;
+		margin-bottom: 50px;
 	}
 
 	.left {

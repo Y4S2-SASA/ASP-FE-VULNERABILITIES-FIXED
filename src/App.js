@@ -26,7 +26,7 @@ export default function App() {
           {/* add private routes here */}
           <Route path="/items" element={<Items />} />
           <Route path="/create-question" element={<CreateQuestions />} />
-          <Route path="/list-questions" element={<ListQuestions />} />
+          <Route path="/questions" element={<ListQuestions />} />
           <Route path="/view-question/:id" element={<ViewQuestion />} />
           <Route path="/reservations" element={<Reservations />} />
           <Route path="/profile" element={<Profile />} />
