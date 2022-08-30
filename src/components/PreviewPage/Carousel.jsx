@@ -1,5 +1,3 @@
-import styles from "./styles.module.css";
-
 export default function PreviewCarousel() {
     return (
         <div
@@ -37,7 +35,7 @@ export default function PreviewCarousel() {
                 className="block w-full"
                 alt="Motorbike Smoke"
             />
-            <div class="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-50"></div>
+            <div class="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-10"></div>
             <div className="carousel-caption hidden md:block absolute text-center">
                 <h5 className="text-4xl">Welcome to AutoMobile Spare Parts</h5>
                 <p>24 Hours service just for you.</p>
@@ -50,7 +48,7 @@ export default function PreviewCarousel() {
                 className="block w-full"
                 alt="Mountaintop"
             />
-            <div class="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-50"></div>
+            <div class="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-10"></div>
             <div className="carousel-caption hidden md:block absolute text-center">
                 <h5 className="text-4xl">Call us Now</h5>
                 <p>+94 (77) 308 7221</p>
@@ -63,7 +61,7 @@ export default function PreviewCarousel() {
                 className="block w-full"
                 alt="Woman Reading a Book"
             />
-            <div class="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-50"></div>
+            <div class="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-10"></div>
             <div className="carousel-caption hidden md:block absolute text-center">
                 <h5 className="text-4xl">Quality and Trustworthy online site for you</h5>
             </div>

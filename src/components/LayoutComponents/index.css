@@ -5,6 +5,13 @@
   height: 80px;
   margin-top: 50vh;
 }
+
+@media (max-width: 640px) {
+  .loading {
+    margin-top: 70% !important;
+  }
+}
+
 .loading div {
   display: inline-block;
   position: absolute;
@@ -33,5 +40,24 @@
   50%, 100% {
     top: 24px;
     height: 32px;
+  }
+}
+
+.flipX {
+  animation: 1s anim-flipX ease infinite;
+}
+@keyframes anim-flipX {
+  0% {
+    opacity: 0;
+    transform: rotateX(90def);
+  }
+  50% {
+    opacity: 1;
+    transform: rotateX(720deg);
+  }
+  100% {
+    /* animate nothing to pause animation at the end */
+    opacity: 1;
+    transform: rotateX(720deg);
   }
 }
