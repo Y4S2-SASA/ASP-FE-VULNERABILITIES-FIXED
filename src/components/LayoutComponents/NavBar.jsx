@@ -48,7 +48,7 @@ export default function NavBar() {
                 >
                 <a
                     className="flex items-center text-gray-900 hover:text-gray-900 focus:text-gray-900 mt-2 lg:mt-0 mr-1"
-                    href="#"
+                    href="/home"
                 >
                     <img
                         className="rounded-t-lg w-0 md:w-16"
@@ -64,24 +64,24 @@ export default function NavBar() {
                             <li className="nav-item p-2">
                                 <a className="nav-link  p-0" href="/home">
                                     {location.pathname === '/home'? 
-                                        <span className="text-red-800 hover:text-red-600 focus:text-red-600 decoration-red-800 underline underline-offset-8 hover:decoration-red-600">Home</span> :
-                                        <span className="text-gray-500 hover:text-red-600 focus:text-red-600">Home</span>
+                                        <span className="text-red-800 font-semibold hover:text-red-600 focus:text-red-600 decoration-red-800 underline underline-offset-8 hover:decoration-red-600">Home</span> :
+                                        <span className="text-gray-500 font-semibold hover:text-red-600 focus:text-red-600">Home</span>
                                     }
                                 </a>
                             </li>
                             <li className="nav-item p-2">
                                 <a className="nav-link text-gray-500 hover:text-gray-500 focus:text-gray-500 p-0" href="/items">
                                     {location.pathname === '/items'?
-                                        <span className="text-red-800 hover:text-red-600 focus:text-red-600 decoration-red-800 underline underline-offset-8 hover:decoration-red-600">Items</span> :
-                                        <span className="text-gray-500 hover:text-red-600 focus:text-red-600">Items</span>
+                                        <span className="text-red-800 font-semibold hover:text-red-600 focus:text-red-600 decoration-red-800 underline underline-offset-8 hover:decoration-red-600">Items</span> :
+                                        <span className="text-gray-500 font-semibold hover:text-red-600 focus:text-red-600">Items</span>
                                     }
                                 </a>
                             </li>
                             <li className="nav-item p-2">
                                 <a className="nav-link text-gray-500 hover:text-gray-700 focus:text-gray-700 p-0" href="/questions">
                                     {location.pathname === '/questions'? 
-                                        <span className="text-red-800 hover:text-red-600 focus:text-red-600 decoration-red-800 underline underline-offset-8 hover:decoration-red-600">Question Thread</span> :
-                                        <span className="text-gray-500 hover:text-red-600 focus:text-red-600">Question Thread</span>
+                                        <span className="text-red-800 font-semibold hover:text-red-600 focus:text-red-600 decoration-red-800 underline underline-offset-8 hover:decoration-red-600">Question Thread</span> :
+                                        <span className="text-gray-500 font-semibold hover:text-red-600 focus:text-red-600">Question Thread</span>
                                     }
                                 </a>
                             </li>
@@ -94,8 +94,8 @@ export default function NavBar() {
                             <li className="nav-item p-2">
                                 <a className="nav-link p-0" href="/admin-panel">
                                     {location.pathname === '/admin-panel'? 
-                                        <span className="text-red-800 hover:text-red-600 focus:text-red-600 decoration-red-800 underline underline-offset-8 hover:decoration-red-600">Home</span> :
-                                        <span className="text-gray-500 hover:text-red-600 focus:text-red-600">Home</span>
+                                        <span className="text-red-800 font-semibold hover:text-red-600 focus:text-red-600 decoration-red-800 underline underline-offset-8 hover:decoration-red-600">Home</span> :
+                                        <span className="text-gray-500 font-semibold hover:text-red-600 focus:text-red-600">Home</span>
                                     }
                                 </a>
                             </li>

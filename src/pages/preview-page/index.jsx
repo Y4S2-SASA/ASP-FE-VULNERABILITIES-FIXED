@@ -1,9 +1,21 @@
-import PreviewCarousel from "../../components/PreviewPage/Carousel"
-import PreviewFooter from "../../components/PreviewPage/PreviewFooter"
-import PreviewHeader from "../../components/PreviewPage/PreviewHeader"
-import ServiceCards from "../../components/PreviewPage/ServiceCards"
+import NavBar from "../../components/LayoutComponents/NavBar";
+import PreviewCarousel from "../../components/PreviewPage/Carousel";
+import PreviewHeader from "../../components/PreviewPage/PreviewHeader";
+import ServiceCards from "../../components/PreviewPage/ServiceCards";
+import {useLocation} from 'react-router-dom';
+import Loader from "../../components/LayoutComponents/Loader";
+import React, { useEffect } from "react";
 
 export default function PreviewSite() {
+    const location = useLocation();
+    const [isLoading, setIsLoading] = React.useState(false);
+
+    useEffect(() => {
+        setIsLoading(true);
+        setTimeout(function(){
+            setIsLoading(false);
+        }, 3000)
+    }, []);
 
     const ServiceHead = () => {
         return (
@@ -18,12 +30,16 @@ export default function PreviewSite() {
     }
     return (
         <div className="container">
-            <PreviewHeader />
-            <PreviewCarousel />
-            <ServiceHead/>
-            <ServiceCards />
-            <br/><br/>
-            {/* <PreviewFooter /> */}
+            {isLoading? <Loader /> : 
+                <>
+                    {location.pathname === '/'? <PreviewHeader /> : <NavBar />}
+                    <br />
+                    <PreviewCarousel />
+                    <ServiceHead/>
+                    <ServiceCards />
+                    <br/><br/>
+                </>
+            }
         </div>
     )
 }
