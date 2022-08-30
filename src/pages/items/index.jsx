@@ -7,11 +7,14 @@ import Button from "../../components/buttons/Buttons";
 import { BsFillTrashFill } from "react-icons/bs";
 import { BsPencilSquare } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { applyToast } from '../../components/toast-message/toast';
+import { useNavigate } from "react-router-dom";
 
 const Items = () => {
     // With this AuthContext you can get the currently logged in user's details
     const loggedInUser = useContext(AuthContext);
     const {userId, role} = loggedInUser;
+    const navigate = useNavigate();
 
     const initialState = [
       {
@@ -34,6 +37,15 @@ const Items = () => {
         });
       }, []);
 
+      const deleteItem = (id) => {
+        console.log(id);
+        itemRequest.deleteItem(id).then((res)=> {
+            console.log(res);
+            applyToast('Item successfully deleted!', 'success');
+            window.location.reload();
+        })
+      }
+
     return (
         <>
         <NavBar />
@@ -50,41 +62,71 @@ const Items = () => {
            </div>
 
             <div className="mt-6 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-6">
-              {item.map((i) => (
-                <div key={i.id} className="group relative">
-                  <div className="relative w-full h-80 bg-white rounded-lg overflow-hidden sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1">
-                    <img
-                      src={i.imageUrl}
-                      className="w-full h-full object-center object-cover"
-                    />
-                  </div>
+              {item.map((i) => {
+                return (
+                  <div key={i._id} className="group relative">
+                    <div className="relative w-full h-80 bg-white rounded-lg overflow-hidden sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1">
+                      <img
+                        src={i.imageUrl}
+                        className="w-full h-full object-center object-cover" />
+                    </div>
 
-                  <div className="flex justify-between pt-4">
-                  <div className="cursor-pointer">
-                    <Link to={`/reserve/${i._id}`}><Button>Add to cart</Button></Link>
-                  </div>
-                  
-                  <div className="flex center-items text-3xl pt-2">
-                  <div className="pr-5 cursor-pointer"><BsPencilSquare/></div>
-                  <div className="pr-5 cursor-pointer"><BsFillTrashFill/></div>
-                  </div>
-                  
-                  </div>
+                    <div className="flex justify-between pt-4">
+                      <div className="cursor-pointer">
+                        <Link to={`/reserve/${i._id}`}><Button>Add to cart</Button></Link>
+                      </div>
+
+                      <div className="flex center-items text-3xl pt-2">
+                        <div className="pr-5 cursor-pointer text-gray-900" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Request"><BsPencilSquare data-bs-toggle="modal" data-bs-target="#updateReservationDetails" /></div>
+                        <div className="pr-5 cursor-pointer text-red-800" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Request"><BsFillTrashFill data-bs-toggle="modal" data-bs-target={`#deleteReservationDetails${i._id}`} /></div>
+                      </div>
+
+                    </div>
 
 
-                  <h3 className="mt-2 text-xl text-gray-900 font-semibold">
+                    <h3 className="mt-2 text-xl text-gray-900 font-semibold">
                       {i.name}
-                  </h3>
-                  <h3 className="mt-0 text-lg text-gray-600 font-semibold">
+                    </h3>
+                    <h3 className="mt-0 text-lg text-gray-600 font-semibold">
                       LKR {i.price} | Availability - {i.quantity}
-                  </h3>
-                  <p className="text-base font-medium text-gray-900 mt-2 mb-24">{i.description}</p>
-                </div>
-              ))}
+                    </h3>
+                    <p className="text-base font-medium text-gray-900 mt-2 mb-24">{i.description}</p>
+
+                    <div>
+                      <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto text-gray-900" id={`deleteReservationDetails${i._id}`} tabIndex={-1} aria-modal="true" role="dialog">
+                        <div className="modal-dialog modal-dialog-centered relative w-auto pointer-events-none">
+                          <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+                            <div className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
+                              <h5 className="text-xl font-medium leading-normal text-gray-800">
+                                Delete Item Details
+                              </h5>
+                              <button type="button" className="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline" data-bs-toggle="tooltip" data-bs-placement="top" title="Close" data-bs-dismiss="modal" aria-label="Close" />
+                            </div>
+                            <div className="modal-body relative p-5">
+                              Are you sure that you want to delete this item?<br />
+                              This Action cannot be undone !
+                            </div>
+                            <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
+                              <div className="transition duration-150 ease-in-out px-3" data-bs-dismiss="modal">
+                                <Button variant={'alternative'}>Close</Button>
+                              </div>
+                              <div className='transition duration-150 ease-in-out ml-1' data-bs-dismiss="modal">
+                                <Button onClick={() => deleteItem(i._id)}>Delete</Button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
       </div>
+
+            
         
         <br/><br/>
         
@@ -93,56 +135,3 @@ const Items = () => {
 }
 
 export default Items;
-
-
-// const callouts = [
-      //   {
-      //     name: 'Steering Wheel',
-      //     description: 'A good choice for your vehicle. Contact us through mobile number - 0761234567',
-      //     imageSrc: 'https://carfromjapan.com/wp-content/uploads/2018/03/hard-steering-wheel.jpg',
-      //     price: '17,000',
-      //     availability: '7'
-      //   },
-      //   {
-      //     name: 'Car Seat',
-      //     description: 'A good choice for your vehicle. Contact us through mobile number - 0761234567',
-      //     imageSrc: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/BMW_Alpina_B3_Biturbo_E92-Leder-Vordersitze_in_Dakota-braun.jpg/1200px-BMW_Alpina_B3_Biturbo_E92-Leder-Vordersitze_in_Dakota-braun.jpg',
-      //     price: '8000',
-      //     availability: '10'
-      //   },
-      //   {
-      //     name: 'Gear Box - pro',
-      //     description: 'Most commonly purchased gear box in colombo and matara. Contact - 011 8965412',
-      //     imageSrc: 'https://www.thecarexpert.co.uk/wp-content/uploads/2020/10/audi-r8-manual-gearbox-2-1200x900-cropped.jpg',
-      //     price: '150,000',
-      //     availability: '4'
-      //   },
-      //   {
-      //     name: 'Bicycle - Handlebar',
-      //     description: 'A good choice for your vehicle. Contact us through mobile number - 0761234567',
-      //     imageSrc: 'https://cdn.mos.cms.futurecdn.net/UnPWk9vbVsDuJnk3Y2ftmd-1200-80.jpg',
-      //     price: '17,000',
-      //     availability: '7'
-      //   },
-      //   {
-      //     name: 'Bicycle Tyres',
-      //     description: 'A good choice for your vehicle. Contact us through mobile number - 0761234567',
-      //     imageSrc: 'https://images.immediate.co.uk/production/volatile/sites/21/2021/05/Tyre-best-list-thumbnail-e41d0f7.jpg?quality=45&resize=768,574',
-      //     price: '8000',
-      //     availability: '10'
-      //   },
-      //   {
-      //     name: 'Three wheeler seat',
-      //     description: 'Most commonly purchased gear box in colombo and matara. Contact - 011 8965412',
-      //     imageSrc: 'https://www.riyasakwala.lk/public/images/vehicle_ad/415/AD000422-2.jpeg',
-      //     price: '150,000',
-      //     availability: '4'
-      //   },
-      //   {
-      //     name: 'Gear Box - pro',
-      //     description: 'Most commonly purchased gear box in colombo and matara. Contact - 011 8965412',
-      //     imageSrc: 'https://www.thecarexpert.co.uk/wp-content/uploads/2020/10/audi-r8-manual-gearbox-2-1200x900-cropped.jpg',
-      //     price: '150,000',
-      //     availability: '4'
-      //   },
-      // ]
