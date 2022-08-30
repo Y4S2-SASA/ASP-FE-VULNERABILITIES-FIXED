@@ -3,18 +3,15 @@ import { registerUser } from "../../api/User/userApi";
 import styles from "./styles.module.css";
 import Button from "../../components/buttons/Buttons";
 import PreviewHeader from "../../components/PreviewPage/PreviewHeader";
-import PreviewFooter from "../../components/PreviewPage/PreviewFooter";
 import { Link, useNavigate } from "react-router-dom";
+import { applyToast } from "../../components/toast-message/toast";
 
 export default function Register() {
     const [user, setUser] = React.useState({});
-    const [error, setError] = React.useState("");
-    const [picMessage, setPicMessage] = React.useState(null);
     const navigate = useNavigate();
     const [proPic, setProPic] = React.useState("https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg");
     const [apiResponseWaiting, setApiResponseWaiting] = React.useState(false);
-
-    let confirmPassword = "";
+    const [confirmPw, setConfirmPw] = React.useState("");
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -28,11 +25,8 @@ export default function Register() {
                 password: user.password,
                 pic: proPic
             };
-            console.log(confirmPassword)
-            if (user.password !== confirmPassword) {
-                setError(
-                  "Passowrds do not match! Try again"
-                );
+            if (user.password !== confirmPw) {
+                applyToast('Passowrds do not match! Try again', 'error');
             }
             const userReg = registerUser(userObj);
 			const { data: res } = await userReg;
@@ -40,14 +34,15 @@ export default function Register() {
             res.data.isSuccessful? setTimeout(function(){
                 setApiResponseWaiting(false);
                 navigate("/login");
-            }, 1500) : setApiResponseWaiting(false);
+                applyToast('Account created successfully', 'success');
+            }, 1500) : setApiResponseWaiting(false) && applyToast('Error on Account creation!', 'error');;
         } catch (error) {
             if (
 				error.response &&
 				error.response.status >= 400 &&
 				error.response.status <= 500
 			) {
-				setError(error.response.data.message);
+                applyToast(error.response.data.message, 'error');
                 setApiResponseWaiting(false);
 			}
         }
@@ -80,16 +75,15 @@ export default function Register() {
                 setUser({ ...user, pic: value });
                 break;
             }
-            case 'confirmPassword': {
-                setUser({ ...user, confirmPassword: value });
-                break;
-            }
             default: { }
         }
     }
 
+    const handleChangePw =(event) => {
+        setConfirmPw(event.target.value);
+    }
+
     const onUploadImgToCloudinary = (pics) => {
-        setPicMessage(null);
         if (pics.type === "image/jpeg" || pics.type === "image/png" || pics.type === "image/jpg") {
           const data = new FormData();
           data.append("file", pics);
@@ -108,7 +102,7 @@ export default function Register() {
               console.log(err);
             });
         } else {
-          return setPicMessage("Please select jpg,png or jpeg type image");
+          return applyToast("Please select jpg,png or jpeg type image", 'info');
         }
       };
 
@@ -190,9 +184,8 @@ export default function Register() {
                                 <input
                                     type="password"
                                     placeholder="Confirm Password"
-                                    name="confirmpassword"
-                                    onChange={handleChange}
-                                    value={user.confirmpassword}
+                                    onChange={handleChangePw}
+                                    value={confirmPw}
                                     required
                                     className={styles.input}
                                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
@@ -209,8 +202,6 @@ export default function Register() {
                                     onChange={(e) => onUploadImgToCloudinary(e.target.files[0])}
                                 />
                             </div>
-                            {error && <div className={styles.error_msg}>{error}</div>}
-                            {picMessage && <div className={styles.error_msg}>{picMessage}</div>}
                             <Button variant="red" disabled={apiResponseWaiting}>
                                 Register
                             </Button>
