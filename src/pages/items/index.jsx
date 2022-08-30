@@ -39,11 +39,11 @@ const Items = () => {
 
       const deleteItem = (id) => {
         console.log(id);
-        // itemRequest.deleteItem(id).then((res)=> {
-        //     console.log(res);
-        //     applyToast('Item successfully deleted!', 'success');
-        //     window.location.reload();
-        // })
+        itemRequest.deleteItem(id).then((res)=> {
+            console.log(res);
+            applyToast('Item successfully deleted!', 'success');
+            window.location.reload();
+        })
       }
 
     return (
@@ -111,7 +111,7 @@ const Items = () => {
                                 <Button variant={'alternative'}>Close</Button>
                               </div>
                               <div className='transition duration-150 ease-in-out ml-1' data-bs-dismiss="modal">
-                                <Button onClick={(e) => deleteItem(i)}>Delete</Button>
+                                <Button onClick={() => deleteItem(i._id)}>Delete</Button>
                               </div>
                             </div>
                           </div>
