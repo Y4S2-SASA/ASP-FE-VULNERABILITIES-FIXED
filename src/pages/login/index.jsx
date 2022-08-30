@@ -25,7 +25,7 @@ export default function Login() {
                 res.userData? setTimeout(function(){
                     setApiResponseWaiting(false);
                     if(res.userData.role === "CLIENT") {
-                        window.location.href = '/items';
+                        window.location.href = '/home';
                     } else if(res.userData.role === "ADMIN") {
                         window.location.href = '/admin-panel';
                     } else {
