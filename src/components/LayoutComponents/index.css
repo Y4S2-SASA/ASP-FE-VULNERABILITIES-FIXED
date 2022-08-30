@@ -5,6 +5,13 @@
   height: 80px;
   margin-top: 50vh;
 }
+
+@media (max-width: 640px) {
+  .loading {
+    margin-top: 70% !important;
+  }
+}
+
 .loading div {
   display: inline-block;
   position: absolute;
