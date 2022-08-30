@@ -4,6 +4,7 @@ import itemRequest from "../../api/Item/item.request";
 import { useContext } from "react"
 import { AuthContext } from "../../App"
 import { applyToast } from '../../components/toast-message/toast';
+import { Link, useNavigate } from "react-router-dom";
 
 const CreateItem = () => {
     // With this AuthContext you can get the currently logged in user's details
@@ -12,6 +13,7 @@ const CreateItem = () => {
     const [picMessage, setPicMessage] = React.useState(null);
     const [proPic, setProPic] = React.useState("https://carfromjapan.com/wp-content/uploads/2018/03/hard-steering-wheel.jpg");
     const [sucess, setSucess] = React.useState(true);
+    const navigate = useNavigate();
 
     const initialInput = {
         name: "",
@@ -37,6 +39,7 @@ const CreateItem = () => {
             console.log(res);
             setInputs(initialInput);
             applyToast('Item successfully created!', 'success');
+            navigate("/items");
         })
         .catch((error) => {
             console.log(error);
@@ -198,12 +201,14 @@ const CreateItem = () => {
                 </button>
 
                 <div className="pr-4">
+                <Link to="/items">
                    <button
                     type="button"
                     className="py-2.5 px-5 mr-2 mb-2 text-lg font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-500 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                     >
                     Cancel
                     </button> 
+                </Link>
                 </div>
                 </div>
                 
