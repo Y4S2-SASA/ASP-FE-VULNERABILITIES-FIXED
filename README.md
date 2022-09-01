@@ -7,7 +7,6 @@ ReactJS, TailwindCSS
   <li>npm start</li>
 </ul>
 
-<br />
 <h2>Start the app in production mode</h2>
 <ul>
   <li>npm i</li>
