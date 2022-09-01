@@ -5,6 +5,12 @@ import Dialog from "../../components/dialog/Dialog";
 import NavBar from "../../components/LayoutComponents/NavBar";
 import Editprofile from "../../components/Profile/EditProfile";
 import ProfileSideNav from "../../components/Profile/ProfileSideNav";
+import { FcAssistant } from "react-icons/fc";
+import { FcSms } from "react-icons/fc";
+import { FcContacts } from "react-icons/fc";
+import { FcSettings } from "react-icons/fc";
+import { FcShipped } from "react-icons/fc";
+import { FcSynchronize } from "react-icons/fc";
 
 export default function Profile() {
     const loggedInUser = useContext(AuthContext);
@@ -76,7 +82,7 @@ export default function Profile() {
             <div className="flex flex-col md:flex-row space-x-0 md:space-x-40 mt-2 md:mt-0">
                 <figcaption className="flex justify-center items-center space-x-3 mt-5 md:mt-10 basis-1/2">
                 <div className="inline-flex overflow-hidden relative justify-center items-center w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600">
-                    <span className="font-medium text-gray-600 dark:text-gray-300">N</span>
+                    <span className="font-medium text-gray-600 dark:text-gray-300"><FcAssistant /></span>
                 </div>
                     <div className="space-y-0.5 font-medium dark:text-white text-left w-80">
                         <div className="text-base font-bold text-gray-600">Full Name</div>
@@ -86,7 +92,7 @@ export default function Profile() {
                 </figcaption>
                 <figcaption className="flex justify-center items-center space-x-3 mt-5 md:mt-10 basis-1/2">
                     <div className="inline-flex overflow-hidden relative justify-center items-center w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600">
-                        <span className="font-medium text-gray-600 dark:text-gray-300">E</span>
+                        <span className="font-medium text-gray-600 dark:text-gray-300"><FcSms /></span>
                     </div>
                     <div className="space-y-0.5 font-medium dark:text-white text-left w-80">
                         <div className="text-base font-bold text-gray-600">Email Address</div>
@@ -100,7 +106,7 @@ export default function Profile() {
             <div className="flex flex-col md:flex-row space-x-0 md:space-x-40 mt-2 md:mt-0">
                 <figcaption className="flex justify-center items-center space-x-3 mt-5 md:mt-10 basis-1/2">
                     <div className="inline-flex overflow-hidden relative justify-center items-center w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600">
-                        <span className="font-medium text-gray-600 dark:text-gray-300">C</span>
+                        <span className="font-medium text-gray-600 dark:text-gray-300"><FcContacts /></span>
                     </div>
                     <div className="space-y-0.5 font-medium dark:text-white text-left w-80">
                         <div className="text-base font-bold text-gray-600">Contact No</div>
@@ -110,7 +116,7 @@ export default function Profile() {
                 </figcaption>
                 <figcaption className="flex justify-center items-center space-x-3 mt-5 md:mt-10 basis-1/2">
                     <div className="inline-flex overflow-hidden relative justify-center items-center w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600">
-                        <span className="font-medium text-gray-600 dark:text-gray-300">R</span>
+                        <span className="font-medium text-gray-600 dark:text-gray-300"><FcSettings /></span>
                     </div>
                     <div className="space-y-0.5 font-medium dark:text-white text-left w-80">
                         <div className="text-base font-bold text-gray-600">Profile Role</div>
@@ -123,7 +129,7 @@ export default function Profile() {
             <div className="flex flex-col md:flex-row space-x-0 md:space-x-40 mt-2 md:mt-0">
                 <figcaption className="flex justify-center items-center space-x-3 mt-5 md:mt-10 basis-1/2">
                     <div className="inline-flex overflow-hidden relative justify-center items-center w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600">
-                        <span className="font-medium text-gray-600 dark:text-gray-300">A</span>
+                        <span className="font-medium text-gray-600 dark:text-gray-300"><FcShipped /></span>
                     </div>
                     <div className="space-y-0.5 font-medium dark:text-white text-left w-80 ">
                         <div className="text-base font-bold text-gray-600">Address</div>
@@ -133,7 +139,7 @@ export default function Profile() {
                 </figcaption>
                 <figcaption className="flex justify-center items-center space-x-3 mt-5 md:mt-10 basis-1/2">
                     <div className="inline-flex overflow-hidden relative justify-center items-center w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600">
-                        <span className="font-medium text-gray-600 dark:text-gray-300">S</span>
+                        <span className="font-medium text-gray-600 dark:text-gray-300"><FcSynchronize /></span>
                     </div>
                     <div className="space-y-0.5 font-medium dark:text-white text-left w-80">
                         <div className="text-base font-bold text-gray-600">Province/State</div>

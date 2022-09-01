@@ -107,6 +107,7 @@
 .long-text {
   white-space: nowrap;
   overflow: hidden;
+  color: #800000;
   animation: animated-text-effect 4s linear 1s 1 normal both,
     animated-cursor 600ms linear infinite;
 }

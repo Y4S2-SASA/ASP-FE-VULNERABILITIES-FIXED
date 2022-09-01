@@ -18,7 +18,7 @@ export default function ServiceCards() {
                     </p>
                     <a
                         data-bs-toggle="offcanvas" href="#offcanvasTop1"
-                        className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-red-800 rounded-lg hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-300 dark:hover:bg-red-300 dark:focus:ring-red-800"
                     >
                     Learn more
                     <svg
@@ -53,7 +53,7 @@ export default function ServiceCards() {
                     </p>
                     <a
                         data-bs-toggle="offcanvas" href="#offcanvasTop2"
-                        className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-red-800 rounded-lg hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-300 dark:hover:bg-red-300 dark:focus:ring-red-800"
                     >
                     Learn more
                     <svg
@@ -88,7 +88,7 @@ export default function ServiceCards() {
                     </p>
                     <a
                         data-bs-toggle="offcanvas" href="#offcanvasTop3"
-                        className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-red-800 rounded-lg hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-300 dark:hover:bg-red-300 dark:focus:ring-red-800"
                     >
                     Learn more
                     <svg
@@ -123,7 +123,7 @@ export default function ServiceCards() {
                     </p>
                     <a
                         data-bs-toggle="offcanvas" href="#offcanvasTop4"
-                        className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-red-800 rounded-lg hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-300 dark:hover:bg-red-300 dark:focus:ring-red-800"
                     >
                     Learn more
                     <svg
