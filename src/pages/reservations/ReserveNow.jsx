@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import {useParams} from 'react-router-dom'
 import NavBar from '../../components/LayoutComponents/NavBar';
-import style from "./reservation.module.css"
 import Button from '../../components/buttons/Buttons';
 import { findUsers } from '../../api/User/userApi';
 import orderRequest from '../../api/Order/order.request';
@@ -223,7 +222,11 @@ export default function ReserveNow() {
     <div>
         <NavBar/>
         <br/>
-            <h1 className={style.heading}>Reserve Now</h1>
+            <div className='lg:justify-self-start lg:grid lg:grid-cols-1 grid grid-cols-1 '>
+                <h3 className="mt-5 text-xl font-semibold lg:justify-self-start justify-self-center">
+                    Reserve Now
+                </h3>
+            </div>
         <br/>
             <h2>Error in loading data!</h2>
     </div>
