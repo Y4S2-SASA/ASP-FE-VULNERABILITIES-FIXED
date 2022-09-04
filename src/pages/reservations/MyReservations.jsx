@@ -22,7 +22,8 @@ export default function MyReservations() {
     const [buyer, setBuyer] = useState({});
     const [status, setStatus] = useState('NEW');
     const [newTotal, setNewTotal] = useState(0);
-    const [open, setOpen] = useState(false);
+    const [max, setMax] = useState(false);
+    const [min, setMin] = useState(false);
 
     const getOrders = () =>{
         orderRequest.getUserOrders(buyerId)
@@ -50,18 +51,43 @@ export default function MyReservations() {
 
     const handleIncrement = () =>{
         if(status === 'UPDATED'){
-            let qty = parseInt(newQuantity) + 1;
-            let price = parseInt(item.price);
-            setNewQuantity(qty);
-            let totalPrice = price * qty
-            setNewTotal(totalPrice);
+            if(newQuantity === item.quantity){
+                let qty = item.quantity;
+                let price = parseInt(item.price);
+                setMax(true)
+                setMin(false)
+                setNewQuantity(qty);
+                let totalPrice = price * qty
+                setNewTotal(totalPrice);
+            }else{
+                let qty = parseInt(newQuantity) + 1;
+                let price = parseInt(item.price);
+                setNewQuantity(qty);
+                setMin(false);
+                let totalPrice = price * qty
+                setNewTotal(totalPrice);
+            }
+            
         }else{
-            let qty = parseInt(quantity) + 1;
-            let price = parseInt(item.price);
-            setNewQuantity(qty);
-            setStatus('UPDATED')
-            let totalPrice = price * qty
-            setNewTotal(totalPrice);
+            if(parseInt(quantity) === item.quantity){
+                let qty = item.quantity;
+                let price = parseInt(item.price);
+                setNewQuantity(qty);
+                setMax(true)
+                setMin(false)
+                setStatus('UPDATED')
+                let totalPrice = price * qty
+                setNewTotal(totalPrice);
+            }else{
+                let qty = parseInt(quantity) + 1;
+                let price = parseInt(item.price);
+                setNewQuantity(qty);
+                setMin(false)
+                setStatus('UPDATED')
+                let totalPrice = price * qty
+                setNewTotal(totalPrice);
+            }
+            
         }
     }
 
@@ -69,9 +95,12 @@ export default function MyReservations() {
         if(status === 'UPDATED'){
             if(newQuantity === 0) {
                 parseInt(newQuantity);
+                setMin(true);
+                setMax(false);
             }else{
                 let qty = parseInt(newQuantity) - 1;
                 let price = parseInt(item.price);
+                setMax(false);
                 setNewQuantity(qty);
                 let totalPrice = price * qty
                 setNewTotal(totalPrice);
@@ -79,10 +108,12 @@ export default function MyReservations() {
         }else{
             if(quantity === 0) {
                 parseInt(quantity);
+                setMax(false);
             }else{
                 let qty = parseInt(quantity) - 1;
                 let price = parseInt(item.price);
                 setNewQuantity(qty);
+                setMax(false)
                 setStatus('UPDATED')
                 let totalPrice = price * qty
                 setNewTotal(totalPrice);
@@ -114,6 +145,12 @@ export default function MyReservations() {
             console.error(error);
             applyToast('Order details delete failed!', 'error')
         })
+    }
+
+    const reset = () =>{
+        setStatus('NEW')
+        setMax(false);
+        setMin(false);
     }
 
     useEffect(() =>{
@@ -166,30 +203,30 @@ export default function MyReservations() {
                         orders.map((row) =>(
                             <div onClick={()=>handleItemDetails(row._id)}>
                                 <AccordionLayout 
-                                title={
-                                    <>
-                                        <div className='grid grid-cols-2'>
-                                            <div className='col-span-1'>
-                                                ORDER ID : {row.orderId}
+                                    title={
+                                        <>
+                                            <div className='grid grid-cols-2'>
+                                                <div className='col-span-1'>
+                                                    ORDER ID : {row.orderId}
+                                                </div>
+                                                <div className='col-span-1 px-9'>
+                                                    Status : {row.status}
+                                                </div>
                                             </div>
-                                            <div className='col-span-1 px-9'>
-                                                Status : {row.status}
-                                            </div>
-                                        </div>
-                                    </>
-                                }
-                                index={row._id}
-                                activeIndex={activeIndex}
-                                setActiveIndex={setActiveIndex}
-                            > 
+                                        </>
+                                    }
+                                    index={row._id}
+                                    activeIndex={activeIndex}
+                                    setActiveIndex={setActiveIndex}
+                                > 
                                     <div className='lg:grid lg:grid-cols-4 lg:gap-x-3'>
                                         <div className='relative w-72 h-60 col-span-1'>
                                             <img src={item.imageUrl} className='w-full h-full bg-white object-center object cover border' alt='Item'></img>
                                         </div>
-                                        <div class=" px-5 col-span-3">
+                                        <div className=" px-5 col-span-3">
                                         <br/>
-                                            <div className='lg:grid lg:grid-cols-3'>
-                                                <div className='col-span-2 grid grid-cols-2 lg:grid lg:grid-cols-3 text-gray-900'>
+                                            <div className='lg:grid lg:grid-cols-3 grid grid-cols-1'>
+                                                <div className='lg:col-span-2 grid grid-cols-2 lg:grid lg:grid-cols-3 text-gray-900'>
                                                         <h3 className='text-base font-semibold lg:col-span-1 mt-5'>Item Name :</h3>
                                                         <h4 className='text-base font-medium lg:col-span-2  mt-5'>{item.name}</h4>
                                                         <h3 className='text-base font-semibold lg:col-span-1 mt-5'>Seller's Name :</h3>
@@ -199,7 +236,7 @@ export default function MyReservations() {
                                                         <h3 className='text-base font-semibold lg:col-span-1 mt-5'>Price :</h3>
                                                         <h4 className='text-base font-medium lg:col-span-2 mt-5'>Rs. {row.total}</h4>
                                                 </div>
-                                                <div className='col-span-1 self-center'>
+                                                <div className='lg:col-span-1 lg:self-center justify-self-center col-span-1'>
                                                     <div className="flex center-items text-3xl pt-5">
                                                         <div className="pr-5 cursor-pointer text-gray-900" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Request"><BsPencilSquare data-bs-toggle="modal" data-bs-target="#updateReservationDetails"/></div>
                                                         <div className="pr-5 cursor-pointer text-red-800" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Request"><BsFillTrashFill data-bs-toggle="modal" data-bs-target="#deleteReservationDetails"/></div>
@@ -213,7 +250,7 @@ export default function MyReservations() {
                                                             <h5 className="text-xl font-medium leading-normal text-gray-800">
                                                                 Update Reservation Details
                                                             </h5>
-                                                            <button type="button" className="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline" data-bs-toggle="tooltip" data-bs-placement="top" title="Close" data-bs-dismiss="modal" aria-label="Close" />
+                                                            <button type="button" onClick={reset} className="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline" data-bs-toggle="tooltip" data-bs-placement="top" title="Close" data-bs-dismiss="modal" aria-label="Close" />
                                                         </div>
                                                         <div className="modal-body relative p-4">
                                                            <div className='max-w-7xl mx-auto px-2 sm:px-10 lg:px-6'>
@@ -238,7 +275,7 @@ export default function MyReservations() {
                                                                 </h3>
                                                                 <h4 className="mt-4 px-5 font-medium lg:col-span-2"> {buyer.contactNo}</h4>
                                                             </div>
-                                                            <div class="mt-5 flex-grow border-t border-gray-300"></div>
+                                                            <div className="mt-5 flex-grow border-t border-gray-300"></div>
                                                             <h3 className="mt-5 px-5 text-lg font-semibold">
                                                                 Item Details
                                                             </h3>
@@ -253,26 +290,48 @@ export default function MyReservations() {
                                                                 <h4 className="mt-4 px-5 font-medium lg:col-span-2">{seller.firstName} {seller.lastName}</h4>
                                                                 <div className="lg:mt-4 px-5 font-medium col-span-2 lg:col-span-3  grid grid-cols-2 lg:grid lg:grid-cols-3">
                                                                     <h3 className='text-base font-semibold col-span-1 lg:col-span-1 mt-5'>Quantity :</h3>
-                                                                    <div class="flex flex-row h-10 w-full rounded-lg col-span-1 relative bg-transparent lg:col-span-2  mt-5 lg:mt-5lg:col-span-2 lg:px-5">
-                                                                        <button onClick={handleDecrement} class=" bg-gray-300 text-gray-600  hover:text-gray-700 hover:bg-gray-400 h-7 w-10 rounded-l cursor-pointer outline-none">
-                                                                            <span class="m-auto text-2xl font-thin">−</span>
-                                                                        </button>
+                                                                    <div className="flex flex-row h-10 w-full rounded-lg col-span-1 relative bg-transparent lg:col-span-2  mt-5 lg:mt-5lg:col-span-2 lg:px-5">
+                                                                        {
+                                                                            min === true || quantity === 0?
+                                                                            <>
+                                                                                <button onClick={handleDecrement} className=" bg-gray-300 text-gray-600 h-7 w-10 rounded-l cursor-not-allowed disabled">
+                                                                                    <span className="m-auto text-2xl font-thin">−</span>
+                                                                                </button>
+                                                                            </>:
+                                                                            <>
+                                                                                <button onClick={handleDecrement} className=" bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-7 w-10 rounded-l cursor-pointer outline-none">
+                                                                                    <span className="m-auto text-2xl font-thin">−</span>
+                                                                                </button>
+                                                                            </>
+                                                                        }
+                                                                        <>
                                                                             {
-                                                                                status === 'UPDATED' ?
-                                                                                    <>
-                                                                                        <h4 className='px-2 py-0.5'> 
-                                                                                            {newQuantity}
-                                                                                        </h4>
-                                                                                    </>:
-                                                                                    <>
-                                                                                        <h4 className='px-2 py-0.5'> 
-                                                                                            {quantity}
-                                                                                        </h4>
-                                                                                    </>
-                                                                            }
-                                                                        <button onClick={handleIncrement} class="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-7 w-10 rounded-r cursor-pointer">
-                                                                            <span class="m-auto text-2xl font-thin">+</span>
-                                                                        </button>
+                                                                                    status === 'UPDATED' ?
+                                                                                        <>
+                                                                                            <h4 className='px-2 py-0.5'> 
+                                                                                                {newQuantity}
+                                                                                            </h4>
+                                                                                        </>:
+                                                                                        <>
+                                                                                            <h4 className='px-2 py-0.5'> 
+                                                                                                {quantity}
+                                                                                            </h4>
+                                                                                        </>
+                                                                                }
+                                                                        </>
+                                                                        {
+                                                                            max === true?
+                                                                            <>
+                                                                                <button onClick={handleIncrement} className="bg-gray-300 text-gray-600 h-7 w-10 rounded-r cursor-not-allowed" disabled>
+                                                                                    <span className="m-auto text-2xl font-thin">+</span>
+                                                                                </button>
+                                                                            </>:
+                                                                            <>
+                                                                                <button onClick={handleIncrement} className="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-7 w-10 rounded-r cursor-pointer">
+                                                                                    <span className="m-auto text-2xl font-thin">+</span>
+                                                                                </button>
+                                                                            </>
+                                                                        }
                                                                     </div>
                                                                 </div>
                                                                 <div className="lg:mt-4 px-5 font-medium col-span-2 lg:col-span-3 lg:grid lg:grid-cols-3">
@@ -280,16 +339,16 @@ export default function MyReservations() {
                                                                         Order Price : 
                                                                     </div>
                                                                     <div className='col-span-1 mt-3 lg:col-span-2 lg:px-4'>
-                                                                        <span class="inline-flex items-center px-2 text-sm text-gray-900 bg-gray-200 h-9 w-10 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                                                        <span className="inline-flex items-center px-2 text-sm text-gray-900 bg-gray-200 h-9 w-10 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
                                                                             LKR
                                                                         </span>
                                                                         {
                                                                             status === 'UPDATED'?
                                                                             <>
-                                                                                <input type="text" name="total" class="rounded-none border p-0.5 h-9 w-40" placeholder="Price" value={newTotal}/>
+                                                                                <input type="text" name="total" className="rounded-none border p-0.5 h-9 w-40" placeholder="Price" value={newTotal}/>
                                                                             </>:
                                                                             <>
-                                                                                <input type="text" name="total" class="rounded-none border p-0.5 h-9 w-40" placeholder="Price" value={total}/>
+                                                                                <input type="text" name="total" className="rounded-none border p-0.5 h-9 w-40" placeholder="Price" value={total}/>
                                                                             </>
                                                                         }
                                                                     </div>
@@ -299,7 +358,7 @@ export default function MyReservations() {
                                                         </div>
                                                         <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
                                                             <div className="transition duration-150 ease-in-out px-3" data-bs-dismiss="modal" >
-                                                                <Button variant={'alternative'}>Close</Button>
+                                                                <Button variant={'alternative'} onClick={reset}>Close</Button>
                                                             </div>
                                                             <div className='transition duration-150 ease-in-out ml-1' data-bs-dismiss="modal">
                                                                 <Button onClick={()=> handleUpdate(row._id)}>Update</Button>
