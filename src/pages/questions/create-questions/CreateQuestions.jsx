@@ -21,6 +21,11 @@ export default function CreateQuestions() {
         imageUrl: "",
         tags: []
     });
+    const [formErrors, setFormErrors] = useState({
+        title: "",
+        description: "",
+        exist: false
+    });
 
     useEffect(() => {
         setQuestion({ ...question, tags: tags });
@@ -29,6 +34,24 @@ export default function CreateQuestions() {
     const IsFormValid = () => {
         if (question.title) return true;
         return false;
+    }
+
+    const validateForm = (name, value) => {
+        if (name == 'title') {
+            if (value.length > 100) {
+                setFormErrors({title: "Title shouldn't be longer than 100 characters", exist: true});
+            } else {{
+                setFormErrors({title: "", exist: false});
+            }}
+        }
+        if (name == 'description') {
+            if (value.length > 5000) {
+                setFormErrors({description: "Title shouldn't be longer than 5000 characters", exist: true});
+            } else {{
+                setFormErrors({description: "", exist: false});
+            }}
+        }
+
     }
 
     const handleCreateQuestion = async (e) => {
@@ -73,6 +96,8 @@ export default function CreateQuestions() {
     const onInputChange = e => {
         const { name, value } = e.target
         setQuestion({ ...question, [name]: value });
+
+        validateForm(name, value);
     };
 
     return (
@@ -101,6 +126,7 @@ export default function CreateQuestions() {
                                     placeholder="name@flowbite.com"
                                     required
                                 />
+                                <span class="text-sm text-red-600">{formErrors.title}</span>
                             </div>
                             <div className="mb-6">
                                 <label
@@ -118,6 +144,7 @@ export default function CreateQuestions() {
                                     placeholder="Describe your question..."
                                     defaultValue={""}
                                 />
+                                <span class="text-sm text-red-600">{formErrors.description}</span>
                             </div>
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="create-question-tags-container">
@@ -155,7 +182,7 @@ export default function CreateQuestions() {
                                 <div className="mr-2">
                                     <Button variant="alternative" onClick={() => window.location.href="list-questions"}>Cancel</Button>
                                 </div>
-                                <Button type="submit" onClick={handleCreateQuestion}>Save</Button>
+                                <Button type="submit" onClick={handleCreateQuestion} disabled={formErrors.exist}>Save</Button>
                             </div>
                         </form>
                     </div>
