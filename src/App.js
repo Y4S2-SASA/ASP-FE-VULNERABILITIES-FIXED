@@ -4,7 +4,6 @@ import PreviewSite from "./pages/preview-page";
 import Items from "./pages/items";
 import Login from "./pages/login";
 import Profile from "./pages/profile";
-import Reservations from "./pages/reservations";
 import Register from "./pages/signup";
 import PrivateRoutes from "./private-routes/PrivateRoutes";
 import Error404 from "./pages/error";
@@ -28,7 +27,6 @@ export default function App() {
           <Route path="/create-question" element={<CreateQuestions />} />
           <Route path="/questions" element={<ListQuestions />} />
           <Route path="/view-question/:id" element={<ViewQuestion />} />
-          <Route path="/reservations" element={<Reservations />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/admin-panel" element={<AdminHome />} />
           <Route path="/404" element={<Error404 />} />
