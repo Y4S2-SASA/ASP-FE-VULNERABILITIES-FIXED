@@ -7,6 +7,7 @@ import QuestionCard from "./QuestionCard";
 
 export default function ListQuestions() {
   const [questions, setQuestions] = useState([]);
+  const [Searchedquestions, setSearchedquestions] = useState([]);
 
   useEffect(() => {
     handleFetchQuestions();
@@ -16,8 +17,24 @@ export default function ListQuestions() {
     getAllQuestions()
       .then(res => {
         setQuestions(res.data.data);
+        setSearchedquestions(res.data.data);
       });
   }
+
+  const onSearch = (regex) => {
+    if (regex == "") {
+      handleFetchQuestions();
+    } else {
+      const questionsList = [];
+      questions.forEach((question) => {
+        const title = question.title;
+        if (title.startsWith(regex)) {
+          questionsList.push(question);
+        }
+      })
+      setQuestions(questionsList);
+    }
+  } 
 
   return (
     <>
@@ -27,7 +44,7 @@ export default function ListQuestions() {
         <div className="max-w-7xl mx-auto px-16 sm:px-16 lg:px-2">
           <div className="max-w-2xl mx-auto py-10 lg:max-w-none">
             <div className="flex justify-between ...">
-              <SearchBox />
+              <SearchBox onSearch={onSearch}/>
               <Button onClick={() => window.location.href='/create-question'}><div className="text-xl">Create Question</div></Button>
             </div>
 
