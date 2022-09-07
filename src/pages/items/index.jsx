@@ -9,6 +9,7 @@ import { BsPencilSquare } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { applyToast } from '../../components/toast-message/toast';
 import { useNavigate } from "react-router-dom";
+import SearchBox from "../../components/search-box/SearchBox";
 
 const Items = () => {
     // With this AuthContext you can get the currently logged in user's details
@@ -53,17 +54,23 @@ const Items = () => {
             <h2>logged in user - {userId}</h2>
             <h2>logged in user's role - {role}</h2> */}
       <br/>
-        <div className="bg-gray-100">
+        <div className="">
         <div className="max-w-7xl mx-auto px-16 sm:px-16 lg:px-2">
           <div className="max-w-2xl mx-auto py-10 lg:max-w-none">
 
-           <div className="py-2">
-           <Button><div className="text-xl"><a href="/createitem">Create your Item</a></div> </Button>
+          <div className="flex justify-between py-2">
+          <div>
+          <SearchBox/>
+          </div>
+          <div>
+          <Button><div className="text-xl"><a href="/createitem">Create your Item</a></div> </Button>
+          </div>
            </div>
 
             <div className="mt-6 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-6">
               {item.map((i) => {
                 return (
+                  <div className="bg-gray-100 px-4">
                   <div key={i._id} className="group relative">
                     <div className="relative w-full h-80 bg-white rounded-lg overflow-hidden sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1">
                       <img
@@ -91,7 +98,7 @@ const Items = () => {
                       LKR {i.price} | Availability - {i.quantity}
                     </h3>
                     <p className="text-base font-medium text-gray-900 mt-2 mb-24">{i.description}</p>
-
+                    </div>
                     <div>
                       <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto text-gray-900" id={`deleteReservationDetails${i._id}`} tabIndex={-1} aria-modal="true" role="dialog">
                         <div className="modal-dialog modal-dialog-centered relative w-auto pointer-events-none">
@@ -118,7 +125,7 @@ const Items = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                    </div>
                 );
               })}
             </div>
