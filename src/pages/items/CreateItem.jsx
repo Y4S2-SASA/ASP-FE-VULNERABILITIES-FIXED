@@ -185,7 +185,7 @@ const CreateItem = () => {
                     name="imageUrl"
                     id="image"
                     type="file"
-                    value={inputs.imageUrl}
+                    // value={inputs.imageUrl}
                     onChange={(e) => onUploadImgToCloudinary(e.target.files[0])}
                 />
                 </div>
