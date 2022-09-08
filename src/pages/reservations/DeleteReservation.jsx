@@ -7,6 +7,7 @@ export default function DeleteReservation(props) {
     const handleDelete = (id) =>{
         orderRequest.deleteOrderDetails(id)
         .then((response) =>{
+            props.getOrders()
             applyToast('Order details deleted successfully!', 'success');
             props.getOrders();
         }).catch((error) =>{
