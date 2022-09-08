@@ -42,7 +42,8 @@ export default function ViewQuestion() {
             <br />
             <div className="bg-gray-100">
                 <br />
-                {deleteModelOpen &&
+                
+                {deleteModelOpen && <>
                     <Dialog onClose={() => setDeleteModelOpen(false)}>
                         <DialogTitle>
                             Delete Question
@@ -55,6 +56,7 @@ export default function ViewQuestion() {
                             <Button variant={"alternative"} onClick={() => setDeleteModelOpen(false)}>Cancel</Button>
                         </DialogActions>
                     </Dialog>
+                    </>
                 }
                 {editModelOpen &&
                     <Dialog onClose={() => setEditModelOpen(false)}>
