@@ -52,7 +52,7 @@ export default function NavBar() {
                 >
                     <img
                         className="rounded-t-lg w-0 md:w-16"
-                        src="images/asplogo.png"
+                        src="https://res.cloudinary.com/automobile-spare-parts/image/upload/v1662561922/Asset99_4x_soobmm.png"
                         alt=""
                         loading="lazy"
                     />
