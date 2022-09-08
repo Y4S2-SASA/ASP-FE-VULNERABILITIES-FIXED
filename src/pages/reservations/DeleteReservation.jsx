@@ -1,6 +1,6 @@
 import React from 'react'
 import orderRequest from '../../api/Order/order.request';
-import DialogSM from '../../components/TestDialog/DialogSM'
+import DialogSM from '../../components/DialogComponent/DialogSM'
 import { applyToast } from '../../components/toast-message/toast';
 
 export default function DeleteReservation(props) {

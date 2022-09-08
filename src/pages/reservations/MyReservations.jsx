@@ -48,7 +48,7 @@ export default function MyReservations() {
         getOrders();
     },[])
 
-  return (
+  return orders ? (
    <>
     <NavBar/><br/>
     <div className="bg-gray-100">
@@ -168,5 +168,22 @@ export default function MyReservations() {
         </div>
     </div><br/>
     </>
+  ):(
+    <div>
+         <NavBar/><br/>
+            <div className="bg-gray-100">
+                <div className='max-w-7xl mx-auto px-10 sm:px-10 lg:px-6'>
+                    <div className="max-w-2xl mx-auto py-5 lg:max-w-none">
+                        <div className='lg:grid lg:grid-cols-2'>
+                            <div className='col-span-1 mt-5'>
+                                <h3 className='text-xl font-semibold'>My Reservations</h3>
+                            </div>
+                            <br/>
+                            <h4 className='text-baseline font-semibold'>You have not placed any Reservations!</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
   )
 }

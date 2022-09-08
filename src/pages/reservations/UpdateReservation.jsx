@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import orderRequest from '../../api/Order/order.request';
-import DialogXL from '../../components/TestDialog/DialogXL'
+import DialogXL from '../../components/DialogComponent/DialogXL'
 import { applyToast } from '../../components/toast-message/toast';
 
 export default function UpdateReservation(props) {
