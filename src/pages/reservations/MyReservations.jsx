@@ -4,8 +4,8 @@ import orderRequest from '../../api/Order/order.request';
 import { AuthContext } from '../../App';
 import AccordionLayout from '../../components/Accordion/AccordionLayout';
 import NavBar from '../../components/LayoutComponents/NavBar'
-import Button from '../../components/buttons/Buttons';
-import { applyToast } from '../../components/toast-message/toast';
+import UpdateReservation from './UpdateReservation';
+import DeleteReservation from './DeleteReservation';
 
 export default function MyReservations() {
     const loggedInUser = useContext(AuthContext);
@@ -18,12 +18,7 @@ export default function MyReservations() {
     const [order, setOrder] = useState({});
     const [total, setTotal] = useState(0);
     const [quantity, setQuantity] = useState(0);
-    const [newQuantity, setNewQuantity] = useState(0)
     const [buyer, setBuyer] = useState({});
-    const [status, setStatus] = useState('NEW');
-    const [newTotal, setNewTotal] = useState(0);
-    const [max, setMax] = useState(false);
-    const [min, setMin] = useState(false);
 
     const getOrders = () =>{
         orderRequest.getUserOrders(buyerId)
@@ -47,110 +42,6 @@ export default function MyReservations() {
         }).catch((error) =>{
             console.error(error.message);
         })
-    }
-
-    const handleIncrement = () =>{
-        if(status === 'UPDATED'){
-            if(newQuantity === item.quantity){
-                let qty = item.quantity;
-                let price = parseInt(item.price);
-                setMax(true)
-                setMin(false)
-                setNewQuantity(qty);
-                let totalPrice = price * qty
-                setNewTotal(totalPrice);
-            }else{
-                let qty = parseInt(newQuantity) + 1;
-                let price = parseInt(item.price);
-                setNewQuantity(qty);
-                setMin(false);
-                let totalPrice = price * qty
-                setNewTotal(totalPrice);
-            }
-            
-        }else{
-            if(parseInt(quantity) === item.quantity){
-                let qty = item.quantity;
-                let price = parseInt(item.price);
-                setNewQuantity(qty);
-                setMax(true)
-                setMin(false)
-                setStatus('UPDATED')
-                let totalPrice = price * qty
-                setNewTotal(totalPrice);
-            }else{
-                let qty = parseInt(quantity) + 1;
-                let price = parseInt(item.price);
-                setNewQuantity(qty);
-                setMin(false)
-                setStatus('UPDATED')
-                let totalPrice = price * qty
-                setNewTotal(totalPrice);
-            }
-            
-        }
-    }
-
-    const handleDecrement = () =>{
-        if(status === 'UPDATED'){
-            if(newQuantity === 0) {
-                parseInt(newQuantity);
-                setMin(true);
-                setMax(false);
-            }else{
-                let qty = parseInt(newQuantity) - 1;
-                let price = parseInt(item.price);
-                setMax(false);
-                setNewQuantity(qty);
-                let totalPrice = price * qty
-                setNewTotal(totalPrice);
-            }
-        }else{
-            if(quantity === 0) {
-                parseInt(quantity);
-                setMax(false);
-            }else{
-                let qty = parseInt(quantity) - 1;
-                let price = parseInt(item.price);
-                setNewQuantity(qty);
-                setMax(false)
-                setStatus('UPDATED')
-                let totalPrice = price * qty
-                setNewTotal(totalPrice);
-            }
-        }
-    }
-
-    const handleUpdate = (id) =>{
-        order.quantity = newQuantity;
-        order.total = newTotal;
-        orderRequest.updateOrderDetails(id, order)
-        .then((response) =>{
-            getOrders();
-            applyToast('Order details updated successfully!', 'success');
-            setStatus('NEW')
-        }).catch((error) =>{
-            console.error(error);
-            applyToast('Order detail update failed!', 'error');
-        })
-    }
-
-    const handleDelete = (id) =>{
-        console.log(id);
-        orderRequest.deleteOrderDetails(id)
-        .then((response) =>{
-            applyToast('Order details deleted successfully!', 'success');
-            getOrders();
-        }).catch((error) =>{
-            console.error(error);
-            applyToast('Order details delete failed!', 'error')
-        })
-    }
-
-    const reset = () =>{
-        setStatus('NEW')
-        setMax(false);
-        setMin(false);
     }
 
     useEffect(() =>{
@@ -243,155 +134,27 @@ export default function MyReservations() {
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto text-gray-900" id="updateReservationDetails" tabIndex={-1} aria-modal="true" role="dialog">
-                                                    <div className="modal-dialog modal-xl modal-dialog-centered relative w-auto pointer-events-none">
-                                                        <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
-                                                        <div className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
-                                                            <h5 className="text-xl font-medium leading-normal text-gray-800">
-                                                                Update Reservation Details
-                                                            </h5>
-                                                            <button type="button" onClick={reset} className="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline" data-bs-toggle="tooltip" data-bs-placement="top" title="Close" data-bs-dismiss="modal" aria-label="Close" />
-                                                        </div>
-                                                        <div className="modal-body relative p-4">
-                                                           <div className='max-w-7xl mx-auto px-2 sm:px-10 lg:px-6'>
-                                                            <h3 className="mt-5 px-5 text-lg font-semibold">
-                                                                User Details
-                                                            </h3>
-                                                            <div className="mt-3 px-5 grid grid-cols-2 lg:grid lg:grid-cols-6 lg:gap-x-6">
-                                                                <h3 className="mt-3 px-5 text-base font-semibold lg:col-span-1">
-                                                                    First Name :
-                                                                </h3>
-                                                                <h4 className="mt-4 px-5 font-medium lg:col-span-2">{buyer.firstName}</h4>
-                                                                <h3 className="mt-3 px-5 text-base font-semibold lg:col-span-1">
-                                                                    Last Name  : 
-                                                                </h3>
-                                                                <h4 className="mt-4 px-5 font-medium lg:col-span-2">{buyer.lastName}</h4>
-                                                                <h3 className="mt-3 px-5 text-base font-semibold lg:col-span-1">
-                                                                    Email :  
-                                                                </h3>
-                                                                <h4 className="mt-4 px-5 font-medium lg:col-span-2">{buyer.email}</h4>
-                                                                <h3 className="mt-3 px-5 text-base font-semibold lg:col-span-1">
-                                                                    Contact No : 
-                                                                </h3>
-                                                                <h4 className="mt-4 px-5 font-medium lg:col-span-2"> {buyer.contactNo}</h4>
-                                                            </div>
-                                                            <div className="mt-5 flex-grow border-t border-gray-300"></div>
-                                                            <h3 className="mt-5 px-5 text-lg font-semibold">
-                                                                Item Details
-                                                            </h3>
-                                                            <div className="mt-3 px-5 grid grid-cols-2 lg:grid lg:grid-cols-6 lg:gap-x-6">
-                                                                <h3 className="mt-3 px-5 text-base font-semibold lg:col-span-1">
-                                                                    Item Name :
-                                                                </h3>
-                                                                <h4 className="mt-4 px-5 font-medium lg:col-span-2">{item.name}</h4>
-                                                                <h3 className="mt-3 px-5 text-base font-semibold lg:col-span-1">
-                                                                    Seller Name  : 
-                                                                </h3>
-                                                                <h4 className="mt-4 px-5 font-medium lg:col-span-2">{seller.firstName} {seller.lastName}</h4>
-                                                                <div className="lg:mt-4 px-5 font-medium col-span-2 lg:col-span-3  grid grid-cols-2 lg:grid lg:grid-cols-3">
-                                                                    <h3 className='text-base font-semibold col-span-1 lg:col-span-1 mt-5'>Quantity :</h3>
-                                                                    <div className="flex flex-row h-10 w-full rounded-lg col-span-1 relative bg-transparent lg:col-span-2  mt-5 lg:mt-5lg:col-span-2 lg:px-5">
-                                                                        {
-                                                                            min === true || quantity === 0?
-                                                                            <>
-                                                                                <button onClick={handleDecrement} className=" bg-gray-300 text-gray-600 h-7 w-10 rounded-l cursor-not-allowed disabled">
-                                                                                    <span className="m-auto text-2xl font-thin">−</span>
-                                                                                </button>
-                                                                            </>:
-                                                                            <>
-                                                                                <button onClick={handleDecrement} className=" bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-7 w-10 rounded-l cursor-pointer outline-none">
-                                                                                    <span className="m-auto text-2xl font-thin">−</span>
-                                                                                </button>
-                                                                            </>
-                                                                        }
-                                                                        <>
-                                                                            {
-                                                                                    status === 'UPDATED' ?
-                                                                                        <>
-                                                                                            <h4 className='px-2 py-0.5'> 
-                                                                                                {newQuantity}
-                                                                                            </h4>
-                                                                                        </>:
-                                                                                        <>
-                                                                                            <h4 className='px-2 py-0.5'> 
-                                                                                                {quantity}
-                                                                                            </h4>
-                                                                                        </>
-                                                                                }
-                                                                        </>
-                                                                        {
-                                                                            max === true?
-                                                                            <>
-                                                                                <button onClick={handleIncrement} className="bg-gray-300 text-gray-600 h-7 w-10 rounded-r cursor-not-allowed" disabled>
-                                                                                    <span className="m-auto text-2xl font-thin">+</span>
-                                                                                </button>
-                                                                            </>:
-                                                                            <>
-                                                                                <button onClick={handleIncrement} className="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-7 w-10 rounded-r cursor-pointer">
-                                                                                    <span className="m-auto text-2xl font-thin">+</span>
-                                                                                </button>
-                                                                            </>
-                                                                        }
-                                                                    </div>
-                                                                </div>
-                                                                <div className="lg:mt-4 px-5 font-medium col-span-2 lg:col-span-3 lg:grid lg:grid-cols-3">
-                                                                    <div className=" col-span-1 lg:col-span-1 text-base font-semibold mt-4">
-                                                                        Order Price : 
-                                                                    </div>
-                                                                    <div className='col-span-1 mt-3 lg:col-span-2 lg:px-4'>
-                                                                        <span className="inline-flex items-center px-2 text-sm text-gray-900 bg-gray-200 h-9 w-10 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
-                                                                            LKR
-                                                                        </span>
-                                                                        {
-                                                                            status === 'UPDATED'?
-                                                                            <>
-                                                                                <input type="text" name="total" className="rounded-none border p-0.5 h-9 w-40" placeholder="Price" value={newTotal}/>
-                                                                            </>:
-                                                                            <>
-                                                                                <input type="text" name="total" className="rounded-none border p-0.5 h-9 w-40" placeholder="Price" value={total}/>
-                                                                            </>
-                                                                        }
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                           </div>
-                                                        </div>
-                                                        <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
-                                                            <div className="transition duration-150 ease-in-out px-3" data-bs-dismiss="modal" >
-                                                                <Button variant={'alternative'} onClick={reset}>Close</Button>
-                                                            </div>
-                                                            <div className='transition duration-150 ease-in-out ml-1' data-bs-dismiss="modal">
-                                                                <Button onClick={()=> handleUpdate(row._id)}>Update</Button>
-                                                            </div>
-                                                        </div>
-                                                        </div>
-                                                    </div>
-                                                    </div>
+                                                    <UpdateReservation
+                                                        id='updateReservationDetails'
+                                                        title="Update Reservation Details"
+                                                        buyer={buyer}
+                                                        seller={seller}
+                                                        order={order}
+                                                        item={item}
+                                                        itemId={row._id}
+                                                        quantity={quantity}
+                                                        total={total}
+                                                        getOrders={getOrders}
+                                                    />
                                                 </div>
                                                 <div>
-                                                    <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto text-gray-900" id="deleteReservationDetails" tabIndex={-1} aria-modal="true" role="dialog">
-                                                    <div className="modal-dialog modal-dialog-centered relative w-auto pointer-events-none">
-                                                        <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
-                                                        <div className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
-                                                            <h5 className="text-xl font-medium leading-normal text-gray-800">
-                                                                Delete Reservation Details
-                                                            </h5>
-                                                            <button type="button" className="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline" data-bs-toggle="tooltip" data-bs-placement="top" title="Close" data-bs-dismiss="modal" aria-label="Close" />
-                                                        </div>
-                                                        <div className="modal-body relative p-5">
-                                                           Are you sure that you want to delete this placed order?
-                                                        </div>
-                                                        <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
-                                                            <div className="transition duration-150 ease-in-out px-3" data-bs-dismiss="modal" >
-                                                                <Button variant={'alternative'}>Close</Button>
-                                                            </div>
-                                                            <div className='transition duration-150 ease-in-out ml-1' data-bs-dismiss="modal">
-                                                                <Button onClick={()=> handleDelete(row._id)}>Delete</Button>
-                                                            </div>
-                                                        </div>
-                                                        </div>
-                                                    </div>
-                                                    </div>
+                                                    <DeleteReservation
+                                                        id='deleteReservationDetails'
+                                                        title="Delete Reservation Details"
+                                                        message=" Are you sure that you want to delete this placed order?"
+                                                        itemId={row._id}
+                                                        getOrders={getOrders}
+                                                    />
                                                 </div>
                                             </div>
                                         </div>
