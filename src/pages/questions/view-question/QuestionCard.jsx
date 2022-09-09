@@ -15,9 +15,9 @@ export default function QuestionCard({ title, createdAt, createdBy, onEdit, imag
                 <div className="flex justify-between ...">
                     <p className="text-base font-medium text-gray-600">@{createdBy.username} &nbsp; {timeSince(new Date(createdAt))} ago </p>
                     {userId == createdBy._id &&
-                        <div className="text-3xl flex justify-between ...">
-                            <div className="pr-5 cursor-pointer" onClick={onEdit}><BsPencilSquare /></div>
-                            <div className="cursor-pointer" onClick={onDelete}><BsFillTrashFill /></div>
+                        <div className="flex center-items text-3xl pt-2">
+                            <div className="pr-5 cursor-pointer text-gray-900" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Question"><BsPencilSquare data-bs-toggle="modal" onClick={onEdit} /></div>
+                            <div className="pr-5 cursor-pointer text-red-800" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Question"><BsFillTrashFill data-bs-toggle="modal" onClick={onDelete} /></div>
                         </div>
                     }
                 </div>

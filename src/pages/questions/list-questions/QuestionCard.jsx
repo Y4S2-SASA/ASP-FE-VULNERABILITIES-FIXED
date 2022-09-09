@@ -10,7 +10,7 @@ export default function QuestionCard({ title, createdAt, createdBy, numOfViews, 
             >
                 <div className="flex justify-between ...">
                     <p className="text-base font-medium text-gray-600">@{createdBy.username} &nbsp; {timeSince(new Date(createdAt))} ago </p>
-                    <p className="text-base font-medium text-gray-600">{numOfViews} Views </p>
+                    <p className="text-base font-medium text-gray-600">{numOfViews} </p>
                 </div>
 
                 <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
