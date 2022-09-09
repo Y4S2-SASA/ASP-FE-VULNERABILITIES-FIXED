@@ -180,7 +180,7 @@ export default function CreateQuestions() {
                             <br />
                             <div class="flex justify-end ...">
                                 <div className="mr-2">
-                                    <Button variant="alternative" onClick={() => window.location.href="list-questions"}>Cancel</Button>
+                                    <Button variant="alternative" onClick={() => window.location.href="questions"}>Cancel</Button>
                                 </div>
                                 <Button type="submit" onClick={handleCreateQuestion} disabled={formErrors.exist}>Save</Button>
                             </div>

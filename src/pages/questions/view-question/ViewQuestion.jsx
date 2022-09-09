@@ -25,7 +25,7 @@ export default function ViewQuestion() {
 
     const handleDeleteQuestion = () => {
         deleteQuestionById(id)
-            .then(() => window.location.href = "list-questions")
+            .then(() => window.location.href = "/questions")
             .catch(() => applyToast());
     }
 
@@ -52,8 +52,8 @@ export default function ViewQuestion() {
                             Are you sure you want to delete this questions?
                         </DialogContent>
                         <DialogActions>
+                            <Button variant={"alternative"} onClick={() => setDeleteModelOpen(false)}>Close</Button>
                             <Button onClick={handleDeleteQuestion}>Delete</Button>
-                            <Button variant={"alternative"} onClick={() => setDeleteModelOpen(false)}>Cancel</Button>
                         </DialogActions>
                     </Dialog>
                     </>
