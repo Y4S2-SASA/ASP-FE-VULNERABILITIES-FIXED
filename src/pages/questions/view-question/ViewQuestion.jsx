@@ -11,12 +11,13 @@ import QuestionCard from "../view-question/QuestionCard";
 import Button from "../../../components/buttons/Buttons";
 import { applyToast } from "../../../components/toast-message/toast";
 import EditQuestion from "../edit-question.jsx/EditQuestion";
+import Comment from "./comments/Comment";
 
 export default function ViewQuestion() {
     const { id } = useParams();
     const [question, setQuestions] = useState({});
     const [isLoading, setLoading] = useState(true);
-    const [deleteModelOpen, setDeleteModelOpen] = useState(false);    
+    const [deleteModelOpen, setDeleteModelOpen] = useState(false);
     const [editModelOpen, setEditModelOpen] = useState(false);
 
     useEffect(() => {
@@ -42,7 +43,7 @@ export default function ViewQuestion() {
             <br />
             <div className="bg-gray-100">
                 <br />
-                
+
                 {deleteModelOpen && <>
                     <Dialog onClose={() => setDeleteModelOpen(false)}>
                         <DialogTitle>
@@ -56,11 +57,11 @@ export default function ViewQuestion() {
                             <Button onClick={handleDeleteQuestion}>Delete</Button>
                         </DialogActions>
                     </Dialog>
-                    </>
+                </>
                 }
                 {editModelOpen &&
                     <Dialog onClose={() => setEditModelOpen(false)}>
-                        <EditQuestion 
+                        <EditQuestion
                             questionObject={question}
                             setEditModelOpen={setEditModelOpen}
                         />
@@ -81,6 +82,15 @@ export default function ViewQuestion() {
                             onDelete={() => setDeleteModelOpen(true)}
                         />
                     }
+                    <div className="flex justify-between ...">
+                        <h3 className="text-2xl font-medium leading-normal text-gray-800">Comments</h3>
+                        <Button variant="dark"><h3>Add Comments</h3></Button>
+                    </div>
+                    <hr />
+                    <Comment />
+                    <Comment />
+                    <Comment />
+                    <Comment />
                 </div>
                 <br />
             </div>

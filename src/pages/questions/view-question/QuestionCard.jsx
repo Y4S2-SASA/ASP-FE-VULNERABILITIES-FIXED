@@ -22,7 +22,7 @@ export default function QuestionCard({ title, createdAt, createdBy, onEdit, imag
                     }
                 </div>
 
-                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                <h5 className="mb-2 text-4xl font-medium tracking-tight text-gray-900 dark:text-white">
                     {title}
                 </h5>
                 <p className="text-base font-medium text-gray-400">
@@ -40,9 +40,8 @@ export default function QuestionCard({ title, createdAt, createdBy, onEdit, imag
                 <div>
                     <p className="text-slate-600 text-lg m-3">{description}</p>
                 </div>
-                <div class="flex justify-end ...">
-                    <p className="text-slate-400 text-sm">25 Comments </p>
-                </div>
+                
+
             </div>
         </>
     );
