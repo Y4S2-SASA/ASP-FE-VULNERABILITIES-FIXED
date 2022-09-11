@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { deleteQuestionById, getQuestionById } from "../../../api/QuestionsApi";
@@ -12,17 +12,33 @@ import Button from "../../../components/buttons/Buttons";
 import { applyToast } from "../../../components/toast-message/toast";
 import EditQuestion from "../edit-question.jsx/EditQuestion";
 import Comment from "./comments/Comment";
+import { addComment, getComments } from "../../../api/commentApi";
+import { AuthContext } from "../../../App";
 
 export default function ViewQuestion() {
+    const loggedInUser = useContext(AuthContext);
+    const { userId } = loggedInUser;
     const { id } = useParams();
     const [question, setQuestions] = useState({});
     const [isLoading, setLoading] = useState(true);
     const [deleteModelOpen, setDeleteModelOpen] = useState(false);
     const [editModelOpen, setEditModelOpen] = useState(false);
+    const [commentModelOpen, setCommentModelOpen] = useState(false);
+    const [comments, setComments] = useState([]);
 
     useEffect(() => {
         fetchQuestion(id);
+        fetchComments();
     }, []);
+
+    const fetchComments = () => {
+        getComments(id)
+            .then(res => {
+                console.log(res.data.data)
+                setComments(res.data.data);
+            })
+            .catch((err => console.log(err)))
+    }
 
     const handleDeleteQuestion = () => {
         deleteQuestionById(id)
@@ -37,13 +53,30 @@ export default function ViewQuestion() {
                 setLoading(false);
             });
     }
+
+    const createComment = () => {
+        const comment = {
+            questionId: id,
+            createdBy: userId,
+            body: document.getElementById("commentBody").value
+        };
+        addComment(comment)
+            .then(() => {
+                applyToast('success','Comment added!' );
+                setCommentModelOpen(false);
+                fetchComments();
+            })
+            .catch((e) => {
+                applyToast()
+                console.log(e)
+            });
+    }
     return (
         <>
             <NavBar />
             <br />
             <div className="bg-gray-100">
                 <br />
-
                 {deleteModelOpen && <>
                     <Dialog onClose={() => setDeleteModelOpen(false)}>
                         <DialogTitle>
@@ -84,13 +117,34 @@ export default function ViewQuestion() {
                     }
                     <div className="flex justify-between ...">
                         <h3 className="text-2xl font-medium leading-normal text-gray-800">Comments</h3>
-                        <Button variant="dark"><h3>Add Comments</h3></Button>
+                        <Button variant="dark" onClick={() => setCommentModelOpen(true)}><h3>Add Comments</h3></Button>
+                        {commentModelOpen &&
+                            <Dialog onClose={() => setCommentModelOpen(false)}>
+                                <DialogTitle>
+                                    Add Comment
+                                </DialogTitle>
+                                <DialogContent>
+                                    <textarea
+                                        id="commentBody"
+                                        rows={4}
+                                        className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="Type comment here..." />
+                                </DialogContent>
+                                <DialogActions>
+                                    <Button variant={"alternative"} onClick={() => setCommentModelOpen(false)}>Close</Button>
+                                    <Button onClick={createComment}>Add</Button>
+                                </DialogActions>
+                            </Dialog>
+                        }
                     </div>
                     <hr />
-                    <Comment />
-                    <Comment />
-                    <Comment />
-                    <Comment />
+                    {comments.map((comment, i) => 
+                        <Comment 
+                            userId={comment.createdBy.username}
+                            createdAt={comment.createdAt}
+                            body={comment.body}
+                        />
+                    )}
                 </div>
                 <br />
             </div>
