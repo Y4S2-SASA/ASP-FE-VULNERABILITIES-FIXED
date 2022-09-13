@@ -65,7 +65,7 @@ export default function AdminHome() {
                                 <img className="mb-3 w-24 h-24" src="images/statistics.png" alt="Bonnie image"/>
                                 <h5 className="mb-1 text-xl font-medium text-gray-500 dark:text-white font-semibold">Questions Report</h5>
                                 <div className="flex mt-4 space-x-3 md:mt-6">
-                                    <a href="#" className="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Go</a>
+                                    <a href="/questions-report" className="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Go</a>
                                 </div>
                             </div>
                         </div>

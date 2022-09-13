@@ -15,6 +15,7 @@ import CreateQuestions from "./pages/questions/create-questions/CreateQuestions"
 import ListQuestions from "./pages/questions/list-questions/ListQuestions";
 import ViewQuestion from "./pages/questions/view-question/ViewQuestion";
 import ReservationRequests from "./pages/reservations/ReservationRequests";
+import QuestionReport from "./pages/question-report/QuestionReport";
 
 export const AuthContext = createContext();
 
@@ -38,6 +39,7 @@ export default function App() {
           <Route path="/requests" element={<ReservationRequests/>}/>
 
           <Route path="/createitem" element={<CreateItem/>}/>
+          <Route path="/questions-report" element={<QuestionReport/>}/>
         </Route>
         {/* add public routes here */}
         <Route path="/" element={<PreviewSite />} />
