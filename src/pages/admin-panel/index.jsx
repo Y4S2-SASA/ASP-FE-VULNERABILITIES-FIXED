@@ -21,7 +21,7 @@ export default function AdminHome() {
                             <img className="mb-3 w-24 h-24" src="images/users.png" alt="Bonnie image"/>
                             <h5 className="mb-1 text-xl font-medium text-gray-500 dark:text-white font-semibold">Manage Users</h5>
                             <div className="flex mt-4 space-x-3 md:mt-6">
-                                <a href="#" className="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-red-800 rounded-lg hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-400 dark:bg-red-400 dark:hover:bg-red-400 dark:focus:ring-red-400">Go</a>
+                                <a href="/users" className="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-white bg-red-800 rounded-lg hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-400 dark:bg-red-400 dark:hover:bg-red-400 dark:focus:ring-red-400">Go</a>
                             </div>
                         </div>
                     </div>
