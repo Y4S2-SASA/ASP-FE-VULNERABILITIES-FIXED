@@ -21,6 +21,7 @@ export default function ReserveNow() {
         buyer:userId,
         item:itemId,
         orderId:'',
+        seller:'',
         quantity:0,
         status:'Pending',
         total:0
@@ -94,6 +95,7 @@ export default function ReserveNow() {
         order.orderId = "R" + newID;
         order.total = total;
         order.quantity = quantity;
+        order.seller = seller._id
         orderRequest.saveOrder(order)
         .then((response) =>{
             console.log(response.data);
