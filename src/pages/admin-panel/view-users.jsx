@@ -6,10 +6,13 @@ import { findUsers } from '../../api/User/userApi';
 import Editprofile from '../../components/Profile/EditProfile';
 import Dialog from '../../components/dialog/Dialog';
 import { applyToast } from '../../components/toast-message/toast';
+import { BsFillTrashFill, BsPencilSquare } from 'react-icons/bs';
+import DeleteUser from '../../components/ManageAdminPanel/DeleteUser';
 
 export default function ViewAllUsers() {
     const [user, setUser] = React.useState([]);
     const [users, setUsers] = React.useState([]);
+    const [onClickUId, setOnClickUId] = React.useState(0);
     const [apiResponseWaiting, setApiResponseWaiting] = React.useState(false);
 
     const pageSize = 5;
@@ -126,7 +129,8 @@ export default function ViewAllUsers() {
                                     </> : 
                                     <>
                                         {paginatedOrders.map((user) =>(
-                                            <tr className='self-center'>
+                                            <>
+                                            <tr className='self-center' key={user}>
                                                 <td className='py-4 px-6'>
                                                     <img src={user?.pic} className="rounded-full w-10 shadow-lg" alt="Avatar" />
                                                 </td>
@@ -139,8 +143,19 @@ export default function ViewAllUsers() {
                                                     <button className="" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Profile" onClick={() => setEditingUser(user)}>
                                                         <img src="images/edit.jpg" className="rounded-full w-6 h-6 shadow-lg" alt="Edit" user={user}/>
                                                     </button>
+                                                    <button onClick={() => setOnClickUId(user?._id)} className="pr-5 cursor-pointer text-red-800" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Request"><BsFillTrashFill className="w-6 h-6 ml-5" data-bs-toggle="modal" data-bs-target="#deleteUserAccount"/></button>
                                                 </td>
+                                                <div>
+                                                    <DeleteUser
+                                                        id='deleteUserAccount'
+                                                        title="Remove User"
+                                                        message="Are you sure to remove this user from the system? This cannot be undo."
+                                                        userId={onClickUId}
+                                                        onCallBackGetUsers={getUsers}
+                                                    />
+                                                </div>
                                             </tr>
+                                            </>
                                         ))}
                                     </>
                             }
