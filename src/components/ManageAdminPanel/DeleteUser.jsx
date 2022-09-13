@@ -5,13 +5,10 @@ import { applyToast } from "../toast-message/toast";
 
 export default function DeleteUser(props) {
     const { id, title, message, onCallBackGetUsers, userId } = props;
-    React.useEffect(() => {
-        console.log(userId)
-    }, []);
 
     const handleDeleteUser = (id) =>{
         deleteUser(id)
-        .then((response) =>{
+        .then((data) =>{
             applyToast('User removed from the system successfully!', 'success');
             onCallBackGetUsers();
         }).catch((error) =>{
