@@ -55,12 +55,24 @@ const deleteOrderDetails = (id) =>{
         })
 }
 
+const getOrderRequests = (seller) =>{
+    return apiInstance
+        .get(`/orders/requests/${seller}`)
+        .then((response) =>{
+            return response;
+        })
+        .catch((error) =>{
+            return error;
+        })
+}
+
 const orderRequest = {
     saveOrder,
     getUserOrders,
     getUserOrder,
     updateOrderDetails,
     deleteOrderDetails,
+    getOrderRequests
 }
 
 export default orderRequest;

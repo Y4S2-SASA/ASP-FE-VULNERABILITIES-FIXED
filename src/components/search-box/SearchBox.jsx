@@ -2,7 +2,6 @@ export default function SearchBox(props) {
 
     const onSearch = (e) => {
         const {value} = e.target;
-        console.log(value);
         props.onSearch(value)
     }
     return (

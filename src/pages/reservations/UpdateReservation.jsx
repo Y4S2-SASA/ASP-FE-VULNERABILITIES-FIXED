@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import orderRequest from '../../api/Order/order.request';
-import DialogXL from '../../components/DialogComponent/DialogXL'
+import Dialog from '../../components/DialogComponent/Dialog'
 import { applyToast } from '../../components/toast-message/toast';
 
 export default function UpdateReservation(props) {
@@ -105,8 +105,9 @@ export default function UpdateReservation(props) {
 
   return (
     <div>
-        <DialogXL 
+        <Dialog 
            id={props.id}
+           size='XL'
            title={props.title}
            content={
             <>
