@@ -80,6 +80,15 @@ const Items = () => {
         console.log(inputs);
       };
 
+      const handleSearch = () => {
+        // if(userId == initialInput.createdBy) {
+        //   itemRequest.getItems().then((res) => {
+        //     setItem(res.data.data);
+        //   });
+        // }
+        console.log("I am props from handleserach");
+      }
+
     return (
         <>
         <NavBar />
@@ -88,23 +97,23 @@ const Items = () => {
             <h2>logged in user's role - {role}</h2> */}
       <br/>
       <br/>
-        <div className="">
+        <div className="bg-gray-100">
         <div className="max-w-7xl mx-auto px-16 sm:px-16 lg:px-2">
           <div className="max-w-2xl mx-auto py-10 lg:max-w-none">
 
           <div className="flex justify-between py-2">
           <div>
-          <SearchBox/>
+          <SearchBox handleSearch={handleSearch}/>
           </div>
           <div>
           <Button><div className="text-xl"><a href="/createitem">Create your Item</a></div> </Button>
           </div>
            </div>
 
-            <div className="mt-6 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-6">
+            <div className="mt-6 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:gap-y-6">
               {item.map((i) => {
                 return (
-                  <div className="bg-gray-100 px-4">
+                  <div className="bg-white px-2 py-2 shadow-md">
                   <div key={i._id} className="group relative">
                     <div className="relative w-full h-80 bg-white rounded-lg overflow-hidden sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1">
                       <img
