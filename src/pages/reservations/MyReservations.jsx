@@ -7,6 +7,7 @@ import NavBar from '../../components/LayoutComponents/NavBar'
 import UpdateReservation from './UpdateReservation';
 import DeleteReservation from './DeleteReservation';
 import DeleteAcceptedReservations from './DeleteAcceptedReservations';
+import _ from 'lodash';
 
 export default function MyReservations() {
     const loggedInUser = useContext(AuthContext);
@@ -20,12 +21,15 @@ export default function MyReservations() {
     const [total, setTotal] = useState(0);
     const [quantity, setQuantity] = useState(0);
     const [buyer, setBuyer] = useState({});
+    const [search, setSearch] = useState("");
+    const [sortStatus, setSortStatus] = useState("ASC")
 
     const getOrders = () =>{
         orderRequest.getUserOrders(buyerId)
         .then((response) =>{
             console.log(response.data.data)
             setOrders(response.data.data);
+            setPaginatedOrders(_(response.data.data).slice(0).take(pageSize).value());
         }).catch((error) =>{
             console.error(error.message);
         })
@@ -45,10 +49,38 @@ export default function MyReservations() {
         })
     }
 
+    const sortAsc = () =>{
+        let sortedOrders = orders.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+        setOrders(sortedOrders)
+        setPaginatedOrders(_(orders).slice(0).take(pageSize).value());
+        setSortStatus('ASC')
+    }
+
+    const sortDesc = () =>{
+        let sortedOrders = orders.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+        setOrders(sortedOrders)
+        setPaginatedOrders(_(orders).slice(0).take(pageSize).value());
+        setSortStatus('DESC')
+    }
+
     useEffect(() =>{
         getOrders();
     },[])
 
+     //Pagination
+     const pageSize = 5;
+     const [paginatedOrders, setPaginatedOrders] = useState([]);
+     const [currentPage, setCurrentPage] = useState(1);
+     const pageCount = orders ? Math.ceil(orders.length/pageSize) : 0;
+     const pages = _.range(1, pageCount + 1)
+ 
+     const pagination = (pageNo) =>{
+         setCurrentPage(pageNo)
+         const startIndex = (pageNo -1) * pageSize;
+         const paginatedOrder = _(orders).slice(startIndex).take(pageSize).value();
+         setPaginatedOrders(paginatedOrder);
+     }
+ 
   return orders ? (
    <>
     <NavBar/><br/>
@@ -64,7 +96,15 @@ export default function MyReservations() {
                         <div className="flex">
                             <div className="dropdown relative">
                                 <button id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" className="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">
-                                    Filter
+                                   {
+                                        sortStatus === 'ASC' ?
+                                            'Newest'
+                                        :
+                                        sortStatus === 'DESC' ?
+                                            'Oldest'
+                                        :
+                                            'Filter'
+                                   }
                                     <svg aria-hidden="true" className="ml-1 w-4 h-4"  fill="currentColor"  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                         <path fillRule="evenodd" 
                                             d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" 
@@ -73,10 +113,12 @@ export default function MyReservations() {
                                 </button>
                                 <ul className="dropdown-menu min-w-max absolute hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none left-auto right-0" aria-labelledby="dropdownMenuButton1">
                                     <li>
-                                        <button type="button" className="inline-flex py-2 px-4 w-full hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Ascending</button>
+                                        <button type="button" className="inline-flex py-2 px-4 w-full hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                            onClick={sortAsc}>Newest</button>
                                     </li>
                                     <li>
-                                        <button type="button" className="inline-flex py-2 px-4 w-full hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Descending</button>
+                                        <button type="button" className="inline-flex py-2 px-4 w-full hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                            onClick={sortDesc}>Oldest</button>
                                     </li>
                                 </ul>
                             </div>
@@ -84,7 +126,8 @@ export default function MyReservations() {
                                 <input type="search" 
                                     id="search-dropdown" 
                                     className="block p-2.5 lg:w-96 z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" 
-                                    placeholder="Search..."/>
+                                    placeholder="Search..."
+                                    value={search} onChange={(e)=>{ setSearch(e.target.value)}}/>
                             </div>
                         </div>
                         </form><br/>
@@ -92,7 +135,13 @@ export default function MyReservations() {
                 </div>
                 <div className='flex flex-col'>
                     {
-                        orders.map((row) =>(
+                       paginatedOrders.filter((row)=>{
+                        if(search === ""){
+                            return row
+                        }else if(row.orderId.toLowerCase().includes(search.toLowerCase())){
+                            return row
+                        }
+                        }).map((row) =>(
                             <div onClick={()=>handleItemDetails(row._id)}>
                                 <AccordionLayout 
                                     title={
@@ -196,7 +245,30 @@ export default function MyReservations() {
                             </AccordionLayout>
                             </div>
                         ))
-                    }
+                    }<br/>
+                    <div className='w-full'>
+                        <nav className="flex justify-between items-center pt-4 text-xs text-gray-700 uppercase bg-gray-50 py-2 px-3" aria-label="Table navigation">
+                        <span className="text-sm font-normal text-gray-500 dark:text-gray-400"><span className="font-semibold text-gray-900 dark:text-white">Page {currentPage}</span> of <span className="font-semibold text-gray-900 dark:text-white">{pageCount}</span></span>
+                        <span></span>
+                        <ul className="inline-flex items-center -space-x-px">
+                            {
+                                pages.map((page) =>(
+                                    <li>
+                                        <p className={
+                                            page === currentPage ? 
+                                            "py-2 px-3 cursor-pointer leading-tight font-semibold text-white border border-gray-300 bg-gray-400 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                                            :
+                                            "py-2 px-3 cursor-pointer leading-tight font-semibold text-gray-700 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"}
+                                        onClick={()=>pagination(page)}
+                                        >
+                                        {page}
+                                        </p>
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>
