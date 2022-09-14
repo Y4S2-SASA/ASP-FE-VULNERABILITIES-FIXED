@@ -4,10 +4,10 @@ export default function Table(props) {
   return (
         <div className="overflow-x-auto relative shadow-md sm:rounded-lg ">
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <thead className="text-baseline text-gray-700 font-bold uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 {props.head}
             </thead>
-            <tbody>
+            <tbody className='text-gray-700'>
                 {props.body}
             </tbody>
             </table>
@@ -21,9 +21,9 @@ export default function Table(props) {
                             <li>
                                 <p className={
                                     page === props.currentPage ? 
-                                    "py-2 px-3 cursor-pointer leading-tight text-white border border-gray-300 bg-gray-400 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                                    "py-2 px-3 cursor-pointer leading-tight font-semibold text-white border border-gray-300 bg-gray-400 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                                     :
-                                    "py-2 px-3 cursor-pointer leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"}
+                                    "py-2 px-3 cursor-pointer leading-tight font-semibold text-gray-700 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"}
                                 onClick={()=>props.pagination(page)}
                                 >
                                 {page}

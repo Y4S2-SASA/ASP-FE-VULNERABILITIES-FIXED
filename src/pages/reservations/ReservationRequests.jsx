@@ -5,20 +5,34 @@ import NavBar from '../../components/LayoutComponents/NavBar'
 import _ from 'lodash';
 import Table from '../../components/Table/Table';
 import {BsFillEyeFill} from 'react-icons/bs'
+import RespondToRequests from './RespondToRequests';
 
 export default function ReservationRequests() {
     const loggedInUser = useContext(AuthContext);
     const {userId} = loggedInUser;
     const sellerId = userId;
     const [orders, setOrders] = useState([]);
+    const [order, setOrder] = useState({})
+    const [buyer, setBuyer] = useState({})
+    const [item, setItem] = useState({})
 
     const getOrders = () =>{
         orderRequest.getOrderRequests(sellerId) 
         .then((res) =>{
             setOrders(res.data.data)
+            setCurrentPage(1)
             setPaginatedOrders(_(res.data.data).slice(0).take(pageSize).value());
         }).catch((error) =>{
             console.error(error.message)
+        })
+    }
+
+    const handleOrder = (itemId) =>{
+        orderRequest.getUserOrder(itemId)
+        .then((response) =>{
+            setOrder(response.data.data);
+            setBuyer(response.data.data.buyer);
+            setItem(response.data.data.item);
         })
     }
 
@@ -118,22 +132,39 @@ export default function ReservationRequests() {
                                             <td className='py-4 px-6'>{row.item.name}</td>
                                             <td className='py-4 px-6'>{row.quantity}</td>
                                             <td className='py-4 px-6'>{row.total}</td>
-                                            <td className='py-4 px-6'>{row.status}</td>
+                                            <td className={
+                                                row.status === 'Accepted'?
+                                                    'py-4 px-6 text-green-600 font-semibold'
+                                                :
+                                                row.status === 'Rejected' ?
+                                                    'py-4 px-6 text-rose-700 font-semibold'
+                                                :
+                                                'py-4 px-6 font-semibold'
+                                                }>{row.status}</td>
                                             <td>
                                                 <div className="flex center-items text-2xl">
-                                                    <div className="pr-5 cursor-pointer text-gray-900 py-3 px-6" data-bs-toggle="tooltip" data-bs-placement="top" title="View Request"> 
-                                                        <BsFillEyeFill/> 
+                                                    <div className="pr-5 cursor-pointer text-gray-900 py-3 px-6 lg:px-9" data-bs-toggle="tooltip" data-bs-placement="top" title="View Request"> 
+                                                        <BsFillEyeFill data-bs-toggle="modal" data-bs-target="#requestDetails" onClick={()=>handleOrder(row._id)}/> 
                                                     </div>
                                                 </div>
                                             </td>
                                         </tr>
-                                    ))}
+                                    ))
+                                }
                                 </> 
                             }
                             currentPage={currentPage}
                             pageCount={pageCount}
                             pages={pages}
                             pagination={pagination}
+                        />
+                        <RespondToRequests
+                            id='requestDetails'
+                            title="Request Details"
+                            order={order}
+                            buyer={buyer}
+                            item={item}
+                            getOrders={getOrders}
                         />
                     </div>
                 </div>

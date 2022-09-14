@@ -15,7 +15,8 @@ export default function Dialog(props) {
           <h5 className="text-xl font-medium leading-normal text-gray-800">
             {props.title}
           </h5>
-          <button type="button" className="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline" data-bs-dismiss="modal" aria-label="Close" />
+          <button type="button" className="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline" 
+          data-bs-toggle="tooltip" data-bs-placement="top" title="Close" data-bs-dismiss="modal" aria-label="Close" />
         </div>
         <div className="modal-body relative p-4">
             {props.content}
@@ -24,9 +25,16 @@ export default function Dialog(props) {
           <div className="transition duration-150 ease-in-out px-3" data-bs-dismiss="modal" >
               <Button variant={'alternative'} onClick={props.close}>Close</Button>
           </div>
-          <div className='transition duration-150 ease-in-out ml-1' data-bs-dismiss="modal">
-              <Button onClick={props.action}>{props.buttonName}</Button>
-          </div>
+          {
+            props.buttonName?
+              <div className='transition duration-150 ease-in-out ml-1' data-bs-dismiss="modal">
+                  <Button onClick={props.action}>{props.buttonName}</Button>
+              </div>
+              :
+              <>
+              </>
+          }
+          
         </div>
       </div>
     </div>
