@@ -216,7 +216,7 @@ export default function UpdateReservation(props) {
             </>
             }
             close={reset}
-            action={()=> handleUpdate(props.itemId)}
+            action={()=> handleUpdate(props.orderId)}
             buttonName="Update"
         />
     </div>

@@ -47,7 +47,6 @@ export default function ReservationRequests() {
     const [paginatedOrders, setPaginatedOrders] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const pageCount = orders ? Math.ceil(orders.length/pageSize) : 0;
-    if(pageCount === 1) return null; 
     const pages = _.range(1, pageCount + 1)
 
     const pagination = (pageNo) =>{
@@ -57,7 +56,7 @@ export default function ReservationRequests() {
         setPaginatedOrders(paginatedOrder);
     }
 
-  return (
+  return paginatedOrders.length !== 0?(
     <>
         <NavBar/>
         <br/>
@@ -141,6 +140,9 @@ export default function ReservationRequests() {
                                                 row.status === 'Rejected' ?
                                                     'py-4 px-6 text-rose-700 font-semibold'
                                                 :
+                                                row.status === 'Requested Reject' ?
+                                                    'py-4 px-6 text-yellow-600 font-semibold'
+                                                :
                                                 'py-4 px-6 font-semibold'
                                                 }>{row.status}</td>
                                             <td>
@@ -173,6 +175,20 @@ export default function ReservationRequests() {
                 </div>
             </div>
         </div><br/>
+    </>
+  ):(
+    <>
+     <NavBar/>
+        <br/>
+        <div className="bg-gray-100">
+            <div className='max-w-7xl mx-auto px-10 sm:px-10 lg:px-6'>
+                <div className="max-w-2xl mx-auto py-5 lg:max-w-none">
+                    <div className='col-span-1 mt-5'>
+                        <h3 className='text-xl font-semibold'>No Reservation Requests Available</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
     </>
   )
 }

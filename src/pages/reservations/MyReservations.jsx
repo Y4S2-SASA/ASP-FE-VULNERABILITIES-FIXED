@@ -6,6 +6,7 @@ import AccordionLayout from '../../components/Accordion/AccordionLayout';
 import NavBar from '../../components/LayoutComponents/NavBar'
 import UpdateReservation from './UpdateReservation';
 import DeleteReservation from './DeleteReservation';
+import DeleteAcceptedReservations from './DeleteAcceptedReservations';
 
 export default function MyReservations() {
     const loggedInUser = useContext(AuthContext);
@@ -101,7 +102,21 @@ export default function MyReservations() {
                                                     ORDER ID : {row.orderId}
                                                 </div>
                                                 <div className='col-span-1 px-9'>
-                                                    Status : {row.status}
+                                                    <div className={
+                                                        row.status === 'Accepted'?
+                                                            'text-green-600 font-semibold'
+                                                        :
+                                                        row.status === 'Rejected' ?
+                                                            'text-rose-700 font-semibold'
+                                                        :
+                                                        row.status === 'Rejected' ?
+                                                            'text-yellow-600 font-semibold'
+                                                        :
+                                                        'font-semibold'
+                                                    }>
+                                                        Status : {row.status}
+                                                    </div>
+                                                    
                                                 </div>
                                             </div>
                                         </>
@@ -130,7 +145,15 @@ export default function MyReservations() {
                                                 <div className='lg:col-span-1 lg:self-center justify-self-center col-span-1'>
                                                     <div className="flex center-items text-3xl pt-5">
                                                         <div className="pr-5 cursor-pointer text-gray-900" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Request"><BsPencilSquare data-bs-toggle="modal" data-bs-target="#updateReservationDetails"/></div>
-                                                        <div className="pr-5 cursor-pointer text-red-800" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Request"><BsFillTrashFill data-bs-toggle="modal" data-bs-target="#deleteReservationDetails"/></div>
+                                                        <div className="pr-5 cursor-pointer text-red-800" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Request">
+                                                            <BsFillTrashFill data-bs-toggle="modal" data-bs-target={
+                                                                row.status === 'Accepted'?
+                                                                    "#requestDeleteReservationDetails"
+                                                                :
+                                                                    "#deleteReservationDetails"
+                                                                } 
+                                                            />
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div>
@@ -141,7 +164,7 @@ export default function MyReservations() {
                                                         seller={seller}
                                                         order={order}
                                                         item={item}
-                                                        itemId={row._id}
+                                                        orderId={row._id}
                                                         quantity={quantity}
                                                         total={total}
                                                         getOrders={getOrders}
@@ -153,6 +176,17 @@ export default function MyReservations() {
                                                         title="Delete Reservation Details"
                                                         message=" Are you sure that you want to delete this placed order?"
                                                         itemId={row._id}
+                                                        getOrders={getOrders}
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <DeleteAcceptedReservations
+                                                        id="requestDeleteReservationDetails"
+                                                        title="Delete Reservation Request"
+                                                        buyer={buyer}
+                                                        seller={seller}
+                                                        order={order}
+                                                        orderId={row._id}
                                                         getOrders={getOrders}
                                                     />
                                                 </div>

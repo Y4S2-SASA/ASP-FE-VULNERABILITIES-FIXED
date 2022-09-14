@@ -152,10 +152,22 @@ export default function RespondToRequests(props) {
                 </div>
                 <div className='lg:grid lg:grid-cols-4 grid grid-cols-2'>
                     <div className='lg:col-span-2 justify-self-end transition duration-150 ease-in-out ml-1 col-span-1' data-bs-dismiss="modal">
-                        <Button onClick={()=>handleResponse('ACCEPTED')} variant={'default'} disabled={props.order.status === 'Accepted'}>Accept</Button>
+                        <Button 
+                            onClick={()=>handleResponse('ACCEPTED')} 
+                            variant={'default'} 
+                            disabled={props.order.status === 'Accepted' || props.order.status === 'Requested Reject'}
+                        >
+                            Accept
+                        </Button>
                     </div>
                     <div className='lg:col-span-2 transition duration-150 ease-in-out ml-1 col-span-1' data-bs-dismiss="modal">
-                        <Button onClick={()=>handleResponse('REJECTED')} variant={'red'} disabled={props.order.status === 'Rejected'}>Reject</Button>
+                        <Button 
+                            onClick={()=>handleResponse('REJECTED')} 
+                            variant={'red'} 
+                            disabled={props.order.status === 'Rejected'}
+                        >
+                            Reject
+                        </Button>
                     </div>
                 </div>
             </>
