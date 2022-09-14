@@ -49,6 +49,7 @@ export default function MyReservations() {
         })
     }
 
+    //Sort Ascending function
     const sortAsc = () =>{
         let sortedOrders = orders.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
         setOrders(sortedOrders)
@@ -56,6 +57,7 @@ export default function MyReservations() {
         setSortStatus('ASC')
     }
 
+    //Sort Descending function
     const sortDesc = () =>{
         let sortedOrders = orders.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
         setOrders(sortedOrders)
