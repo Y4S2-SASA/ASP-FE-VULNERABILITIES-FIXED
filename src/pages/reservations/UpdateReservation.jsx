@@ -83,18 +83,23 @@ export default function UpdateReservation(props) {
     }
     
     const handleUpdate = (id) =>{
-        console.log(id)
-        props.order.quantity = newQuantity;
-        props.order.total = newTotal;
-        orderRequest.updateOrderDetails(id, props.order)
-        .then((response) =>{
-            props.getOrders()
-            applyToast('Order details updated successfully!', 'success');
-            setStatus('NEW')
-        }).catch((error) =>{
-            console.error(error);
+        if(newQuantity === 0){
             applyToast('Order detail update failed!', 'error');
-        })
+        }else{
+            props.order.quantity = newQuantity;
+            props.order.total = newTotal;
+            props.order.status = 'Pending'
+            orderRequest.updateOrderDetails(id, props.order)
+            .then((response) =>{
+                props.getOrders()
+                applyToast('Order details updated successfully!', 'success');
+                setStatus('NEW')
+            }).catch((error) =>{
+                console.error(error);
+                applyToast('Order detail update failed!', 'error');
+            })
+        }
+        
     }
 
     const reset = () =>{
@@ -216,7 +221,7 @@ export default function UpdateReservation(props) {
             </>
             }
             close={reset}
-            action={()=> handleUpdate(props.itemId)}
+            action={()=> handleUpdate(props.orderId)}
             buttonName="Update"
         />
     </div>
