@@ -15,6 +15,7 @@ export default function ReservationRequests() {
     const [order, setOrder] = useState({})
     const [buyer, setBuyer] = useState({})
     const [item, setItem] = useState({})
+    const [seller, setSeller] = useState({})
 
     const getOrders = () =>{
         orderRequest.getOrderRequests(sellerId) 
@@ -33,6 +34,7 @@ export default function ReservationRequests() {
             setOrder(response.data.data);
             setBuyer(response.data.data.buyer);
             setItem(response.data.data.item);
+            setSeller(response.data.data.item.createdBy);
         })
     }
 
@@ -164,6 +166,7 @@ export default function ReservationRequests() {
                             order={order}
                             buyer={buyer}
                             item={item}
+                            seller={seller}
                             getOrders={getOrders}
                         />
                     </div>

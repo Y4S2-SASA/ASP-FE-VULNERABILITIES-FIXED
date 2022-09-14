@@ -1,12 +1,35 @@
 import React from 'react'
-import { useState } from 'react'
 import itemRequest from '../../api/Item/item.request'
 import orderRequest from '../../api/Order/order.request'
 import Button from '../../components/buttons/Buttons'
 import Dialog from '../../components/DialogComponent/Dialog'
 import { applyToast } from '../../components/toast-message/toast'
+import emailJs from '@emailjs/browser'
 
 export default function RespondToRequests(props) {
+    let emailParameters = {
+        reciever:props.buyer.firstName + ' ' + props.buyer.lastName,
+        subject:'Regarding the Order Request',
+        message:'',
+        sender:props.seller.firstName + ' ' + props.seller.lastName,
+        reply_to:props.buyer.email,
+        from:process.env.REACT_APP_EMAIL
+    }
+    const handleEmail = (emailParams) =>{
+        emailJs.send(
+            process.env.REACT_APP_SERVICE_ID, 
+            process.env.REACT_APP_TEMPLATE_ID, 
+            emailParams, 
+            process.env.REACT_APP_PUBLIC_KEY
+        )
+        .then((response) =>{
+            applyToast('Email sent successfully!', 'success');
+            console.log('SUCCESS!', response.status, response.text);
+        }, (error) =>{
+            applyToast('Error in sending Email!', 'error');
+            console.log('FAILED...', error);
+        });
+    }
     const handleResponse = (action) =>{
         switch(action) {
             case 'ACCEPTED':{
@@ -18,10 +41,14 @@ export default function RespondToRequests(props) {
                     .then((response) =>{
                         updatedQuantity = 0
                         props.order.status = 'Accepted';
+                        //Email Parameters
+                        emailParameters.message = 'The order request placed with the order ID:' + props.order.orderId + ' has been Accepted!'
                         orderRequest.updateOrderDetails(props.order._id, props.order)
                         .then((response) =>{
                             applyToast('Order Request Accepted!', 'success');
                             props.getOrders();
+                            //Email Functionality
+                            handleEmail(emailParameters);
                         }).catch((error) =>{
                             applyToast('Order Request Accept Failed!', 'error');
                             console.error(error.message)
@@ -40,10 +67,14 @@ export default function RespondToRequests(props) {
             case 'REJECTED':{
                 if(props.order.status === 'Pending'){
                     props.order.status = 'Rejected';
+                    //Email Parameters
+                    emailParameters.message = 'The order request placed with the order ID:' + props.order.orderId + ' has been Rejected!'
                     orderRequest.updateOrderDetails(props.order._id, props.order)
                     .then((response) =>{
                         applyToast('Order Request Rejected!', 'success');
                         props.getOrders();
+                        //Email Functionality
+                        handleEmail(emailParameters);
                     }).catch((error) =>{
                         applyToast('Order Request Reject Failed!', 'error');
                         console.error(error.message);
@@ -56,10 +87,14 @@ export default function RespondToRequests(props) {
                     itemRequest.updateItem(updatedItem, props.item._id)
                     .then((response) =>{
                         props.order.status = 'Rejected';
+                        //Email Parameters
+                        emailParameters.message = 'The order request placed with the order ID:' + props.order.orderId + ' has been Rejected!'
                         orderRequest.updateOrderDetails(props.order._id, props.order)
                         .then((response) =>{
                             applyToast('Order Request Rejected!', 'success');
                             props.getOrders();
+                            //Email Functionality
+                            handleEmail(emailParameters);
                         }).catch((error) =>{
                             applyToast('Order Request Reject Failed!', 'error');
                             console.error(error.message);
