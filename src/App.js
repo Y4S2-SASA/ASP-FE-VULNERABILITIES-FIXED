@@ -15,7 +15,11 @@ import CreateQuestions from "./pages/questions/create-questions/CreateQuestions"
 import ListQuestions from "./pages/questions/list-questions/ListQuestions";
 import ViewQuestion from "./pages/questions/view-question/ViewQuestion";
 import ReservationRequests from "./pages/reservations/ReservationRequests";
+<<<<<<< HEAD
 import QuestionReport from "./pages/question-report/QuestionReport";
+=======
+import ViewAllUsers from "./pages/admin-panel/view-users";
+>>>>>>> 5e4f3804ab6d75120d95bcc6b2047f6905565858
 
 export const AuthContext = createContext();
 
@@ -39,7 +43,11 @@ export default function App() {
           <Route path="/requests" element={<ReservationRequests/>}/>
 
           <Route path="/createitem" element={<CreateItem/>}/>
+<<<<<<< HEAD
           <Route path="/questions-report" element={<QuestionReport/>}/>
+=======
+          <Route path="/users" element={<ViewAllUsers/>}/>
+>>>>>>> 5e4f3804ab6d75120d95bcc6b2047f6905565858
         </Route>
         {/* add public routes here */}
         <Route path="/" element={<PreviewSite />} />
