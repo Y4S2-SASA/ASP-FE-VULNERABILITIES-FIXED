@@ -213,7 +213,7 @@ export default function ReserveNow() {
                     <div className='mt-5 px-5 lg:grid lg:grid-cols-8 lg:self-end'>
                         <div className='lg:col-span-7'></div>
                         <div className='lg:col-span-1'> 
-                            <Button onClick={handleSubmit}>Submit</Button>
+                            <Button onClick={handleSubmit} disabled={quantity === 0 || item.quantity === 0}>Submit</Button>
                         </div>
                     </div>
                 </div>
