@@ -26,6 +26,8 @@ export default function QuestionReport(props) {
                 const tags = res.data.data;
                 setTagsLabels(Object.keys(tags));
                 setTagsData(Object.values(tags));
+                console.log('tagsLabels', tagsLabels)
+                console.log('tagsData', tagsData)
             })
             .catch(err => applyToast())
 
