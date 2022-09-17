@@ -12,11 +12,14 @@ export default function Table(props) {
             </tbody>
             </table>
             <div className='w-full'>
-                <nav className="flex justify-between items-center pt-4 text-xs text-gray-700 uppercase bg-gray-50 py-2 px-3" aria-label="Table navigation">
-                <span className="text-sm font-normal text-gray-500 dark:text-gray-400"><span className="font-semibold text-gray-900 dark:text-white">Page {props.currentPage}</span> of <span className="font-semibold text-gray-900 dark:text-white">{props.pageCount}</span></span>
-                <span></span>
-                <ul className="inline-flex items-center -space-x-px">
-                    {
+            {
+                props.pages ?
+                <>
+                    <nav className="flex justify-between items-center pt-4 text-xs text-gray-700 uppercase bg-gray-50 py-2 px-3" aria-label="Table navigation">
+                    <span className="text-sm font-normal text-gray-500 dark:text-gray-400"><span className="font-semibold text-gray-900 dark:text-white">Page {props.currentPage}</span> of <span className="font-semibold text-gray-900 dark:text-white">{props.pageCount}</span></span>
+                    <span></span>
+                    <ul className="inline-flex items-center -space-x-px">
+                        {
                         props.pages.map((page) =>(
                             <li>
                                 <p className={
@@ -31,8 +34,12 @@ export default function Table(props) {
                             </li>
                         ))
                     }
-                </ul>
-                </nav>
+                    </ul>
+                    </nav>
+                </>
+                :
+                <></>
+            }
             </div>
         </div>
   )
