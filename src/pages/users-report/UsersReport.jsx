@@ -19,9 +19,8 @@ export default function UsersReport(props) {
     const [apiResponseWaiting, setApiResponseWaiting] = React.useState(false);
 
     useEffect(() => {
-        getUsers();
+        // getUsers();
         setIsDataAvailable(false);
-        console.log("tableData", tableData)
     }, []);
     
     const getUsers = () => {
@@ -44,8 +43,15 @@ export default function UsersReport(props) {
                 setClientRoles(clients);
                 setAdminRoles(admins);
                 
-                setTagsLabels(["All Users", `Registered (${startDate} - ${endDate})`, 'Clients', 'Admins']);
-                setTagsData([userData?.length, dateFilteredData.length, clientRoles.length, adminRoles.length]);
+                var types=[];
+                var values=[];
+for(var i=0;i<tableData.length;i++){
+    types.push(tableData[i].type);
+    values.push(tableData[i].count);
+}
+
+                setTagsLabels(types);
+                setTagsData(values);
                 applyToast('Generated Successfully!', 'success');
                 setTimeout(function(){
                     setApiResponseWaiting(false);
