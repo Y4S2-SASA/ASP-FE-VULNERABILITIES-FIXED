@@ -32,7 +32,7 @@ export default function OrderReport() {
                 const buyer = res.data.data;
                 const lables = Object.keys(buyer)
                 const count = Object.values(buyer)
-                for(let i = 0; i < 4; i++){
+                for(let i = 0; i < 5; i++){
                     if(lables[i] !== undefined){
                         names[i] = lables[i].split(',').pop();
                         id[i] = lables[i].split(',')[0]
