@@ -16,31 +16,40 @@ export default function UsersReport(props) {
     const [clientRoles, setClientRoles] = React.useState([]);
     const [users, setUsers] = React.useState([]);
     const [isDataAvailable, setIsDataAvailable] = React.useState(false);
+    const [apiResponseWaiting, setApiResponseWaiting] = React.useState(false);
 
     useEffect(() => {
-        setIsDataAvailable(false);
         getUsers();
+        setIsDataAvailable(false);
         console.log("tableData", tableData)
     }, []);
     
     const getUsers = () => {
+        setApiResponseWaiting(true);
+        
         const startDate = document.getElementById("startDate").value;
         const endDate = document.getElementById("endDate").value;
 
         findUsers()
           .then(res => {
             if(res.data.isSuccessful) {
-                setIsDataAvailable(true);
+                setIsDataAvailable(true);                
                 let userData = res.data.responseData;
-                console.log(userData)
+                let filteredData = userData.filter(e => e.createdAt >= startDate && e.createdAt <= endDate);
+                let clients = userData.filter(e => e.role === "CLIENT");
+                let admins = userData.filter(e => e.role === "ADMIN");
+
                 setUsers(userData);
-                console.log(userData);
-                setDateFilteredData(userData.filter(e => e.createdAt >= startDate && e.createdAt <= endDate));
-                setClientRoles(userData.filter(e => e.role === "CLIENT"));
-                setAdminRoles(userData.filter(e => e.role === "ADMIN"));
+                setDateFilteredData(filteredData);
+                setClientRoles(clients);
+                setAdminRoles(admins);
+                
                 setTagsLabels(["All Users", `Registered (${startDate} - ${endDate})`, 'Clients', 'Admins']);
                 setTagsData([userData?.length, dateFilteredData.length, clientRoles.length, adminRoles.length]);
                 applyToast('Generated Successfully!', 'success');
+                setTimeout(function(){
+                    setApiResponseWaiting(false);
+                }, 2000)
             } else {
                 console.error("error");
                 applyToast('Failed to Generate!', 'error');
@@ -72,46 +81,67 @@ export default function UsersReport(props) {
         <>
             <NavBar />
             <ReportHeader onGenerate={getUsers} />
-            <p>Choose start date and end date. Then click on generate report</p>
+            {isDataAvailable? 
+            
+            <>
+            {apiResponseWaiting ?
+             <>
+             <br />
+             <center>
+                 <div className="flex justify-center items-center">
+                     <div className="spinner-border animate-spin inline-block w-24 h-24 border-4 rounded-full text-red-800" role="status">
+                         <span className="visually-hidden">Loading...</span>
+                     </div>
+                 </div>
+             </center>
+             <br />
+         </> : 
+         <div className="grid grid-cols-2 gap-2">
+         <div >
+             <br />
+         <Table
+                                 head={
+                                     <>
+                                         <tr>
+                                             <th scope="col" className="py-3 px-6">
+                                                 Type
+                                             </th>
+                                             <th scope="col" className="py-3 px-6">
+                                                 Count
+                                             </th>
+                                         </tr>
+                                     </>
+                                 }
+                                 body={
+                                     <>
+                                     {tableData.map((row) => (
+                                         <tr className='self-center'>
+                                             <td className='py-4 px-6'>{row.type}</td>
+                                             <div className="grid">
+                                                 <td className='py-4 px-6 ml-5'>{row.count}</td>
+                                             </div>
+                                         </tr>
+                                     ))}
+                                     </> 
+                                 }
+                             />
+         </div>
+         <div className="h-96 w-96 justify-self-center lg:mt-0 mt-7 p-2">
+             {tagsLabels && tagsData &&
+                 <DoughnutChart
+                     labels={tagsLabels}
+                     data={tagsData}
+                 />
+             }
+         </div>
+     </div>
+        }
+            
+            </> :
+            <><p>Loading...</p></>}
+            
 
-            <div className="grid grid-cols-2 gap-2">
-                <div >
-                <Table
-                                        head={
-                                            <>
-                                                <tr>
-                                                    <th scope="col" className="py-3 px-6">
-                                                        Type
-                                                    </th>
-                                                    <th scope="col" className="py-3 px-6">
-                                                        Count
-                                                    </th>
-                                                </tr>
-                                            </>
-                                        }
-                                        body={
-                                            <>
-                                            {tableData.map((row) => (
-                                                <tr className='self-center'>
-                                                    <td className='py-4 px-6'>{row.type}</td>
-                                                    <div className="grid">
-                                                        <td className='py-4 px-6 justify-self-center'>{row.count}</td>
-                                                    </div>
-                                                </tr>
-                                            ))}
-                                            </> 
-                                        }
-                                    />
-                </div>
-                <div>
-                    {tagsLabels && tagsData &&
-                        <DoughnutChart
-                            labels={tagsLabels}
-                            data={tagsData}
-                        />
-                    }
-                </div>
-            </div>
+            
 
         </>
     )
