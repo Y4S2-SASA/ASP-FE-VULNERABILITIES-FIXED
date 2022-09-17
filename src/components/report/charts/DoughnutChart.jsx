@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import { Doughnut } from "react-chartjs-2";
+import 'chart.js/auto';
+import { Chart } from 'react-chartjs-2';
 
 export default function DoughnutChart(props) {
 
@@ -23,6 +24,6 @@ export default function DoughnutChart(props) {
     },[props])
 
     return (
-        Object.keys(data).length !== 0 && <Doughnut data={data} />
+        Object.keys(data).length !== 0 &&  <Chart type='doughnut' data={data} />
     )
 }

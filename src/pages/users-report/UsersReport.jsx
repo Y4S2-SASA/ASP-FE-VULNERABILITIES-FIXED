@@ -33,7 +33,9 @@ export default function UsersReport(props) {
                 setDateFilteredData(userData.filter(e => e.createdAt >= startDate && e.createdAt <= endDate));
                 setClientRoles(userData.filter(e => e.role === "CLIENT"));
                 setAdminRoles(userData.filter(e => e.role === "ADMIN"));
+
                 setTagsLabels(["All Users", `Registered (${startDate} - ${endDate})`, 'Clients', 'Admins']);
+                
                 setTagsData([userData?.length, dateFilteredData.length, clientRoles.length, adminRoles.length]);
             } else {
                 console.error("error");
