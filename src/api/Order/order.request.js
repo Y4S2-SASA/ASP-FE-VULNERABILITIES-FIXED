@@ -66,13 +66,25 @@ const getOrderRequests = (seller) =>{
         })
 }
 
+const getOrderReport = (dateRange) =>{
+    return apiInstance
+        .post(`/orders/report`, dateRange)
+        .then((response) =>{
+            return response;
+        })
+        .catch((error) =>{
+            return error;
+        })
+}
+
 const orderRequest = {
     saveOrder,
     getUserOrders,
     getUserOrder,
     updateOrderDetails,
     deleteOrderDetails,
-    getOrderRequests
+    getOrderRequests,
+    getOrderReport
 }
 
 export default orderRequest;

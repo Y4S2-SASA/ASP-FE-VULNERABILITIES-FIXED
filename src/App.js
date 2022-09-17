@@ -17,6 +17,7 @@ import ViewQuestion from "./pages/questions/view-question/ViewQuestion";
 import ReservationRequests from "./pages/reservations/ReservationRequests";
 import QuestionReport from "./pages/question-report/QuestionReport";
 import ViewAllUsers from "./pages/admin-panel/view-users";
+import OrderReport from "./pages/reservations/OrderReport";
 
 export const AuthContext = createContext();
 
@@ -38,6 +39,7 @@ export default function App() {
           <Route path="/reserve/:id" element={<ReserveNow />} />
           <Route path="/my-reservations" element={<MyReservations/>}/>
           <Route path="/requests" element={<ReservationRequests/>}/>
+          <Route path="/order-report" element={<OrderReport/>}/>
 
           <Route path="/createitem" element={<CreateItem/>}/>
           <Route path="/questions-report" element={<QuestionReport/>}/>
