@@ -45,10 +45,10 @@ export default function UsersReport(props) {
                 
                 var types=[];
                 var values=[];
-for(var i=0;i<tableData.length;i++){
-    types.push(tableData[i].type);
-    values.push(tableData[i].count);
-}
+                for(var i=0;i<tableData.length;i++){
+                    types.push(tableData[i].type);
+                    values.push(tableData[i].count);
+                }
 
                 setTagsLabels(types);
                 setTagsData(values);
@@ -87,68 +87,59 @@ for(var i=0;i<tableData.length;i++){
         <>
             <NavBar />
             <ReportHeader onGenerate={getUsers} />
-            {isDataAvailable? 
-            
+            {isDataAvailable?
             <>
-            {apiResponseWaiting ?
-             <>
-             <br />
-             <center>
-                 <div className="flex justify-center items-center">
-                     <div className="spinner-border animate-spin inline-block w-24 h-24 border-4 rounded-full text-red-800" role="status">
-                         <span className="visually-hidden">Loading...</span>
-                     </div>
-                 </div>
-             </center>
-             <br />
-         </> : 
-         <div className="grid grid-cols-2 gap-2">
-         <div >
-             <br />
-         <Table
-                                 head={
-                                     <>
-                                         <tr>
-                                             <th scope="col" className="py-3 px-6">
-                                                 Type
-                                             </th>
-                                             <th scope="col" className="py-3 px-6">
-                                                 Count
-                                             </th>
-                                         </tr>
-                                     </>
-                                 }
-                                 body={
-                                     <>
-                                     {tableData.map((row) => (
-                                         <tr className='self-center'>
-                                             <td className='py-4 px-6'>{row.type}</td>
-                                             <div className="grid">
-                                                 <td className='py-4 px-6 ml-5'>{row.count}</td>
-                                             </div>
-                                         </tr>
-                                     ))}
-                                     </> 
-                                 }
-                             />
-         </div>
-         <div className="h-96 w-96 justify-self-center lg:mt-0 mt-7 p-2">
-             {tagsLabels && tagsData &&
-                 <DoughnutChart
-                     labels={tagsLabels}
-                     data={tagsData}
-                 />
-             }
-         </div>
-     </div>
-        }
-            
+                {apiResponseWaiting ?
+                    <>
+                    <br />
+                    <center>
+                        <div className="flex justify-center items-center">
+                            <div className="spinner-border animate-spin inline-block w-24 h-24 border-4 rounded-full text-red-800" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </center>
+                    <br />
+                    </> : 
+                    <div className="grid grid-cols-2 gap-2">
+                        <div>
+                            <br />
+                            <Table
+                                head={
+                                    <>
+                                        <tr>
+                                            <th scope="col" className="py-3 px-6">Type</th>
+                                            <th scope="col" className="py-3 px-6">Count</th>
+                                        </tr>
+                                    </>
+                                }
+
+                                body={
+                                        <>
+                                            {tableData.map((row) => (
+                                                <tr className='self-center'>
+                                                    <td className='py-4 px-6'>{row.type}</td>
+                                                    <div className="grid">
+                                                        <td className='py-4 px-6 ml-5'>{row.count}</td>
+                                                    </div>
+                                                </tr>
+                                            ))}
+                                        </> 
+                                    }
+                            />
+                        </div>
+                        <div className="h-96 w-96 justify-self-center lg:mt-0 mt-7 p-2">
+                            {tagsLabels && tagsData &&
+                                <DoughnutChart
+                                    labels={tagsLabels}
+                                    data={tagsData}
+                                />
+                            }
+                        </div>
+                    </div>
+                }
             </> :
             <><p>Loading...</p></>}
-            
-
-            
-
         </>
     )
 }
