@@ -96,9 +96,11 @@ export default function ViewAllUsers() {
                             </form><br/>
                         </div>
                         <div className='col-span-1 mt-5 justify-self-end'>
-                            <Button className="drop-shadow-2xl" variant="red">
-                                User Report
-                            </Button>
+                            <a href="/users-report">
+                                <Button className="drop-shadow-2xl" variant="red">
+                                    User Report
+                                </Button>
+                            </a>
                         </div>
                     </div><br/>
                     <div className="" style={{marginTop: "-30px"}}>
