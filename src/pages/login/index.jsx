@@ -1,6 +1,6 @@
 import React from "react";
 import { loginUser } from "../../api/User/userApi"
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
 import Button from "../../components/buttons/Buttons";
 import PreviewHeader from "../../components/PreviewPage/PreviewHeader";
@@ -9,7 +9,6 @@ import { applyToast } from "../../components/toast-message/toast";
 export default function Login() {
     const [credentials, setCredentials] = React.useState({});
     const [apiResponseWaiting, setApiResponseWaiting] = React.useState(false);
-    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -56,7 +55,7 @@ export default function Login() {
                 setCredentials({ ...credentials, password: value });
                 break;
             }
-            default: { }
+            default:
         }
     }
     return (

@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import NavBar from "../../components/LayoutComponents/NavBar";
 import itemRequest from "../../api/Item/item.request";
-import { useContext } from "react"
 import { AuthContext } from "../../App"
 import { applyToast } from '../../components/toast-message/toast';
 import { Link, useNavigate } from "react-router-dom";
@@ -9,10 +8,9 @@ import { Link, useNavigate } from "react-router-dom";
 const CreateItem = () => {
     // With this AuthContext you can get the currently logged in user's details
     const loggedInUser = useContext(AuthContext);
-    const {userId, role} = loggedInUser;
-    const [picMessage, setPicMessage] = React.useState(null);
+    const {userId} = loggedInUser;
+    const [setPicMessage] = React.useState(null);
     const [proPic, setProPic] = React.useState("https://carfromjapan.com/wp-content/uploads/2018/03/hard-steering-wheel.jpg");
-    const [sucess, setSucess] = React.useState(true);
     const navigate = useNavigate();
 
     const initialInput = {
@@ -59,7 +57,6 @@ const CreateItem = () => {
       }, []);
 
       const onUploadImgToCloudinary = (pics) => {
-        setPicMessage(null);
         if (pics.type === "image/jpeg" || pics.type === "image/png" || pics.type === "image/jpg") {
           const data = new FormData();
           data.append("file", pics);

@@ -5,8 +5,8 @@ import { applyToast } from '../../components/toast-message/toast';
 
 const DeleteItem = (props) => {
 
-    const handleDelete = (id) => {
-        itemRequest.deleteItem(id)
+    const handleDelete = () => {
+        itemRequest.deleteItem(props.itemId)
         .then((res) => {
             console.log(res);
             applyToast('Item successfully deleted!', 'success');
@@ -20,7 +20,7 @@ const DeleteItem = (props) => {
             id={props.id}
             title={props.title}
             content={props.message}
-            action={()=>handleDelete(props.itemId)}
+            action={handleDelete}
             buttonName="Delete"
             />
         </div>

@@ -30,6 +30,7 @@ export default function MyReservations() {
             console.log(response.data.data)
             setOrders(response.data.data);
             setPaginatedOrders(_(response.data.data).slice(0).take(pageSize).value());
+            setSortStatus('ASC')
         }).catch((error) =>{
             console.error(error.message);
         })
@@ -100,10 +101,10 @@ export default function MyReservations() {
                                 <button id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" className="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">
                                    {
                                         sortStatus === 'ASC' ?
-                                            'Newest'
+                                            'Oldest'
                                         :
                                         sortStatus === 'DESC' ?
-                                            'Oldest'
+                                            'Newest'
                                         :
                                             'Filter'
                                    }
@@ -116,11 +117,11 @@ export default function MyReservations() {
                                 <ul className="dropdown-menu min-w-max absolute hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none left-auto right-0" aria-labelledby="dropdownMenuButton1">
                                     <li>
                                         <button type="button" className="inline-flex py-2 px-4 w-full hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                            onClick={sortAsc}>Newest</button>
+                                            onClick={sortAsc}>Oldest</button>
                                     </li>
                                     <li>
                                         <button type="button" className="inline-flex py-2 px-4 w-full hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                            onClick={sortDesc}>Oldest</button>
+                                            onClick={sortDesc}>Newest</button>
                                     </li>
                                 </ul>
                             </div>
@@ -148,11 +149,11 @@ export default function MyReservations() {
                                 <AccordionLayout 
                                     title={
                                         <>
-                                            <div className='grid grid-cols-2'>
+                                            <div className='grid grid-cols-3'>
                                                 <div className='col-span-1'>
                                                     ORDER ID : {row.orderId}
                                                 </div>
-                                                <div className='col-span-1 px-9'>
+                                                <div className='col-span-2 px-9'>
                                                     <div className={
                                                         row.status === 'Accepted'?
                                                             'text-green-600 font-semibold'
@@ -160,14 +161,13 @@ export default function MyReservations() {
                                                         row.status === 'Rejected' ?
                                                             'text-rose-700 font-semibold'
                                                         :
-                                                        row.status === 'Rejected' ?
+                                                        row.status === 'Requested Reject' ?
                                                             'text-yellow-600 font-semibold'
                                                         :
                                                         'font-semibold'
                                                     }>
                                                         Status : {row.status}
                                                     </div>
-                                                    
                                                 </div>
                                             </div>
                                         </>

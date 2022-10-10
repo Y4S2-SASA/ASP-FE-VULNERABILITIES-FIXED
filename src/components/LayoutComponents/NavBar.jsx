@@ -4,7 +4,7 @@ import {useLocation} from 'react-router-dom';
 
 export default function NavBar() {
     const loggedInUser = useContext(AuthContext);
-    const {userId, role, proPic} = loggedInUser;
+    const {role, proPic} = loggedInUser;
     const location = useLocation();
     
     const handleLogout = () => {

@@ -1,11 +1,10 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
 import { AuthContext } from "../../App";
 import {useLocation} from 'react-router-dom';
 
 export default function ProfileSideNav() {
     const loggedInUser = useContext(AuthContext);
-    const {userId, role, proPic} = loggedInUser;
+    const {role} = loggedInUser;
     const location = useLocation();
     
     const handleLogout = () => {

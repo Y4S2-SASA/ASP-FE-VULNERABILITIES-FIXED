@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import orderRequest from '../../api/Order/order.request'
 import Dialog from '../../components/DialogComponent/Dialog'
 import { applyToast } from '../../components/toast-message/toast'

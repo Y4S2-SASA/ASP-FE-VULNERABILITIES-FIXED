@@ -77,7 +77,7 @@ export default function Register() {
                 setUser({ ...user, pic: value });
                 break;
             }
-            default: { }
+            default:
         }
     }
 

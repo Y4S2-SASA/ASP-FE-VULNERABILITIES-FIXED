@@ -6,7 +6,7 @@ import { findUsers } from '../../api/User/userApi';
 import Editprofile from '../../components/Profile/EditProfile';
 import Dialog from '../../components/dialog/Dialog';
 import { applyToast } from '../../components/toast-message/toast';
-import { BsFillTrashFill, BsPencilSquare } from 'react-icons/bs';
+import { BsFillTrashFill } from 'react-icons/bs';
 import DeleteUser from '../../components/ManageAdminPanel/DeleteUser';
 import Button from '../../components/buttons/Buttons';
 
@@ -130,7 +130,8 @@ export default function ViewAllUsers() {
                                         </center>
                                     </> : 
                                     <>
-                                        {paginatedOrders.filter((user) => {
+                                        {
+                                        paginatedOrders.filter((user) => {
                                             if (search === "") {
                                                 return user;
                                             } else if (user.email.toLowerCase().includes(search.toLowerCase())) {

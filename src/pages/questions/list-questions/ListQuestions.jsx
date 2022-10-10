@@ -7,7 +7,7 @@ import QuestionCard from "./QuestionCard";
 
 export default function ListQuestions() {
   const [questions, setQuestions] = useState([]);
-  const [Searchedquestions, setSearchedquestions] = useState([]);
+  const [setSearchedquestions] = useState([]);
 
   useEffect(() => {
     handleFetchQuestions();
