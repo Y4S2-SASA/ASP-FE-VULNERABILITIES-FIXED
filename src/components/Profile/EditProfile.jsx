@@ -1,21 +1,16 @@
 import React from "react";
 import { updateUser } from "../../api/User/userApi";
 import Button from "../buttons/Buttons";
-import Dialog from "../dialog/Dialog";
 import DialogActions from "../dialog/DialogActions";
 import DialogContent from "../dialog/DialogContent";
 import DialogTitle from "../dialog/DialogTitle";
 import { applyToast } from "../toast-message/toast";
 
 export default function Editprofile(props) {
-    // let data = props.user;
-
     const [user, setUser] = React.useState(props.userDetails);
-    const [picMessage, setPicMessage] = React.useState(null);
     const [proPic, setProPic] = React.useState(user.pic);
 
     const handleEditUser = () => {
-        // props.setEditOpen(false);
         const userObj = {
             firstName: user.firstName,
             lastName: user.lastName,
@@ -77,7 +72,7 @@ export default function Editprofile(props) {
                 setUser({...user, state: value});
                 break;
             }
-            default: {}
+            default:
         }
     }
     

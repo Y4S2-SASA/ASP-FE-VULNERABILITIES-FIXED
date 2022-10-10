@@ -19,7 +19,6 @@ export default function UsersReport(props) {
     const [apiResponseWaiting, setApiResponseWaiting] = React.useState(false);
 
     useEffect(() => {
-        // getUsers();
         setIsDataAvailable(false);
     }, []);
     
@@ -43,9 +42,9 @@ export default function UsersReport(props) {
                 setClientRoles(clients);
                 setAdminRoles(admins);
                 
-                var types=[];
-                var values=[];
-                for(var i=0;i<tableData.length;i++){
+                let types=[];
+                let values=[];
+                for(let i=0;i<tableData.length;i++){
                     types.push(tableData[i].type);
                     values.push(tableData[i].count);
                 }

@@ -107,7 +107,7 @@ export default function RespondToRequests(props) {
                     break;
                 }
             }
-            default:{}
+            default:
         }
     }
   return (

@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import NavBar from "../../components/LayoutComponents/NavBar";
 import "./ItemReport.css";
 import ReportHeader from "../../components/report/header/ReportHeader";
 import itemRequest from "../../api/Item/item.request";
-import _ from 'lodash';
 
 const ItemReport = () => {
 
@@ -18,7 +17,6 @@ const ItemReport = () => {
         },
     ];
 
-    const [item, setItem] = useState(initialState);
     const [dateFilteredData, setDateFilteredData] = useState([]);
 
     const onGenerate = () => {
@@ -30,8 +28,6 @@ const ItemReport = () => {
             console.log("Item page: onGenerate");
             const datas = res.data.data
             console.log(datas);
-            setItem(datas);
-
             setDateFilteredData(datas.filter(e => e.createdAt >= startDate && e.createdAt <= endDate));
             console.log(dateFilteredData);
         })

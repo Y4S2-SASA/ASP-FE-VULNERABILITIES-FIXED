@@ -4,7 +4,6 @@ import { applyToast } from "../../components/toast-message/toast";
 import DoughnutChart from "../../components/report/charts/DoughnutChart";
 import ReportHeader from "../../components/report/header/ReportHeader";
 import orderRequest from "../../api/Order/order.request";
-import _ from "lodash";
 import Table from "../../components/Table/Table";
 
 export default function OrderReport() {

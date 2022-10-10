@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useContext, useState } from "react"
+import { useEffect, useContext, useState } from "react"
 import { TagsInput } from "react-tag-input-component";
 import { createQuestion } from "../../../api/QuestionsApi";
 import { AuthContext } from "../../../App";
@@ -32,7 +31,9 @@ export default function CreateQuestions() {
     }, [tags])
 
     const IsFormValid = () => {
-        if (question.title) return true;
+        if (question.title) {
+            return true;
+        }
         return false;
     }
 

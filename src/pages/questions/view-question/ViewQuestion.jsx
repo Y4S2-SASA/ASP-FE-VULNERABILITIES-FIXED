@@ -1,5 +1,4 @@
-import { useContext, useEffect } from "react";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { deleteQuestionById, getQuestionById } from "../../../api/QuestionsApi";
 import Dialog from "../../../components/dialog/Dialog";
@@ -62,7 +61,7 @@ export default function ViewQuestion() {
         };
         addComment(comment)
             .then(() => {
-                applyToast('success','Comment added!' );
+                applyToast('Comment Added', 'success');
                 setCommentModelOpen(false);
                 fetchComments();
             })

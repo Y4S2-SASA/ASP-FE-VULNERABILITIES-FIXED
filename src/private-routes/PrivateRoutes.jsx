@@ -8,8 +8,6 @@ import {
 } from '../helper/helper';
 
 export default function PrivateRoutes() {
-    // Todo: takes currently logged in user's id and role from localstorage or however - @Amantha
-    // Uda todo eka done - @Shehannn
     const userId = getAuth()._id;
     const role = getLoggedUserRole();
     const proPic = getLoggedUserProfilePic();
