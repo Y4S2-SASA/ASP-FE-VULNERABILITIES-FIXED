@@ -1,6 +1,5 @@
 import { timeSince } from "../../../helper/helper";
-import { BsFillTrashFill } from "react-icons/bs";
-import { BsPencilSquare } from "react-icons/bs";
+import { BsFillTrashFill, BsPencilSquare  } from "react-icons/bs";
 import { AuthContext } from "../../../App";
 import { useContext } from "react";
 

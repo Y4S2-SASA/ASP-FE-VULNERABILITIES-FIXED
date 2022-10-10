@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../App";
-import Button from "../../components/buttons/Buttons";
 import NavBar from "../../components/LayoutComponents/NavBar";
 import Error404 from "../error";
 import { FcServices, FcTodoList, FcPaid, FcPositiveDynamic, FcVoicePresentation } from "react-icons/fc";
@@ -8,7 +7,7 @@ import { FcServices, FcTodoList, FcPaid, FcPositiveDynamic, FcVoicePresentation 
 
 export default function AdminHome() {
     const loggedInUser = useContext(AuthContext);
-    const {userId, role, proPic} = loggedInUser;
+    const {role} = loggedInUser;
 
     const ServiceManagement = () => {
         return (
