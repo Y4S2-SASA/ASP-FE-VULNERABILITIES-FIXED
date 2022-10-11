@@ -1,7 +1,7 @@
 import { timeSince } from "../../../helper/helper";
 import './QuestionCard.css';
 
-export default function QuestionCard({ title, createdAt, createdBy, numOfViews, imageUrl, tags, _id }) {
+export default function QuestionCard({ title, createdAt, createdBy, numOfViews, imageUrl, tags, _id, commentsCount }) {
     return (
         <>
             <a
@@ -10,7 +10,7 @@ export default function QuestionCard({ title, createdAt, createdBy, numOfViews, 
             >
                 <div className="flex justify-between ...">
                     <p className="text-base font-medium text-gray-600">@{createdBy.username} &nbsp; {timeSince(new Date(createdAt))} ago </p>
-                    <p className="text-base font-medium text-gray-600">{numOfViews} </p>
+                    <p className="text-base font-medium text-gray-600">{numOfViews} views</p>
                 </div>
 
                 <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
@@ -29,7 +29,7 @@ export default function QuestionCard({ title, createdAt, createdBy, numOfViews, 
                     <img className="image rounded-lg" src={imageUrl} />
                 </div>
                 <div class="flex justify-end ...">
-                    <p className="text-base font-medium text-gray-600">25 Comments </p>
+                    <p className="text-base font-medium text-gray-600">{commentsCount || 0} Comments </p>
                 </div>
             </a>
         </>
