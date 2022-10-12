@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { deleteQuestionById, getQuestionById } from "../../../api/QuestionsApi";
+import { deleteQuestionById, getQuestionById, updateQuestionById } from "../../../api/QuestionsApi";
 import Dialog from "../../../components/dialog/Dialog";
 import DialogTitle from "../../../components/dialog/DialogTitle";
 import DialogContent from "../../../components/dialog/DialogContent";
@@ -11,7 +11,7 @@ import Button from "../../../components/buttons/Buttons";
 import { applyToast } from "../../../components/toast-message/toast";
 import EditQuestion from "../edit-question.jsx/EditQuestion";
 import Comment from "./comments/Comment";
-import { addComment, getComments } from "../../../api/commentApi";
+import { addComment, deleteComment, getComments } from "../../../api/commentApi";
 import { AuthContext } from "../../../App";
 
 export default function ViewQuestion() {
@@ -30,11 +30,16 @@ export default function ViewQuestion() {
         fetchComments();
     }, []);
 
+    const updateViewCount = (id, views) => {
+        updateQuestionById(id, {numOfViews: views + 1});
+    }
+
     const fetchComments = () => {
         getComments(id)
             .then(res => {
                 console.log(res.data.data)
                 setComments(res.data.data);
+                updateQuestionById(id, {comments: [res.data.data.length]});
             })
             .catch((err => console.log(err)))
     }
@@ -50,7 +55,14 @@ export default function ViewQuestion() {
             .then(res => {
                 setQuestions(res.data.data);
                 setLoading(false);
+                updateViewCount(res.data.data._id, res.data.data.numOfViews);
             });
+    }
+
+    const handleDeleteComment = async (id) => {
+        applyToast('Comment deleting', 'info');
+        await deleteComment(id);
+        fetchComments();
     }
 
     const createComment = () => {
@@ -139,9 +151,11 @@ export default function ViewQuestion() {
                     <hr />
                     {comments.map((comment, i) => 
                         <Comment 
-                            userId={comment.createdBy.username}
+                            userId={comment.createdBy._id}
                             createdAt={comment.createdAt}
                             body={comment.body}
+                            commentId={comment._id}
+                            onDelete={handleDeleteComment}
                         />
                     )}
                 </div>
