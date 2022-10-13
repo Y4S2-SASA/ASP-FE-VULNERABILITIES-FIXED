@@ -61,6 +61,7 @@ export default function ListQuestions() {
                       imageUrl={question.imageUrl}
                       createdAt={question.createdAt}
                       _id={question._id}
+                      commentsCount={question.comments[0]}
                     />
                   </div>
                 )

@@ -69,7 +69,9 @@ export default function CreateQuestions() {
                     title: question.title,
                     description: question.description,
                     imageUrl: imageUrl,
-                    tags: question.tags
+                    tags: question.tags,
+                    numOfViews: 0,
+                    comments: [0]
                 }
                 await createQuestion(newQuestion);
                 applyToast('Question created', 'success');
