@@ -4,11 +4,11 @@ ReactJS, TailwindCSS
 <h2>Start the app in development mode(Local)</h2>
 <ul>
   <li>npm i</li>
-  <li>npm start</li>
+  <li>npm run dev</li>
 </ul>
 
 <h2>Start the app in production mode</h2>
 <ul>
   <li>npm i</li>
-  <li>npm run prod</li>
+  <li>npm start</li>
 </ul>
