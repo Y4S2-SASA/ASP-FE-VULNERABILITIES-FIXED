@@ -190,8 +190,8 @@ const Items = () => {
 
 
                             <div className="flex center-items text-3xl pt-2">
-                              <div className="pr-5 cursor-pointer text-gray-900" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Request"><BsPencilSquare data-bs-toggle="modal" data-bs-target={`#updateReservationDetails${i._id}`} /></div>
-                              <div className="pr-5 cursor-pointer text-red-800" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Request"><BsFillTrashFill data-bs-toggle="modal" data-bs-target={`#deleteReservationDetails${i._id}`} /></div>
+                              <div className="pr-5 cursor-pointer text-gray-900" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Request"><BsPencilSquare data-bs-toggle="modal" data-bs-target={`#updateItemDetails${i._id}`} /></div>
+                              <div className="pr-5 cursor-pointer text-red-800" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Request"><BsFillTrashFill data-bs-toggle="modal" data-bs-target={`#deleteItemDetails${i._id}`} /></div>
                             </div>
 
                             :
@@ -214,7 +214,7 @@ const Items = () => {
                     {/* Delete Item */}
                     <div>
                       <DeleteItem
-                        id={`deleteReservationDetails${i._id}`}
+                        id={`deleteItemDetails${i._id}`}
                         title="Delete Item Detail"
                         message=" Are you sure you want to delete this item?"
                         itemId={i._id}
@@ -225,7 +225,7 @@ const Items = () => {
                     <div>
 
                       <Dialog
-                        id={`updateReservationDetails${i._id}`}
+                        id={`updateItemDetails${i._id}`}
                         size='XL'
                         title="Update Item Details"
                         content={
