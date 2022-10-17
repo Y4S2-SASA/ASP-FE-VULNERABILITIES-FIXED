@@ -7,7 +7,7 @@ import QuestionCard from "./QuestionCard";
 
 export default function ListQuestions() {
   const [questions, setQuestions] = useState([]);
-  const [Searchedquestions, setSearchedquestions] = useState([]);
+  const [setSearchedquestions] = useState([]);
 
   useEffect(() => {
     handleFetchQuestions();
@@ -61,6 +61,7 @@ export default function ListQuestions() {
                       imageUrl={question.imageUrl}
                       createdAt={question.createdAt}
                       _id={question._id}
+                      commentsCount={question.comments[0]}
                     />
                   </div>
                 )

@@ -1,20 +1,15 @@
 import React, { useContext, useEffect } from "react"
-import { fetchUser, findUsers, updateUser } from "../../api/User/userApi";
+import { findUsers } from "../../api/User/userApi";
 import { AuthContext } from "../../App"
 import Dialog from "../../components/dialog/Dialog";
 import NavBar from "../../components/LayoutComponents/NavBar";
 import Editprofile from "../../components/Profile/EditProfile";
 import ProfileSideNav from "../../components/Profile/ProfileSideNav";
-import { FcAssistant } from "react-icons/fc";
-import { FcSms } from "react-icons/fc";
-import { FcContacts } from "react-icons/fc";
-import { FcSettings } from "react-icons/fc";
-import { FcShipped } from "react-icons/fc";
-import { FcSynchronize } from "react-icons/fc";
+import { FcAssistant, FcSms, FcContacts, FcSettings, FcShipped, FcSynchronize } from "react-icons/fc";
 
 export default function Profile() {
     const loggedInUser = useContext(AuthContext);
-    const {userId, role} = loggedInUser;
+    const {userId} = loggedInUser;
     const [user, setUser] = React.useState([]);
     const [editModelOpen, setEditModelOpen] = React.useState(false);
 
@@ -27,7 +22,7 @@ export default function Profile() {
           .then(res => {
             if(res.data.isSuccessful) {
                 let userData = res.data.responseData;
-                for (var valueObj = 0; valueObj < userData?.length; valueObj++) {
+                for (let valueObj = 0; valueObj < userData?.length; valueObj++) {
                     if (userData[valueObj]._id === userId) {
                         console.log(userData[valueObj]);
                         setUser(userData[valueObj]);
@@ -38,17 +33,6 @@ export default function Profile() {
             }
           })
           .catch(() => console.log("couldn't fetch"));
-    }
-
-    const handleEditUser = () => {
-        // props.setEditOpen(false);
-        updateUser(user.id, user)
-            .then((res) => {
-                if (res.data.isSuccessful) {
-                    getUser();
-                }
-            })
-            .catch((e) => console.log(e));
     }
 
     const ProfileDetails = () => {

@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import 'chart.js/auto';
 import { Chart } from 'react-chartjs-2';
 

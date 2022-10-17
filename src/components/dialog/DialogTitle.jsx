@@ -1,5 +1,4 @@
-import React from "react";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { DialogContext } from "./Dialog";
 
 export default function DialogTitle({ children }) {

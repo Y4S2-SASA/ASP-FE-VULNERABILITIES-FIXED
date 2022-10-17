@@ -17,15 +17,15 @@ export default function DeleteUser(props) {
         })
     };
 
-  return (
-    <div>
-        <Dialog
-            id={id}
-            title={title}
-            content={message}
-            action={() => handleDeleteUser(userId)}
-            buttonName="Delete"
-        />
-    </div>
-  )
+    return (
+        <div>
+            <Dialog
+                id={id}
+                title={title}
+                content={message}
+                action={() => handleDeleteUser(userId)}
+                buttonName="Delete"
+            />
+        </div>
+    );
 }

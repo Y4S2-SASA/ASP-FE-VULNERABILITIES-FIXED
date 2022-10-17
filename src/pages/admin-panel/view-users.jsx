@@ -6,14 +6,16 @@ import { findUsers } from '../../api/User/userApi';
 import Editprofile from '../../components/Profile/EditProfile';
 import Dialog from '../../components/dialog/Dialog';
 import { applyToast } from '../../components/toast-message/toast';
-import { BsFillTrashFill, BsPencilSquare } from 'react-icons/bs';
+import { BsFillTrashFill } from 'react-icons/bs';
 import DeleteUser from '../../components/ManageAdminPanel/DeleteUser';
+import Button from '../../components/buttons/Buttons';
 
 export default function ViewAllUsers() {
     const [user, setUser] = React.useState([]);
     const [users, setUsers] = React.useState([]);
     const [onClickUId, setOnClickUId] = React.useState(0);
     const [apiResponseWaiting, setApiResponseWaiting] = React.useState(false);
+    const [search, setSearch] = useState("");
 
     const pageSize = 5;
     const [paginatedOrders, setPaginatedOrders] = useState([]);
@@ -70,38 +72,38 @@ export default function ViewAllUsers() {
             <div className='max-w-7xl mx-auto px-10 sm:px-10 lg:px-6'>
                 <div className="max-w-2xl mx-auto py-5 lg:max-w-none">
                     <div className='lg:grid lg:grid-cols-2'>
-                        <div className='col-span-1 mt-5 justify-self-end'>
+                        <div className='col-span-1 mt-5 justify-self-start'>
                             <form>
-                            <div className="flex">
-                                <div className="dropdown relative">
-                                    <button id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" className="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">
-                                        Filter
-                                        <svg aria-hidden="true" className="ml-1 w-4 h-4"  fill="currentColor"  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path fillRule="evenodd" 
-                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" 
-                                                clipRule="evenodd" />
-                                        </svg>
-                                    </button>
-                                    <ul className="dropdown-menu min-w-max absolute hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none left-auto right-0" aria-labelledby="dropdownMenuButton1">
-                                        <li>
-                                            <button type="button" className="inline-flex py-2 px-4 w-full hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Ascending</button>
-                                        </li>
-                                        <li>
-                                            <button type="button" className="inline-flex py-2 px-4 w-full hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Descending</button>
-                                        </li>
-                                    </ul>
+                                <div className="flex justify-center">
+                                    <div className="xl:w-96">
+                                        <div className="input-group relative flex flex-wrap items-stretch w-full rounded">
+                                        <input
+                                            type="search"
+                                            value={search}
+                                            onChange={(e) => { setSearch(e.target.value) }}
+                                            className="form-control drop-shadow-2xl relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                            placeholder="Search from the Email"
+                                            aria-label="Search from the Email"
+                                            aria-describedby="button-addon2"/>
+                                        <span className="input-group-text flex items-center px-3 py-1.5 text-base font-normal text-gray-700 text-center whitespace-nowrap rounded" id="basic-addon2">
+                                            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" className="w-4" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path>
+                                            </svg>
+                                        </span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="relative w-full">
-                                    <input type="search" 
-                                        id="search-dropdown" 
-                                        className="block p-2.5 lg:w-96 z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" 
-                                        placeholder="Search..."/>
-                                </div>
-                            </div>
                             </form><br/>
                         </div>
+                        <div className='col-span-1 mt-5 justify-self-end'>
+                            <a href="/users-report">
+                                <Button className="drop-shadow-2xl" variant="red">
+                                    User Report
+                                </Button>
+                            </a>
+                        </div>
                     </div><br/>
-                    <div>
+                    <div className="" style={{marginTop: "-30px"}}>
                         <Table
                             head={
                                 <>
@@ -128,7 +130,14 @@ export default function ViewAllUsers() {
                                         </center>
                                     </> : 
                                     <>
-                                        {paginatedOrders.map((user) =>(
+                                        {
+                                        paginatedOrders.filter((user) => {
+                                            if (search === "") {
+                                                return user;
+                                            } else if (user.email.toLowerCase().includes(search.toLowerCase())) {
+                                                return user;
+                                            }
+                                            }).map((user) =>(
                                             <>
                                             <tr className='self-center' key={user}>
                                                 <td className='py-4 px-6'>

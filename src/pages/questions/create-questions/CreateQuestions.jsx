@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useContext, useState } from "react"
+import { useEffect, useContext, useState } from "react"
 import { TagsInput } from "react-tag-input-component";
 import { createQuestion } from "../../../api/QuestionsApi";
 import { AuthContext } from "../../../App";
@@ -32,7 +31,9 @@ export default function CreateQuestions() {
     }, [tags])
 
     const IsFormValid = () => {
-        if (question.title) return true;
+        if (question.title) {
+            return true;
+        }
         return false;
     }
 
@@ -68,7 +69,9 @@ export default function CreateQuestions() {
                     title: question.title,
                     description: question.description,
                     imageUrl: imageUrl,
-                    tags: question.tags
+                    tags: question.tags,
+                    numOfViews: 0,
+                    comments: [0]
                 }
                 await createQuestion(newQuestion);
                 applyToast('Question created', 'success');
