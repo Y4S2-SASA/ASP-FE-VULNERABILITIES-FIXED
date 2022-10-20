@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import NavBar from "../../components/LayoutComponents/NavBar";
 import itemRequest from "../../api/Item/item.request";
-import { useContext } from "react"
 import { AuthContext } from "../../App"
 import { applyToast } from '../../components/toast-message/toast';
 import { Link, useNavigate } from "react-router-dom";
@@ -9,10 +8,9 @@ import { Link, useNavigate } from "react-router-dom";
 const CreateItem = () => {
     // With this AuthContext you can get the currently logged in user's details
     const loggedInUser = useContext(AuthContext);
-    const {userId, role} = loggedInUser;
-    const [picMessage, setPicMessage] = React.useState(null);
-    const [proPic, setProPic] = React.useState("https://apply.sts.net.pk/assets/images/default-upload-image.jpg");
-    const [sucess, setSucess] = React.useState(true);
+    const {userId} = loggedInUser;
+    const [setPicMessage] = React.useState(null);
+    const [proPic, setProPic] = React.useState("https://carfromjapan.com/wp-content/uploads/2018/03/hard-steering-wheel.jpg");
     const navigate = useNavigate();
 
     const initialInput = {
@@ -59,7 +57,6 @@ const CreateItem = () => {
       }, []);
 
       const onUploadImgToCloudinary = (pics) => {
-        setPicMessage(null);
         if (pics.type === "image/jpeg" || pics.type === "image/png" || pics.type === "image/jpg") {
           const data = new FormData();
           data.append("file", pics);
@@ -108,12 +105,6 @@ const CreateItem = () => {
                     value={inputs.name}
                     onChange={handleChange}
                 />
-                {
-                    inputs.name == "" ? <div className="text-sm text-red-500">This is a required field</div> : null
-                }
-                {
-                    inputs.name.length > 30 ? <div className="text-sm text-red-500">Maximum word limit is 100</div> : null
-                }
                 </div>
 
                 <div className="mb-6">
@@ -132,18 +123,12 @@ const CreateItem = () => {
                     type="text"
                     id="price"
                     name="price"
-                    className="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-lgp-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-lg border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Ex: 7000"
                     value={inputs.price}
                     onChange={handleChange}
                     />
                 </div>
-                {
-                    inputs.price == "" ? <div className="text-sm text-red-500">This is a required field</div> : null
-                }
-                {
-                    isNaN(inputs.price) ? <div className="text-sm text-red-500">Price should be a number</div> : null
-                }
                 </div>
 
                 <div className="mb-6">
@@ -163,14 +148,8 @@ const CreateItem = () => {
                     value={inputs.quantity}
                     onChange={handleChange}
                 />
-                {
-                    inputs.quantity == "" ? <div className="text-sm text-red-500">This is a required field</div> : null
-                }
-                {
-                    isNaN(inputs.quantity) ? <div className="text-sm text-red-500">Quantity should be a number</div> : null
-                }
                 </div>
-                
+
                 <div className="mb-6">
                 <label
                     htmlFor="description"
@@ -188,12 +167,6 @@ const CreateItem = () => {
                     value={inputs.description}
                     onChange={handleChange}
                 />
-                {
-                    inputs.description == "" ? <div className="text-sm text-red-500">This is a required field</div> : null
-                }
-                {
-                    inputs.description.length > 150 ? <div className="text-sm text-red-500">Maximum word limit is 150</div> : null
-                }
                 </div>
 
                 <div className="mb-6">
@@ -216,32 +189,13 @@ const CreateItem = () => {
                 <br/>
 
                 <div className="flex flex-row-reverse">   
-
-                {
-                    inputs.name == "" || inputs.name.length > 100 || inputs.name == "" 
-                    || isNaN(inputs.price) || inputs.quantity == "" || isNaN(inputs.quantity) 
-                    || inputs.description == "" || inputs.description.length > 150
-
-                    ?
-
-                    <button
-                    type="button"
-                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                    >
-                    Save
-                    </button>
-
-                    : 
-
-                    <button
-                    type="button"
-                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                    onClick={AddItem}
-                    >
-                    Save
-                    </button>
-                }
-                
+                <button
+                type="button"
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                onClick={AddItem}
+                >
+                Save
+                </button>
 
                 <div className="pr-4">
                 <Link to="/items">
