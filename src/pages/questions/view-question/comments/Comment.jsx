@@ -4,7 +4,7 @@ import { AuthContext } from '../../../../App';
 import { timeSince } from '../../../../helper/helper';
 import './Comment.css';
 
-export default function Comment({ userId, createdAt, body, onDelete, commentId }) {
+export default function Comment({ userId, username, createdAt, body, onDelete, commentId }) {
     const loggedInUser = useContext(AuthContext);
     const loggedInUserId = loggedInUser.userId;
     return (
@@ -15,7 +15,7 @@ export default function Comment({ userId, createdAt, body, onDelete, commentId }
 
                 <div className="flex justify-between ...">
                     <div>
-                    <p className="text-base font-medium text-gray-500">@{userId} &nbsp; {timeSince(new Date(createdAt))} ago </p>
+                    <p className="text-base font-medium text-gray-500">@{username} &nbsp; {timeSince(new Date(createdAt))} ago </p>
                     <p className="text-base ml-3 font-medium ">{body}</p>
                     </div>
                     {userId == loggedInUserId &&
