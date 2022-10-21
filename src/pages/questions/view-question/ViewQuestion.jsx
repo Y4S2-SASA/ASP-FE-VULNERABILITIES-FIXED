@@ -151,7 +151,7 @@ export default function ViewQuestion() {
                     <hr />
                     {comments.map((comment, i) => 
                         <Comment 
-                            userId={comment.createdBy._id}
+                            userId={comment.createdBy.username}
                             createdAt={comment.createdAt}
                             body={comment.body}
                             commentId={comment._id}
