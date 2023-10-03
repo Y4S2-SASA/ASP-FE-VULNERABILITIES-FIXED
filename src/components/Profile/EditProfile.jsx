@@ -139,7 +139,7 @@ export default function Editprofile(props) {
                     </div>
                     <div>
                     <img
-                        src={proPic}
+                        src={DomPurify.sanitize(proPic)}
                         className="rounded-lg w-32 h-32"
                         alt="Avatar"
                     />
