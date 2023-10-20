@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSearchParams } from 'react-router-dom'
 import { registerUser } from "../../api/User/userApi";
 import styles from "./styles.module.css";
 import Button from "../../components/buttons/Buttons";
@@ -12,7 +13,20 @@ export default function Register() {
     const [proPic, setProPic] = React.useState("https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg");
     const [apiResponseWaiting, setApiResponseWaiting] = React.useState(false);
     const [confirmPw, setConfirmPw] = React.useState("");
+    let [searchParams, setSearchParams] = useSearchParams();
 
+    const handleSignupWithGoogle = () => {
+        window.location.replace("http://localhost:3001/api/users/google/auth/signup")
+    }
+
+    useEffect(() => {
+        const msg = searchParams.get("msg");
+        if (msg == "created") {
+            navigate("/login");
+            applyToast('Account created successfully. Please login to proceed!', 'success');
+        }
+
+    }, []);
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -215,6 +229,9 @@ export default function Register() {
                                 </div>
                             )}
                         </form>
+                        <Button onClick={handleSignupWithGoogle} variant="blue" disabled={apiResponseWaiting}>
+                                Register with Google
+                            </Button>
                     </div>
                 </div>
 		    </div>

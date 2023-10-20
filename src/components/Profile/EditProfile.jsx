@@ -5,6 +5,7 @@ import DialogActions from "../dialog/DialogActions";
 import DialogContent from "../dialog/DialogContent";
 import DialogTitle from "../dialog/DialogTitle";
 import { applyToast } from "../toast-message/toast";
+import DOMPurify from "dompurify";
 
 export default function Editprofile(props) {
     const [user, setUser] = React.useState(props.userDetails);
@@ -139,7 +140,7 @@ export default function Editprofile(props) {
                     </div>
                     <div>
                     <img
-                        src={DomPurify.sanitize(proPic)}
+                        src={DOMPurify.sanitize(proPic)}
                         className="rounded-lg w-32 h-32"
                         alt="Avatar"
                     />

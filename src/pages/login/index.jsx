@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSearchParams  } from 'react-router-dom'
 import { loginUser } from "../../api/User/userApi"
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
@@ -9,6 +10,31 @@ import { applyToast } from "../../components/toast-message/toast";
 export default function Login() {
     const [credentials, setCredentials] = React.useState({});
     const [apiResponseWaiting, setApiResponseWaiting] = React.useState(false);
+    let [searchParams, setSearchParams] = useSearchParams();
+
+    const handleLoginWithGoogle = () => {
+        window.location.replace("http://localhost:3001/api/users/google/auth/signin")
+    }
+
+    useEffect(() => {
+        const token = searchParams.get("token");
+        const role = searchParams.get("role");
+        const pic = searchParams.get("pic");
+
+        if (token && role) {
+            localStorage.setItem("token", token);
+            localStorage.setItem("userRole", role);
+            localStorage.setItem("profilePic", pic);
+            if(role === "CLIENT") {
+                window.location.href = '/home';
+            } else if(role === "ADMIN") {
+                window.location.href = '/admin-panel';
+            } else {
+                window.location.href = '/404';
+            }
+        }
+
+    }, []);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -91,6 +117,9 @@ export default function Login() {
                             />
                             <Button variant="red" disabled={apiResponseWaiting} type="submit">
                                 Login
+                            </Button>
+                            <Button variant="blue" onClick={handleLoginWithGoogle}>
+                                Login with Google
                             </Button>
                             {apiResponseWaiting && (
                                 <div className="flex justify-center items-center">
