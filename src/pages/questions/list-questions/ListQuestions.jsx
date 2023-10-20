@@ -4,10 +4,22 @@ import Button from "../../../components/buttons/Buttons";
 import NavBar from "../../../components/LayoutComponents/NavBar";
 import SearchBox from "../../../components/search-box/SearchBox";
 import QuestionCard from "./QuestionCard";
+import { getCsrfToken } from "../../../api/csrf/csrf.request";
+import axios from "axios";
 
 export default function ListQuestions() {
   const [questions, setQuestions] = useState([]);
   const [setSearchedquestions] = useState([]);
+
+  useEffect(() => {
+    async function handleCsrfToken () {
+        const crsfToken = await getCsrfToken();
+        axios.defaults.headers.common = {
+           "CSRF-Token": crsfToken
+        }
+    }
+    handleCsrfToken()
+   }, [])
 
   useEffect(() => {
     handleFetchQuestions();

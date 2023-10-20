@@ -9,6 +9,8 @@ import { applyToast } from '../../components/toast-message/toast';
 import { BsFillTrashFill } from 'react-icons/bs';
 import DeleteUser from '../../components/ManageAdminPanel/DeleteUser';
 import Button from '../../components/buttons/Buttons';
+import { getCsrfToken } from '../../api/csrf/csrf.request';
+import axios from 'axios';
 
 export default function ViewAllUsers() {
     const [user, setUser] = React.useState([]);
@@ -32,6 +34,16 @@ export default function ViewAllUsers() {
     useEffect(() => {
         getUsers();
     }, []);
+
+    useEffect(() => {
+        async function handleCsrfToken () {
+            const crsfToken = await getCsrfToken();
+            axios.defaults.headers.common = {
+               "CSRF-Token": crsfToken
+            }
+        }
+        handleCsrfToken()
+       }, [])
     
     const getUsers = () => {
         setApiResponseWaiting(true);

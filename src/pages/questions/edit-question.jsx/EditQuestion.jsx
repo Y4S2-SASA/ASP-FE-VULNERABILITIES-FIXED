@@ -7,6 +7,8 @@ import DialogContent from "../../../components/dialog/DialogContent";
 import DialogActions from "../../../components/dialog/DialogActions";
 import Button from "../../../components/buttons/Buttons";
 import { updateQuestionById } from "../../../api/QuestionsApi";
+import { getCsrfToken } from "../../../api/csrf/csrf.request";
+import axios from "axios";
 
 export default function EditQuestion(props) {
     const [question, setQuestion] = useState(props.questionObject);
@@ -14,8 +16,14 @@ export default function EditQuestion(props) {
     const [image, setImage] = useState();
 
     useEffect(() => {
-        console.log(tags)
-    }, [tags])
+        async function handleCsrfToken () {
+            const crsfToken = await getCsrfToken();
+            axios.defaults.headers.common = {
+               "CSRF-Token": crsfToken
+            }
+        }
+        handleCsrfToken()
+       }, [])
     const handleImageOnInput = (pic) => {
         return new Promise((resolve, reject) => {
             uploadImgToCloudinary(pic)

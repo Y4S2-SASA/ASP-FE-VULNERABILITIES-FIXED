@@ -7,8 +7,19 @@ import NavBar from "../../../components/LayoutComponents/NavBar";
 import { applyToast } from "../../../components/toast-message/toast";
 import { uploadImgToCloudinary } from "../../../helper/helper";
 import "./CreateQuestions.css"
+import { getCsrfToken } from "../../../api/csrf/csrf.request";
+import axios from "axios";
 
 export default function CreateQuestions() {
+    useEffect(() => {
+        async function handleCsrfToken () {
+            const crsfToken = await getCsrfToken();
+            axios.defaults.headers.common = {
+               "CSRF-Token": crsfToken
+            }
+        }
+        handleCsrfToken()
+       }, [])
     const loggedInUser = useContext(AuthContext);
     const { userId } = loggedInUser;
     const [tags, setTags] = useState(["tags"]);
