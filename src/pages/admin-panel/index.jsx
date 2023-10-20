@@ -1,13 +1,26 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { AuthContext } from "../../App";
 import NavBar from "../../components/LayoutComponents/NavBar";
 import Error404 from "../error";
 import { FcServices, FcTodoList, FcPaid, FcPositiveDynamic, FcVoicePresentation } from "react-icons/fc";
+import axios from "axios";
+import { getCsrfToken } from "../../api/csrf/csrf.request";
 
 
 export default function AdminHome() {
     const loggedInUser = useContext(AuthContext);
     const {role} = loggedInUser;
+
+    export default function CreateQuestions() {
+        useEffect(() => {
+            async function handleCsrfToken () {
+                const crsfToken = await getCsrfToken();
+                axios.defaults.headers.common = {
+                   "CSRF-Token": crsfToken
+                }
+            }
+            handleCsrfToken()
+           }, [])
 
     const ServiceManagement = () => {
         return (

@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import { applyToast } from '../../components/toast-message/toast';
 import DeleteItem from "./DeleteItem";
 import Dialog from '../../components/DialogComponent/Dialog'
+import { getCsrfToken } from "../../api/csrf/csrf.request";
+import axios from "axios";
 
 const Items = () => {
   // With this AuthContext you can get the currently logged in user's details
@@ -18,6 +20,15 @@ const Items = () => {
   const [deleteId, setDeleteId] = useState();
   const [selectedItem, setSelectedItem] = useState({});
 
+  useEffect(() => {
+    async function handleCsrfToken () {
+        const crsfToken = await getCsrfToken();
+        axios.defaults.headers.common = {
+           "CSRF-Token": crsfToken
+        }
+    }
+    handleCsrfToken()
+   }, [])
   const initialState = [
     {
       name: "",

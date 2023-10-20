@@ -4,6 +4,8 @@ import itemRequest from "../../api/Item/item.request";
 import { AuthContext } from "../../App"
 import { applyToast } from '../../components/toast-message/toast';
 import { Link, useNavigate } from "react-router-dom";
+import { getCsrfToken } from "../../api/csrf/csrf.request";
+import axios from "axios";
 
 const CreateItem = () => {
     // With this AuthContext you can get the currently logged in user's details
@@ -13,6 +15,16 @@ const CreateItem = () => {
     const [proPic, setProPic] = React.useState("https://apply.sts.net.pk/assets/images/default-upload-image.jpg");
     const navigate = useNavigate();
 
+    useEffect(() => {
+        async function handleCsrfToken () {
+            const crsfToken = await getCsrfToken();
+            axios.defaults.headers.common = {
+               "CSRF-Token": crsfToken
+            }
+        }
+        handleCsrfToken()
+       }, [])
+       
     const initialInput = {
         name: "",
         price: "",

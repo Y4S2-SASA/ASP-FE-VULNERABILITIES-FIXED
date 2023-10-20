@@ -6,12 +6,24 @@ import NavBar from "../../components/LayoutComponents/NavBar";
 import Editprofile from "../../components/Profile/EditProfile";
 import ProfileSideNav from "../../components/Profile/ProfileSideNav";
 import { FcAssistant, FcSms, FcContacts, FcSettings, FcShipped, FcSynchronize } from "react-icons/fc";
+import { getCsrfToken } from "../../api/csrf/csrf.request";
+import axios from "axios";
 
 export default function Profile() {
     const loggedInUser = useContext(AuthContext);
     const {userId} = loggedInUser;
     const [user, setUser] = React.useState([]);
     const [editModelOpen, setEditModelOpen] = React.useState(false);
+
+    useEffect(() => {
+        async function handleCsrfToken () {
+            const crsfToken = await getCsrfToken();
+            axios.defaults.headers.common = {
+               "CSRF-Token": crsfToken
+            }
+        }
+        handleCsrfToken()
+       }, [])
 
     useEffect(() => {
         getUser();

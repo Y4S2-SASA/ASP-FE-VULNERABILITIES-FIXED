@@ -1,16 +1,28 @@
 import NavBar from "../../components/LayoutComponents/NavBar";
 import "./QuestionReport.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getAllQuestions, getTags } from "../../api/QuestionsApi";
 import { applyToast } from "../../components/toast-message/toast";
 import DoughnutChart from "../../components/report/charts/DoughnutChart";
 import ReportHeader from "../../components/report/header/ReportHeader";
 import Table from "../../components/Table/Table";
+import { getCsrfToken } from "../../api/csrf/csrf.request";
+import axios from "axios";
 
 export default function QuestionReport(props) {
     const [tagsLabels, setTagsLabels] = useState([]);
     const [tagsData, setTagsData] = useState([]);
     const [questions, setQuestions] = useState([]);
+
+    useEffect(() => {
+        async function handleCsrfToken () {
+            const crsfToken = await getCsrfToken();
+            axios.defaults.headers.common = {
+               "CSRF-Token": crsfToken
+            }
+        }
+        handleCsrfToken()
+       }, [])
 
     const filterQuestions = (questions, startDate, endDate) => {
         const unsortedQuestions = []
